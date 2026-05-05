@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.DS_Store
+*.local
+*.log
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+.vite/
+.parcel-cache/
+.cache/
