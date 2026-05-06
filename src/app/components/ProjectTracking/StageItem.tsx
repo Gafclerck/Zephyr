@@ -37,10 +37,10 @@ export function StageItem({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
       className={`p-4 rounded border transition-all ${isActive
-        ? "bg-[#1A3AFF]/10 border-[#1A3AFF]/50"
-        : isCompleted
-          ? "bg-emerald-500/5 border-emerald-500/30"
-          : "bg-background border-border/40"
+          ? "bg-muted/40 border-[#1A3AFF]"
+          : isCompleted
+            ? "bg-muted/20 border-border/40"
+            : "bg-background border-border/40"
         }`}
     >
       {/* Header */}
@@ -48,10 +48,10 @@ export function StageItem({
         <div className="flex items-center gap-3 flex-1">
           <div
             className={`p-1.5 rounded ${isCompleted
-              ? "bg-emerald-500/20 text-emerald-600"
-              : isActive
-                ? "bg-[#1A3AFF]/20 text-[#1A3AFF]"
-                : "bg-muted text-muted-foreground"
+                ? "bg-border text-muted-foreground"
+                : isActive
+                  ? "bg-[#1A3AFF]/10 text-[#1A3AFF]"
+                  : "bg-muted text-muted-foreground"
               }`}
           >
             {getStatusIcon()}

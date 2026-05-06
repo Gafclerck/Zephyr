@@ -69,14 +69,14 @@ export function AdminProjects() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-semibold text-foreground tracking-tight mb-1">
+                    <h1 className="text-3xl font-semibold text-foreground mb-2">
                         Gestion des Projets
                     </h1>
                     <p className="text-sm text-muted-foreground">
-                        Suivez l'avancement de tous les projets clients
+                        Suivi d'avancement des projets clients
                     </p>
                 </div>
-                <button className="px-4 py-2 bg-[#1A3AFF] text-white text-sm rounded font-medium hover:bg-[#0D2FE0] transition-colors flex items-center gap-2">
+                <button className="px-4 py-2 bg-[#1A3AFF] text-white text-sm font-medium rounded hover:bg-[#0D2FE0] transition-colors flex items-center gap-2">
                     <Plus className="w-4 h-4" />
                     Nouveau projet
                 </button>
@@ -91,7 +91,7 @@ export function AdminProjects() {
                     transition={{ duration: 0.5 }}
                     className="lg:col-span-1 space-y-4"
                 >
-                    <h2 className="font-semibold text-foreground">
+                    <h2 className="text-lg font-semibold text-foreground">
                         Projets ({projects.length})
                     </h2>
                     <ProjectList

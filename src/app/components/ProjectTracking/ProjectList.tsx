@@ -56,7 +56,7 @@ export function ProjectList({
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         className={`w-full p-4 rounded border transition-all text-left hover:border-[#1A3AFF]/50 ${isSelected
-                            ? "bg-[#1A3AFF]/10 border-[#1A3AFF]/50"
+                            ? "bg-muted/40 border-[#1A3AFF]"
                             : "bg-background border-border/40 hover:bg-muted/10"
                             }`}
                     >
@@ -80,23 +80,16 @@ export function ProjectList({
 
                         {/* Progress & Status Bar */}
                         <div className="flex items-center gap-3">
-                            <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+                            <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${progress}%` }}
                                     transition={{ duration: 0.6 }}
-                                    className="h-full bg-gradient-to-r from-[#1A3AFF] to-[#0D2FE0]"
+                                    className="h-full bg-[#1A3AFF]"
                                 />
                             </div>
-                            <span
-                                className={`text-xs font-semibold whitespace-nowrap ${getStatusColor(
-                                    project.status
-                                )}`}
-                            >
+                            <span className="text-xs font-semibold text-[#1A3AFF] whitespace-nowrap">
                                 {progress}%
-                            </span>
-                            <span className="text-xs text-muted-foreground whitespace-nowrap">
-                                {getStatusLabel(project.status)}
                             </span>
                         </div>
                     </motion.button>

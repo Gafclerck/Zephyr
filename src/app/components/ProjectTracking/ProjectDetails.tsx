@@ -29,13 +29,13 @@ export function ProjectDetails({
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
       case "pending":
-        return "bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-500/30";
+        return "bg-muted text-muted-foreground border-border";
       case "in_progress":
         return "bg-[#1A3AFF]/10 text-[#1A3AFF] border-[#1A3AFF]/30";
       case "completed":
-        return "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30";
+        return "bg-border text-muted-foreground border-border";
       default:
-        return "bg-gray-500/10 text-gray-700 border-gray-500/30";
+        return "bg-muted text-muted-foreground border-border";
     }
   };
 

@@ -21,7 +21,7 @@ export function ProjectsOverview() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0 }}
-                    className="p-5 bg-white dark:bg-[#0A1220] border border-border/40 rounded flex flex-col justify-between"
+                    className="p-5 bg-background border border-border/40 rounded"
                 >
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-sm font-medium text-muted-foreground">
@@ -33,7 +33,7 @@ export function ProjectsOverview() {
                         <span className="text-2xl font-semibold text-foreground">
                             {totalProjects}
                         </span>
-                        <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-500/10 px-1.5 py-0.5">
+                        <span className="text-xs font-medium text-[#1A3AFF] bg-[#1A3AFF]/10 px-1.5 py-0.5 rounded">
                             100%
                         </span>
                     </div>
@@ -43,7 +43,7 @@ export function ProjectsOverview() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="p-5 bg-white dark:bg-[#0A1220] border border-border/40 rounded flex flex-col justify-between"
+                    className="p-5 bg-background border border-border/40 rounded"
                 >
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-sm font-medium text-muted-foreground">
@@ -55,7 +55,7 @@ export function ProjectsOverview() {
                         <span className="text-2xl font-semibold text-foreground">
                             {inProgressProjects}
                         </span>
-                        <span className="text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-500/10 px-1.5 py-0.5">
+                        <span className="text-xs font-medium text-[#1A3AFF] bg-[#1A3AFF]/10 px-1.5 py-0.5 rounded">
                             {Math.round((inProgressProjects / totalProjects) * 100)}%
                         </span>
                     </div>
@@ -65,7 +65,7 @@ export function ProjectsOverview() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="p-5 bg-white dark:bg-[#0A1220] border border-border/40 rounded flex flex-col justify-between"
+                    className="p-5 bg-background border border-border/40 rounded"
                 >
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-sm font-medium text-muted-foreground">
@@ -77,7 +77,7 @@ export function ProjectsOverview() {
                         <span className="text-2xl font-semibold text-foreground">
                             {completedProjects}
                         </span>
-                        <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5">
+                        <span className="text-xs font-medium text-[#1A3AFF] bg-[#1A3AFF]/10 px-1.5 py-0.5 rounded">
                             {Math.round((completedProjects / totalProjects) * 100)}%
                         </span>
                     </div>

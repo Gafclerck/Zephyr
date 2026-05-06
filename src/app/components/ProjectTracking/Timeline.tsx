@@ -48,7 +48,7 @@ export function Timeline({
                   animate={isCurrent ? { scale: [1, 1.1, 1] } : {}}
                   transition={{ duration: 2, repeat: Infinity }}
                   className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm transition-all ${isCompleted
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-border text-muted-foreground"
                     : isCurrent
                       ? "bg-[#1A3AFF] text-white ring-2 ring-[#1A3AFF]/30"
                       : "bg-muted text-muted-foreground border border-border/40"
@@ -78,8 +78,8 @@ export function Timeline({
                   animate={{ scaleX: 1 }}
                   transition={{ delay: idx * 0.1 + 0.2 }}
                   className={`flex-1 h-1 mx-1 md:mx-2 rounded-full origin-left ${isCurrentOrNext
-                    ? "bg-gradient-to-r from-[#1A3AFF] to-[#1A3AFF]/50"
-                    : "bg-border/30"
+                      ? "bg-[#1A3AFF]"
+                      : "bg-border/30"
                     }`}
                 />
               )}
