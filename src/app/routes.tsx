@@ -8,12 +8,14 @@ import { Portfolio } from "./pages/Portfolio";
 import { Blog } from "./pages/Blog";
 import { BlogPost } from "./pages/BlogPost";
 import { Contact } from "./pages/Contact";
+import { ProjectTracking } from "./pages/ProjectTracking";
 import { AdminDashboard } from "./pages/admin/Dashboard";
 import { AdminLeads } from "./pages/admin/Leads";
 import { AdminBlog } from "./pages/admin/Blog";
 import { AdminTestimonials } from "./pages/admin/Testimonials";
 import { AdminPortfolio } from "./pages/admin/Portfolio";
 import { AdminSolutions } from "./pages/admin/Solutions";
+import { AdminProjects } from "./pages/admin/Projects";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -28,6 +30,7 @@ export const router = createBrowserRouter([
       { path: "blog", Component: Blog },
       { path: "blog/:slug", Component: BlogPost },
       { path: "contact", Component: Contact },
+      { path: "project-tracking/:projectId", Component: ProjectTracking },
     ],
   },
   {
@@ -40,6 +43,7 @@ export const router = createBrowserRouter([
       { path: "testimonials", Component: AdminTestimonials },
       { path: "portfolio", Component: AdminPortfolio },
       { path: "solutions", Component: AdminSolutions },
+      { path: "projects", Component: AdminProjects },
     ],
   },
   {

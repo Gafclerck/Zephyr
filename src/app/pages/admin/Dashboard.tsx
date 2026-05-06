@@ -6,6 +6,7 @@ import {
   ArrowUpRight
 } from "lucide-react";
 import { Link } from "react-router";
+import { ProjectsOverview } from "../../components/admin/ProjectsOverview";
 
 export function AdminDashboard() {
   const stats = [
@@ -70,7 +71,7 @@ export function AdminDashboard() {
 
       {/* Main Content Area */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Recent Leads */}
         <div className="lg:col-span-2 bg-white dark:bg-[#0A1220] border border-border/40">
           <div className="p-5 border-b border-border/40 flex items-center justify-between">
@@ -96,11 +97,10 @@ export function AdminDashboard() {
                     <td className="px-5 py-3.5 text-muted-foreground">{lead.company}</td>
                     <td className="px-5 py-3.5 text-muted-foreground">{lead.date}</td>
                     <td className="px-5 py-3.5 text-right">
-                      <span className={`inline-flex items-center px-2 py-1 text-xs font-medium ${
-                        lead.status === "Nouveau" 
-                          ? "bg-[#1A3AFF]/10 text-[#1A3AFF]" 
+                      <span className={`inline-flex items-center px-2 py-1 text-xs font-medium ${lead.status === "Nouveau"
+                          ? "bg-[#1A3AFF]/10 text-[#1A3AFF]"
                           : "bg-muted text-muted-foreground"
-                      }`}>
+                        }`}>
                         {lead.status}
                       </span>
                     </td>
@@ -131,6 +131,12 @@ export function AdminDashboard() {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Projects Section */}
+      <div>
+        <h2 className="text-lg font-semibold text-foreground tracking-tight mb-4">Gestion des Projets</h2>
+        <ProjectsOverview />
       </div>
     </div>
   );
