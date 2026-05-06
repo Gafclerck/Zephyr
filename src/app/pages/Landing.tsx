@@ -241,7 +241,7 @@ function Hero() {
     <section className="relative flex min-h-screen border-b border-border/40 overflow-hidden">
 
       {/* ── Colonne texte ── */}
-      <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-10 pb-10 border-r border-border/40">
+      <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-6 md:pt-10 pb-6 md:pb-10 border-r border-border/40">
 
         {/* Top label */}
         <motion.div
@@ -257,7 +257,7 @@ function Hero() {
         </motion.div>
 
         {/* Main content — centré verticalement */}
-        <div className="flex flex-col justify-center flex-1 py-12">
+        <div className="flex flex-col justify-center flex-1 py-5 md:py-12 ">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
