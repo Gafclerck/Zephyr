@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { GlassCard } from "../../components/ui/GlassCard";
-import { Button } from "../../components/ui/Button";
-import { Badge } from "../../components/ui/Badge";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Plus, Edit, Trash2, X, CheckCircle, Image as ImageIcon } from "lucide-react";
 
 export function AdminPortfolio() {
   const [showForm, setShowForm] = useState(false);
@@ -11,133 +8,165 @@ export function AdminPortfolio() {
     {
       id: "1",
       title: "TechFlow Platform",
-      category: "web",
-      tags: ["Web App", "React", "Node.js"],
-      description: "SaaS platform for project management",
-      results: "+300% user engagement",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+      category: "Web",
+      client: "TechCorp",
+      date: "2026",
+      featured: true,
     },
     {
       id: "2",
       title: "FitTrack Mobile",
-      category: "mobile",
-      tags: ["iOS", "Android", "Health"],
-      description: "Fitness tracking app with AI recommendations",
-      results: "50K+ downloads",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop",
+      category: "Mobile",
+      client: "FitTrack Inc",
+      date: "2026",
+      featured: false,
+    },
+    {
+      id: "3",
+      title: "GreenEco Brand",
+      category: "Branding",
+      client: "GreenEco",
+      date: "2025",
+      featured: false,
     },
   ];
 
   return (
-    <div className="p-8">
-      <div className="mb-8 flex items-center justify-between">
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-['Orbitron'] text-foreground mb-2">Portfolio Management</h1>
-          <p className="text-muted-foreground">Showcase your best work</p>
+          <h1 className="text-2xl font-semibold text-foreground tracking-tight mb-1">Portfolio</h1>
+          <p className="text-sm text-muted-foreground">Gérez vos études de cas et réalisations.</p>
         </div>
-        <Button variant="primary" onClick={() => setShowForm(!showForm)}>
-          <Plus className="w-5 h-5 mr-2" />
-          Add Project
-        </Button>
+        <button 
+          onClick={() => setShowForm(!showForm)}
+          className="px-4 py-2 bg-[#1A3AFF] text-white text-sm font-medium hover:bg-[#1A3AFF]/90 transition-colors flex items-center gap-2"
+        >
+          {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+          {showForm ? "Fermer l'éditeur" : "Nouveau Projet"}
+        </button>
       </div>
 
       {showForm && (
-        <GlassCard className="mb-6">
-          <h2 className="text-xl font-['Orbitron'] text-foreground mb-4">New Project</h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-foreground mb-2 text-sm">Project Title</label>
+        <div className="bg-white dark:bg-[#0A1220] border border-border/40 p-6 md:p-8">
+          <h2 className="text-lg font-semibold text-foreground mb-6">Ajout au Portfolio</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="md:col-span-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Nom du projet</label>
               <input
                 type="text"
-                className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none"
-                placeholder="Project name"
+                className="w-full px-4 py-2.5 bg-muted/10 border border-border/40 text-foreground text-sm focus:border-[#1A3AFF] focus:ring-1 focus:ring-[#1A3AFF] outline-none transition-colors"
+                placeholder="Ex: Refonte Système Core"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Client</label>
+              <input
+                type="text"
+                className="w-full px-4 py-2.5 bg-muted/10 border border-border/40 text-foreground text-sm focus:border-[#1A3AFF] focus:ring-1 focus:ring-[#1A3AFF] outline-none transition-colors"
+                placeholder="Nom du client"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-foreground mb-2 text-sm">Category</label>
-                <select className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none">
-                  <option value="web">Web</option>
-                  <option value="mobile">Mobile</option>
-                  <option value="branding">Branding</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-foreground mb-2 text-sm">Tags (comma-separated)</label>
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Catégorie</label>
+              <select className="w-full px-4 py-2.5 bg-muted/10 border border-border/40 text-foreground text-sm focus:border-[#1A3AFF] focus:ring-1 focus:ring-[#1A3AFF] outline-none transition-colors">
+                <option>Web</option>
+                <option>Mobile</option>
+                <option>Branding</option>
+                <option>Marketing</option>
+              </select>
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Description et Résultats</label>
+              <textarea
+                className="w-full px-4 py-3 bg-muted/10 border border-border/40 text-foreground text-sm focus:border-[#1A3AFF] focus:ring-1 focus:ring-[#1A3AFF] outline-none transition-colors min-h-[120px] resize-y"
+                placeholder="Description du défi, solution technique et résultats mesurables..."
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Visuels (URLs)</label>
+              <div className="flex gap-3">
                 <input
                   type="text"
-                  className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none"
-                  placeholder="React, Node.js, API"
+                  className="flex-1 px-4 py-2.5 bg-muted/10 border border-border/40 text-foreground text-sm focus:border-[#1A3AFF] focus:ring-1 focus:ring-[#1A3AFF] outline-none transition-colors"
+                  placeholder="https://..."
                 />
+                <button className="px-4 bg-muted border border-border/40 hover:bg-muted/80 transition-colors flex items-center justify-center">
+                  <ImageIcon className="w-4 h-4 text-muted-foreground" />
+                </button>
               </div>
             </div>
 
-            <div>
-              <label className="block text-foreground mb-2 text-sm">Description</label>
-              <textarea
-                className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none"
-                rows={3}
-                placeholder="Brief project description"
-              />
-            </div>
-
-            <div>
-              <label className="block text-foreground mb-2 text-sm">Key Results</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none"
-                placeholder="e.g. +300% engagement, $500K revenue"
-              />
-            </div>
-
-            <div>
-              <label className="block text-foreground mb-2 text-sm">Project Image URL</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 rounded-lg bg-muted border border-[#00B4FF]/20 text-foreground focus:border-[#00B4FF] focus:outline-none"
-                placeholder="https://..."
-              />
-            </div>
-
-            <div className="flex gap-3">
-              <Button variant="primary">Add Project</Button>
-              <Button variant="ghost" onClick={() => setShowForm(false)}>Cancel</Button>
+            <div className="md:col-span-2 flex items-center gap-3 p-4 bg-muted/5 border border-border/40">
+              <input type="checkbox" id="featured" className="w-4 h-4 rounded-sm border-border/40 text-[#1A3AFF] focus:ring-[#1A3AFF]" />
+              <label htmlFor="featured" className="text-sm font-medium text-foreground">Mettre en avant sur la page d'accueil</label>
             </div>
           </div>
-        </GlassCard>
+
+          <div className="flex flex-wrap gap-3 pt-6 border-t border-border/40">
+            <button className="px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-medium hover:bg-[#1A3AFF]/90 transition-colors flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" /> Sauvegarder
+            </button>
+            <button onClick={() => setShowForm(false)} className="px-5 py-2.5 bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+              Annuler
+            </button>
+          </div>
+        </div>
       )}
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <GlassCard key={project.id} className="p-0">
-            <div
-              className="h-48 bg-cover bg-center rounded-t-xl"
-              style={{ backgroundImage: `url(${project.image})` }}
-            />
-            <div className="p-6">
-              <div className="flex flex-wrap gap-2 mb-3">
-                {project.tags.map((tag, i) => (
-                  <Badge key={i} variant="gray">{tag}</Badge>
-                ))}
-              </div>
-              <h3 className="text-xl text-foreground mb-2">{project.title}</h3>
-              <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-              <p className="text-[#00B4FF] text-sm mb-4">{project.results}</p>
-
-              <div className="flex gap-2">
-                <button className="flex-1 p-2 rounded-lg bg-[#0D1F4E] text-[#00B4FF] hover:bg-[#00B4FF]/10 flex items-center justify-center gap-2">
-                  <Edit className="w-4 h-4" />
-                  Edit
-                </button>
-                <button className="p-2 rounded-lg bg-[#0D1F4E] text-red-400 hover:bg-red-400/10">
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </GlassCard>
-        ))}
+      {/* Grid */}
+      <div className="bg-white dark:bg-[#0A1220] border border-border/40">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-muted/30 text-muted-foreground border-b border-border/40">
+              <tr>
+                <th className="px-6 py-4 font-semibold">Projet</th>
+                <th className="px-6 py-4 font-semibold">Client</th>
+                <th className="px-6 py-4 font-semibold">Catégorie</th>
+                <th className="px-6 py-4 font-semibold text-center">Statut</th>
+                <th className="px-6 py-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/40">
+              {projects.map((project) => (
+                <tr key={project.id} className="hover:bg-muted/10 transition-colors">
+                  <td className="px-6 py-4">
+                    <p className="font-medium text-foreground text-base mb-1">{project.title}</p>
+                    <p className="text-muted-foreground text-xs">{project.date}</p>
+                  </td>
+                  <td className="px-6 py-4 text-muted-foreground">{project.client}</td>
+                  <td className="px-6 py-4">
+                    <span className="px-2.5 py-1 bg-muted/50 text-muted-foreground text-xs font-medium">
+                      {project.category}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-center">
+                    {project.featured ? (
+                      <span className="px-2.5 py-1 bg-[#1A3AFF]/10 text-[#1A3AFF] text-xs font-medium">En Vedette</span>
+                    ) : (
+                      <span className="px-2.5 py-1 bg-muted text-muted-foreground text-xs font-medium">Standard</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center justify-end gap-2">
+                      <button className="p-2 text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-colors">
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button className="p-2 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

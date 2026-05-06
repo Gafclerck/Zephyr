@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { MessageCircle, X, Send, Bot, Minimize2 } from "lucide-react";
+import { MessageCircle, X, Send, Bot, Minimize2, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface Message {
@@ -111,7 +111,6 @@ export function ChatBot() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  // Conversation history for Claude API
   const conversationHistory = useRef<Array<{ role: string; content: string }>>([]);
 
   useEffect(() => {
@@ -181,11 +180,14 @@ export function ChatBot() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#1A3AFF] text-white flex items-center justify-center shadow-lg shadow-[#1A3AFF]/30 hover:bg-[#0D2FE0] transition-colors"
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-16 h-16 bg-[#1A3AFF] text-white flex items-center justify-center rounded-none shadow-xl shadow-[#1A3AFF]/30 transition-shadow"
             aria-label="Ouvrir le chat"
           >
-            <MessageCircle className="w-6 h-6" />
+            <MessageCircle className="w-7 h-7" />
+            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-none -mt-1 -mr-1" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -195,36 +197,38 @@ export function ChatBot() {
         {isOpen && (
           <motion.div
             key="chat-window"
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.97 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-4rem)] flex flex-col bg-background border border-[#1A3AFF]/20 shadow-2xl shadow-black/20"
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[600px] max-h-[calc(100vh-4rem)] flex flex-col bg-background border border-border/50 rounded-none shadow-2xl overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[#1A3AFF]/15 bg-[#1A3AFF]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-white/20 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-white" />
+            <div className="flex items-center justify-between px-6 py-5 bg-muted/30 backdrop-blur-md border-b border-border/50">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-10 h-10 bg-[#1A3AFF] rounded-none flex items-center justify-center shadow-inner">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background rounded-none translate-x-1/4 translate-y-1/4" />
                 </div>
                 <div>
-                  <p className="text-white font-['Orbitron'] text-sm tracking-wide">Zephyr AI</p>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-white/70 text-xs">En ligne</span>
-                  </div>
+                  <h3 className="font-['Orbitron'] font-medium text-foreground tracking-wide">Zephyr AI</h3>
+                  <p className="text-xs text-muted-foreground flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-[#1A3AFF]" /> Assistant Premium
+                  </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-white/70 hover:text-white transition-colors p-1"
+                  className="w-8 h-8 flex items-center justify-center rounded-none text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
                 >
                   <Minimize2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => { setIsOpen(false); setMessages([]); conversationHistory.current = []; }}
-                  className="text-white/70 hover:text-white transition-colors p-1"
+                  className="w-8 h-8 flex items-center justify-center rounded-none text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -232,44 +236,49 @@ export function ChatBot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-5 space-y-6">
               <AnimatePresence initial={false}>
                 {messages.map((msg) => (
                   <motion.div
                     key={msg.id}
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                     className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                   >
+                    {msg.sender === "bot" && (
+                      <div className="w-8 h-8 rounded-none bg-[#1A3AFF]/10 flex items-center justify-center mr-3 mt-1 shrink-0">
+                        <Bot className="w-4 h-4 text-[#1A3AFF]" />
+                      </div>
+                    )}
                     <div
-                      className={`max-w-[82%] px-4 py-3 text-sm leading-relaxed ${
+                      className={`max-w-[75%] px-4 py-3 text-[15px] leading-relaxed shadow-sm ${
                         msg.sender === "user"
-                          ? "bg-[#1A3AFF] text-white"
-                          : "bg-muted text-foreground border border-[#1A3AFF]/10"
+                          ? "bg-[#1A3AFF] text-white rounded-none rounded-tr-sm"
+                          : "bg-muted/50 text-foreground border border-border/50 rounded-none rounded-tl-sm"
                       }`}
                     >
                       {msg.typing ? (
-                        <div className="flex gap-1 items-center py-0.5">
+                        <div className="flex gap-1.5 items-center py-2 px-1">
                           {[0, 0.15, 0.3].map((delay, i) => (
                             <motion.span
                               key={i}
-                              className="w-1.5 h-1.5 rounded-full bg-[#1A3AFF]"
-                              animate={{ y: [0, -6, 0] }}
-                              transition={{ duration: 0.6, repeat: Infinity, delay }}
+                              className="w-1.5 h-1.5 rounded-none bg-foreground/40"
+                              animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4] }}
+                              transition={{ duration: 0.8, repeat: Infinity, delay }}
                             />
                           ))}
                         </div>
                       ) : (
                         <>
-                          <p className="whitespace-pre-line">{msg.text}</p>
+                          <p className="whitespace-pre-wrap font-medium">{msg.text}</p>
                           {(msg as Message & { quickReplies?: string[] }).quickReplies && (
-                            <div className="flex flex-wrap gap-1.5 mt-3">
+                            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border/50">
                               {((msg as Message & { quickReplies?: string[] }).quickReplies ?? []).map((reply) => (
                                 <button
                                   key={reply}
                                   onClick={() => sendMessage(reply)}
-                                  className="px-2.5 py-1 text-xs border border-[#1A3AFF]/30 text-[#1A3AFF] hover:bg-[#1A3AFF] hover:text-white transition-colors"
+                                  className="px-4 py-2 text-sm text-left border border-[#1A3AFF]/20 text-[#1A3AFF] rounded-none hover:bg-[#1A3AFF] hover:text-white transition-all hover:pl-5"
                                 >
                                   {reply}
                                 </button>
@@ -282,11 +291,11 @@ export function ChatBot() {
                   </motion.div>
                 ))}
               </AnimatePresence>
-              <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} className="h-2" />
             </div>
 
             {/* Input */}
-            <div className="px-4 py-3 border-t border-[#1A3AFF]/15">
+            <div className="p-4 bg-background border-t border-border/50">
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -294,21 +303,23 @@ export function ChatBot() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage(input)}
-                  placeholder="Écrivez votre message..."
-                  className="flex-1 px-3 py-2 text-sm bg-muted border border-[#1A3AFF]/15 text-foreground placeholder-muted-foreground focus:outline-none focus:border-[#1A3AFF]/40 transition-colors"
+                  placeholder="Posez votre question..."
+                  className="flex-1 px-4 py-3 bg-muted/30 border border-border rounded-none text-[15px] text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#1A3AFF]/30 focus:border-[#1A3AFF] transition-all"
                   disabled={loading}
                 />
                 <button
                   onClick={() => sendMessage(input)}
                   disabled={loading || !input.trim()}
-                  className="w-10 h-10 flex items-center justify-center bg-[#1A3AFF] text-white hover:bg-[#0D2FE0] disabled:opacity-40 transition-colors shrink-0"
+                  className="w-12 h-12 flex items-center justify-center bg-[#1A3AFF] text-white rounded-none hover:bg-[#1A3AFF] disabled:opacity-50 disabled:hover:bg-[#1A3AFF] transition-colors shrink-0 shadow-sm"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-5 h-5 ml-1" />
                 </button>
               </div>
-              <p className="text-muted-foreground/50 text-[10px] mt-2 text-center">
-                {useAI ? "✦ Propulsé par Claude AI" : "Assistant Zephyr"}
-              </p>
+              <div className="flex justify-center mt-3">
+                <span className="text-[10px] font-['Orbitron'] tracking-wider text-muted-foreground/60 uppercase">
+                  {useAI ? "Propulsé par IA Claude" : "Assistant Automatique"}
+                </span>
+              </div>
             </div>
           </motion.div>
         )}
@@ -316,3 +327,4 @@ export function ChatBot() {
     </>
   );
 }
+

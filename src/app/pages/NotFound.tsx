@@ -6,7 +6,7 @@ export function NotFound() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="container mx-auto px-6 text-center">
-        <h1 className="text-9xl font-['Orbitron'] bg-gradient-to-r from-[#1A3AFF] to-[#00B4FF] bg-clip-text text-transparent mb-6">
+        <h1 className="text-9xl font-['Orbitron'] text-[#1A3AFF] mb-6">
           404
         </h1>
         <h2 className="text-3xl text-foreground mb-4">Page Not Found</h2>

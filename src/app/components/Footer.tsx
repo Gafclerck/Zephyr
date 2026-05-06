@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import LogoBlanc from "../../assets/logos/Logo-Zephyr-Blanc.png";
+import LogoNoir from "../../assets/logos/Logo-Zephyr-Noir.png";
 
 const FOOTER_LINKS = {
   company: [
@@ -23,11 +25,17 @@ export function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-[#1A3AFF]/15">
         {/* Brand */}
         <div className="p-10 lg:border-r border-[#1A3AFF]/15">
-          <Link to="/" className="flex items-center gap-2.5 mb-6 group">
-            <div className="w-10 h-10 border border-[#1A3AFF] flex items-center justify-center shrink-0">
-              <span className="font-['Orbitron'] text-[#1A3AFF] text-lg font-bold">Z</span>
-            </div>
-            <span className="font-['Orbitron'] text-foreground text-lg tracking-widest">ZEPHYR</span>
+          <Link to="/" className="flex items-center mb-6 group">
+            <img 
+              src={LogoBlanc} 
+              alt="Zephyr Logo" 
+              className="h-8 hidden dark:block" 
+            />
+            <img 
+              src={LogoNoir} 
+              alt="Zephyr Logo" 
+              className="h-8 block dark:hidden" 
+            />
           </Link>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-[220px]">
             Agence digitale premium. Nous construisons des expériences web et mobile qui génèrent des résultats mesurables.
@@ -101,7 +109,7 @@ export function Footer() {
           <div className="mt-8">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-['Orbitron'] tracking-wider hover:bg-[#0D2FE0] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-['Orbitron'] tracking-wider hover:bg-[#1A3AFF] transition-colors"
             >
               Start a Project
               <ArrowUpRight className="w-4 h-4" />

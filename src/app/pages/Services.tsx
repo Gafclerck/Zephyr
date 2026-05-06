@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import {
   Code, Smartphone, Palette, TrendingUp,
   ArrowRight, CheckCircle, ArrowUpRight,
-  Globe, Zap, Shield, Users
+  Globe, Zap, Shield, Users, ArrowDown
 } from "lucide-react";
 import { Link } from "react-router";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, useInView } from "motion/react";
 
 /* ─── Types ─── */
 interface Service {
@@ -16,11 +16,9 @@ interface Service {
   shortDesc: string;
   longDesc: string;
   img: string;
-  imgLabel: string;
   features: string[];
   deliverables: string[];
   technologies: string[];
-  timeline: string;
   startingPrice: string;
   highlight: { label: string; value: string }[];
 }
@@ -32,35 +30,25 @@ const SERVICES: Service[] = [
     number: "01",
     icon: Code,
     title: "Développement Web",
-    shortDesc: "Sites haute performance, e-commerce, SaaS",
-    longDesc:
-      "On conçoit et développe des sites web qui convertissent. Du site vitrine au SaaS complexe, chaque ligne de code est pensée pour la performance, le SEO et l'expérience utilisateur.",
-    img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&h=800&fit=crop",
-    imgLabel: "Service Web — Screenshot projet ou mockup device",
+    shortDesc: "Sites & SaaS",
+    longDesc: "Des plateformes web performantes, scalables et taillées pour la conversion.",
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
     features: [
-      "Design responsive tous écrans",
-      "Optimisation SEO dès la structure",
-      "Temps de chargement < 2 secondes",
-      "CMS headless ou intégré",
-      "E-commerce Shopify / WooCommerce",
-      "Progressive Web Apps (PWA)",
-      "Analytics et suivi conversions",
-      "Maintenance et évolutions",
+      "Architecture Headless",
+      "Performances Core Web Vitals",
+      "Optimisation SEO technique",
     ],
     deliverables: [
-      "Maquettes Figma validées",
-      "Code source complet",
-      "Documentation technique",
-      "Formation CMS",
-      "Déploiement + hébergement",
+      "Code source documenté",
+      "Déploiement CI/CD",
+      "Documentation API",
     ],
-    technologies: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "Vercel", "Stripe"],
-    timeline: "2 – 8 semaines",
-    startingPrice: "500 000 FCFA",
+    technologies: ["React", "Next.js", "TypeScript", "Node.js"],
+    startingPrice: "500K FCFA",
     highlight: [
-      { label: "Projets livrés", value: "80+" },
-      { label: "Taux satisfaction", value: "98%" },
-      { label: "Délai moyen", value: "4 sem." },
+      { label: "Projets", value: "80+" },
+      { label: "Délai", value: "4 sem." },
+      { label: "Perf", value: "99%" },
     ],
   },
   {
@@ -68,35 +56,25 @@ const SERVICES: Service[] = [
     number: "02",
     icon: Smartphone,
     title: "Applications Mobiles",
-    shortDesc: "iOS & Android natifs ou cross-platform",
-    longDesc:
-      "Applications mobiles performantes et intuitives. On utilise React Native pour couvrir iOS et Android avec un seul code optimisé, ou le développement natif pour les cas exigeants.",
-    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop",
-    imgLabel: "Service Mobile — Mockup phones avec interface app",
+    shortDesc: "iOS & Android",
+    longDesc: "Des expériences mobiles natives, fluides et engageantes pour vos utilisateurs.",
+    img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
     features: [
-      "iOS & Android (une seule codebase)",
-      "Interface native et fluide",
+      "React Native",
       "Mode hors connexion",
-      "Notifications push",
-      "Authentification sécurisée",
-      "Intégration paiement mobile",
-      "Backend API REST / GraphQL",
-      "Optimisation App Store (ASO)",
+      "Notifications ciblées",
     ],
     deliverables: [
-      "Wireframes et prototypes",
-      "Application iOS et Android",
-      "API backend documentée",
-      "Publication App Store / Play Store",
-      "Guide d'utilisation",
+      "App iOS & Android",
+      "Backend & API",
+      "Publication stores",
     ],
-    technologies: ["React Native", "Expo", "TypeScript", "Firebase", "Node.js", "AWS", "Redux", "Jest"],
-    timeline: "6 – 16 semaines",
-    startingPrice: "2 000 000 FCFA",
+    technologies: ["React Native", "Firebase", "Node.js"],
+    startingPrice: "2M FCFA",
     highlight: [
-      { label: "Apps publiées", value: "35+" },
-      { label: "Downloads cumulés", value: "200K+" },
-      { label: "Plateformes", value: "iOS & Android" },
+      { label: "Apps", value: "35+" },
+      { label: "DL", value: "200K+" },
+      { label: "OS", value: "iOS/Android" },
     ],
   },
   {
@@ -104,35 +82,25 @@ const SERVICES: Service[] = [
     number: "03",
     icon: Palette,
     title: "Branding & Design",
-    shortDesc: "Identité visuelle complète et mémorable",
-    longDesc:
-      "Une marque forte, c'est un avantage compétitif durable. On construit des identités visuelles qui reflètent votre positionnement et parlent à votre cible, des stratégies de marque aux supports de communication.",
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=800&fit=crop",
-    imgLabel: "Service Branding — Planche d'identité visuelle, logo",
+    shortDesc: "Identité Visuelle",
+    longDesc: "Une image de marque forte et cohérente, déclinée sur tous vos supports.",
+    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
     features: [
-      "Stratégie de marque et positionnement",
-      "Logo design (3 concepts initiaux)",
-      "Palette de couleurs et typographie",
-      "Charte graphique complète",
-      "Templates réseaux sociaux",
-      "Cartes de visite et supports print",
-      "Motion design pour digital",
-      "Brand guidelines document",
+      "Stratégie de marque",
+      "Charte graphique",
+      "Design System UI",
     ],
     deliverables: [
-      "Charte graphique PDF + Figma",
-      "Logo tous formats (SVG, PNG, etc.)",
-      "Kit réseaux sociaux",
-      "Templates print",
-      "Fichiers sources complets",
+      "Fichiers vectoriels",
+      "Brand Guidelines",
+      "Librairie Figma",
     ],
-    technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop", "After Effects", "Notion"],
-    timeline: "2 – 4 semaines",
-    startingPrice: "300 000 FCFA",
+    technologies: ["Figma", "Illustrator", "Photoshop"],
+    startingPrice: "300K FCFA",
     highlight: [
-      { label: "Projets branding", value: "60+" },
-      { label: "Secteurs couverts", value: "15+"},
-      { label: "Awards design", value: "8" },
+      { label: "Marques", value: "60+" },
+      { label: "Awards", value: "8" },
+      { label: "Concepts", value: "3/projet" },
     ],
   },
   {
@@ -140,217 +108,51 @@ const SERVICES: Service[] = [
     number: "04",
     icon: TrendingUp,
     title: "Marketing Digital",
-    shortDesc: "Croissance mesurable, ROI prouvé",
-    longDesc:
-      "Stratégies data-driven qui génèrent des leads qualifiés. SEO, publicité payante, réseaux sociaux et email marketing : on pilote chaque canal avec des KPIs clairs et des reportings transparents.",
-    img: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=1200&h=800&fit=crop",
-    imgLabel: "Service Marketing — Dashboard analytics, graphiques croissance",
+    shortDesc: "Acquisition & SEO",
+    longDesc: "Des stratégies pilotées par la donnée pour accélérer votre croissance.",
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
     features: [
-      "Audit SEO et stratégie de contenu",
-      "Optimisation on-page et technique",
-      "Google Ads & Meta Ads",
-      "Gestion réseaux sociaux (3 plateformes)",
-      "Email marketing et automation",
-      "Création de contenus (texte + visuels)",
-      "Reporting mensuel détaillé",
-      "A/B testing et optimisation CRO",
+      "Campagnes Ads (Google/Meta)",
+      "Stratégie de Contenu",
+      "Emailing Automation",
     ],
     deliverables: [
-      "Audit initial complet",
-      "Plan éditorial mensuel",
-      "Rapports de performance",
-      "Bibliothèque de contenus",
-      "Recommandations mensuelles",
+      "Plan stratégique",
+      "Reporting ROI",
+      "Dashboards",
     ],
-    technologies: ["Google Analytics", "Google Ads", "Meta Business", "SEMrush", "HubSpot", "Mailchimp", "Hotjar"],
-    timeline: "Minimum 3 mois",
-    startingPrice: "150 000 FCFA/mois",
+    technologies: ["Analytics", "Ads", "HubSpot"],
+    startingPrice: "150K/mois",
     highlight: [
-      { label: "Clients marketing", value: "40+" },
-      { label: "Leads générés", value: "10 000+" },
-      { label: "ROI moyen", value: "×4.2" },
+      { label: "Clients", value: "40+" },
+      { label: "Leads", value: "10K+" },
+      { label: "ROI", value: "×4.2" },
     ],
   },
 ];
 
 const WHY_US = [
-  { icon: Zap, title: "Livraison rapide", desc: "Sprints agiles, livraisons itératives. On respecte les délais, point." },
-  { icon: Shield, title: "Code de qualité", desc: "Tests automatisés, code review, documentation. Rien n'est laissé au hasard." },
-  { icon: Globe, title: "Vision globale", desc: "UX, performance, SEO, accessibilité. On pense à tout dès le départ." },
-  { icon: Users, title: "Équipe dédiée", desc: "Un interlocuteur unique, une équipe senior. Communication directe, zéro bureaucratie." },
+  { icon: Zap, title: "Exécution Rapide", desc: "Sprints agiles et itérations hebdomadaires." },
+  { icon: Shield, title: "Qualité Supérieure", desc: "Code propre, tests et design premium." },
+  { icon: Globe, title: "Vision 360°", desc: "Architecture, UI et marketing unifiés." },
+  { icon: Users, title: "Équipe Experte", desc: "Un interlocuteur unique et dédié." },
 ];
 
 /* ─── Page Component ─── */
 export function Services() {
-  const [activeId, setActiveId] = useState<string>("web");
-  const activeService = SERVICES.find((s) => s.id === activeId)!;
-
   return (
-    <div className="bg-background min-h-screen">
-      {/* ── HERO ── */}
+    <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       <HeroSection />
+      
+      {/* Individual Service Sections */}
+      <div id="services-list" className="flex flex-col">
+        {SERVICES.map((service, index) => (
+          <ServiceSection key={service.id} service={service} index={index} />
+        ))}
+      </div>
 
-      {/* ── SERVICE EXPLORER ── */}
-      <section className="border-b border-[#1A3AFF]/15">
-        <div className="grid lg:grid-cols-[280px_1fr] min-h-[700px]">
-          {/* Sidebar navigation */}
-          <aside className="border-r border-[#1A3AFF]/15 flex flex-col">
-            <div className="p-6 border-b border-[#1A3AFF]/15">
-              <p className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground">
-                Sélectionner
-              </p>
-            </div>
-            {SERVICES.map((service) => (
-              <ServiceTabButton
-                key={service.id}
-                service={service}
-                isActive={activeId === service.id}
-                onClick={() => setActiveId(service.id)}
-              />
-            ))}
-          </aside>
-
-          {/* Service detail panel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeId}
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-              className="grid lg:grid-cols-2"
-            >
-              {/* Left: Content */}
-              <div className="flex flex-col justify-between p-10 border-r border-[#1A3AFF]/15">
-                <div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-12 border border-[#1A3AFF]/30 flex items-center justify-center">
-                      <activeService.icon className="w-6 h-6 text-[#1A3AFF]" />
-                    </div>
-                    <div>
-                      <span className="font-['Orbitron'] text-xs text-muted-foreground tracking-widest">
-                        {activeService.number}
-                      </span>
-                      <h2 className="font-['Orbitron'] text-2xl text-foreground">{activeService.title}</h2>
-                    </div>
-                  </div>
-
-                  <p className="text-foreground/80 leading-relaxed mb-8">{activeService.longDesc}</p>
-
-                  {/* Highlights */}
-                  <div className="grid grid-cols-3 gap-3 mb-8">
-                    {activeService.highlight.map((h) => (
-                      <div key={h.label} className="bg-muted p-4 border border-[#1A3AFF]/10">
-                        <p className="font-['Orbitron'] text-xl text-foreground mb-1">{h.value}</p>
-                        <p className="text-muted-foreground text-xs">{h.label}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2">
-                    <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-4">
-                      Inclus
-                    </h4>
-                    {activeService.features.slice(0, 6).map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <CheckCircle className="w-4 h-4 text-[#1A3AFF] shrink-0" />
-                        <span className="text-foreground/80 text-sm">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Pricing & CTA */}
-                <div className="mt-8 pt-8 border-t border-[#1A3AFF]/15">
-                  <div className="flex items-end justify-between mb-6">
-                    <div>
-                      <p className="text-muted-foreground text-xs mb-1">À partir de</p>
-                      <p className="font-['Orbitron'] text-2xl text-foreground">{activeService.startingPrice}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-muted-foreground text-xs mb-1">Délai</p>
-                      <p className="font-['Orbitron'] text-sm text-foreground">{activeService.timeline}</p>
-                    </div>
-                  </div>
-                  <Link to="/contact">
-                    <motion.button
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      className="w-full py-4 bg-[#1A3AFF] text-white font-['Orbitron'] text-sm tracking-wider hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-3"
-                    >
-                      Demander ce service
-                      <ArrowRight className="w-4 h-4" />
-                    </motion.button>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right: Visual */}
-              <div className="flex flex-col">
-                {/* Image */}
-                <div className="relative flex-1 min-h-[300px] overflow-hidden">
-                  {activeService.img ? (
-                    <img
-                      src={activeService.img}
-                      alt={activeService.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-muted flex items-center justify-center">
-                      <p className="text-muted-foreground text-sm text-center px-8">{activeService.imgLabel}</p>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-background/30" />
-                </div>
-
-                {/* Tech stack + Deliverables */}
-                <div className="p-8 border-t border-[#1A3AFF]/15 grid grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-4">
-                      Stack technique
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {activeService.technologies.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2.5 py-1 text-xs border border-[#1A3AFF]/20 text-foreground/70 bg-muted"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-4">
-                      Livrables
-                    </h4>
-                    <ul className="space-y-1.5">
-                      {activeService.deliverables.map((d) => (
-                        <li key={d} className="flex items-center gap-2 text-xs text-foreground/70">
-                          <span className="w-1 h-1 rounded-full bg-[#1A3AFF] shrink-0" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
-
-      {/* ── PROCESS ── */}
       <ProcessSection />
-
-      {/* ── WHY US ── */}
       <WhyUsSection />
-
-      {/* ── ALL SERVICES CARDS ── */}
-      <AllServicesSection onSelect={setActiveId} />
-
-      {/* ── CTA ── */}
       <CtaSection />
     </div>
   );
@@ -358,180 +160,217 @@ export function Services() {
 
 /* ─── Hero Section ─── */
 function HeroSection() {
-  return (
-    <section className="border-b border-[#1A3AFF]/15">
-      <div className="grid lg:grid-cols-[1fr_400px]">
-        <div className="px-8 md:px-16 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <span className="h-px w-12 bg-[#1A3AFF]" />
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase">
-                Ce qu'on fait
-              </span>
-            </div>
-            <h1 className="font-['Orbitron'] text-6xl md:text-7xl text-foreground leading-[1.0] mb-8 tracking-tight">
-              Services
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-xl leading-relaxed mb-12">
-              Quatre domaines d'expertise, une seule obsession : livrer des solutions digitales
-              qui génèrent des résultats concrets pour votre activité.
-            </p>
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-            {/* Service quick-nav pills */}
-            <div className="flex flex-wrap gap-3">
-              {SERVICES.map((s) => (
-                <a
-                  key={s.id}
-                  href={`#${s.id}`}
-                  className="px-4 py-2 border border-[#1A3AFF]/20 text-muted-foreground text-sm hover:border-[#1A3AFF] hover:text-[#1A3AFF] transition-colors font-['Orbitron'] text-xs tracking-wider"
-                >
-                  {s.number} {s.title}
-                </a>
-              ))}
+  return (
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40">
+      <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10" />
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+          alt="Abstract architecture"
+          className="w-full h-full object-cover opacity-60 grayscale"
+        />
+      </motion.div>
+
+      <div className="container relative z-20 px-6 md:px-12 mx-auto mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <span className="w-12 h-[1px] bg-[#1A3AFF]" />
+            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
+              Nos Services
+            </span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
+            Expertise <br className="hidden md:block" />
+            <span className="text-foreground">
+              Digitale Complète.
+            </span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
+            Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l'ensemble de votre stratégie technologique et créative.
+          </p>
+
+          <div className="flex items-center gap-6">
+            <button 
+              onClick={() => {
+                const el = document.getElementById("services-list");
+                el?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="w-14 h-14 rounded-none border border-border/50 flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300 group"
+            >
+              <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+            </button>
+            <span className="text-sm font-['Orbitron'] uppercase tracking-widest text-muted-foreground">
+              Découvrir nos offres
+            </span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Individual Service Section ─── */
+function ServiceSection({ service, index }: { service: Service; index: number }) {
+  const isEven = index % 2 === 0;
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+
+  return (
+    <section 
+      ref={ref}
+      id={service.id} 
+      className="py-20 md:py-24 border-b border-border/40 relative"
+    >
+      <div className="container mx-auto px-6 md:px-12">
+        <div className={`flex flex-col gap-16 lg:gap-20 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+          
+          {/* Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full lg:w-5/12 flex flex-col gap-8"
+          >
+            <div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-muted rounded-none flex items-center justify-center border border-border/50">
+                  <service.icon className="w-6 h-6 text-[#1A3AFF]" />
+                </div>
+                <span className="font-['Orbitron'] text-3xl text-foreground/20 font-bold tracking-tighter">
+                  {service.number}
+                </span>
+              </div>
+              <h3 className="text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-foreground">{service.title}</h3>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {service.longDesc}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border/50">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">Points clés</p>
+                <ul className="space-y-3">
+                  {service.features.map(f => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
+                      <CheckCircle className="w-4 h-4 text-[#1A3AFF] shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">Livrables</p>
+                <ul className="space-y-3">
+                  {service.deliverables.map(d => (
+                    <li key={d} className="flex items-start gap-2 text-sm text-foreground/80">
+                      <span className="w-1.5 h-1.5 rounded-none bg-foreground/30 mt-1.5 shrink-0" />
+                      <span>{d}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-border/50 flex flex-wrap items-center justify-between gap-6">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Budget moyen</p>
+                <p className="text-xl font-['Orbitron'] font-semibold text-foreground">{service.startingPrice}</p>
+              </div>
+              <Link to="/contact">
+                <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white rounded-none hover:bg-[#1A3AFF] transition-colors font-medium">
+                  Nous consulter <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </Link>
             </div>
           </motion.div>
-        </div>
 
-        {/* Hero image */}
-        <div className="hidden lg:block border-l border-[#1A3AFF]/15 relative min-h-[400px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=900&fit=crop"
-            alt="Zephyr team at work"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-background/40" />
-          {/* Stats overlay */}
-          <div className="absolute bottom-8 left-8 right-8">
-            <div className="bg-background/90 backdrop-blur-sm border border-[#1A3AFF]/20 p-5 grid grid-cols-2 gap-4">
-              {[
-                { label: "Années d'expérience", value: "5+" },
-                { label: "Projets livrés", value: "150+" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <p className="font-['Orbitron'] text-2xl text-foreground">{s.value}</p>
-                  <p className="text-muted-foreground text-xs mt-1">{s.label}</p>
-                </div>
-              ))}
+          {/* Visual */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="w-full lg:w-7/12"
+          >
+            <div className="relative w-full h-[500px] lg:h-[650px] rounded-none overflow-hidden group border border-border/40">
+              <img 
+                src={service.img} 
+                alt={service.title} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+              
+              <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
+                {service.highlight.map(h => (
+                  <div key={h.label} className="bg-background/80 backdrop-blur-md p-4 rounded-none border border-white/10">
+                    <p className="font-['Orbitron'] text-xl md:text-2xl text-foreground mb-1">{h.value}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{h.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+
+            <div className="mt-6 p-6 bg-muted/30 border border-border/50 rounded-none flex items-center justify-between">
+              <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">Tech Stack</span>
+              <div className="flex items-center gap-2 flex-wrap justify-end">
+                {service.technologies.map(t => (
+                  <span key={t} className="px-3 py-1 bg-background border border-border rounded-none text-xs font-medium text-foreground/80">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── Service Tab Button ─── */
-function ServiceTabButton({
-  service,
-  isActive,
-  onClick,
-}: {
-  service: Service;
-  isActive: boolean;
-  onClick: () => void;
-}) {
-  const Icon = service.icon;
-  return (
-    <button
-      onClick={onClick}
-      className={`
-        flex items-center gap-4 px-6 py-5 text-left w-full
-        border-b border-[#1A3AFF]/15 transition-colors duration-150 group
-        ${isActive
-          ? "bg-[#1A3AFF]/5 border-l-2 border-l-[#1A3AFF]"
-          : "hover:bg-muted border-l-2 border-l-transparent"
-        }
-      `}
-    >
-      <Icon className={`w-5 h-5 shrink-0 ${isActive ? "text-[#1A3AFF]" : "text-muted-foreground group-hover:text-foreground"}`} />
-      <div className="min-w-0">
-        <span className={`font-['Orbitron'] text-xs tracking-wider block ${isActive ? "text-[#1A3AFF]" : "text-muted-foreground"}`}>
-          {service.number}
-        </span>
-        <span className={`text-sm font-medium block truncate ${isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"}`}>
-          {service.title}
-        </span>
-      </div>
-      {isActive && <ArrowRight className="w-4 h-4 text-[#1A3AFF] ml-auto shrink-0" />}
-    </button>
-  );
-}
-
 /* ─── Process Section ─── */
 function ProcessSection() {
   const steps = [
-    {
-      n: "01", title: "Découverte",
-      desc: "On analyse votre activité, vos objectifs et vos concurrents. On pose les vraies questions avant d'écrire la première ligne.",
-      duration: "1-3 jours",
-      img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=600&h=400&fit=crop",
-    },
-    {
-      n: "02", title: "Design",
-      desc: "Wireframes, maquettes Figma, prototype cliquable. Vous validez avant qu'on code. Zéro surprise.",
-      duration: "3-7 jours",
-      img: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&h=400&fit=crop",
-    },
-    {
-      n: "03", title: "Développement",
-      desc: "Sprints d'une semaine avec livraisons régulières. Vous suivez l'avancement en temps réel.",
-      duration: "2-10 semaines",
-      img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
-    },
-    {
-      n: "04", title: "Lancement",
-      desc: "Tests complets, déploiement, formation. Et on reste disponibles après le lancement.",
-      duration: "2-5 jours",
-      img: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&h=400&fit=crop",
-    },
+    { n: "01", title: "Cadrage", desc: "Analyse des objectifs et specs techniques." },
+    { n: "02", title: "Design", desc: "Création des interfaces UI/UX." },
+    { n: "03", title: "Ingénierie", desc: "Développement agile en sprints." },
+    { n: "04", title: "Lancement", desc: "Mise en production et tests QA." },
   ];
 
   return (
-    <section className="py-24 border-b border-[#1A3AFF]/15">
-      <div className="px-8 md:px-16 mb-16">
-        <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-          Méthode
-        </span>
-        <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground">
-          Notre processus
-        </h2>
-      </div>
+    <section className="py-20 md:py-24 bg-foreground text-background">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div>
+            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
+              Méthodologie
+            </span>
+            <h2 className="text-4xl md:text-5xl font-['Orbitron'] tracking-tight">Le processus</h2>
+          </div>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-[#1A3AFF]/15">
-        {steps.map((step, i) => {
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: true });
-          return (
-            <motion.div
-              key={step.n}
-              ref={ref}
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="border-r border-[#1A3AFF]/15 last:border-r-0"
-            >
-              {/* Step image */}
-              <div className="relative h-48 overflow-hidden">
-                <img src={step.img} alt={step.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-background/50" />
-                <span className="absolute top-4 left-5 font-['Orbitron'] text-3xl text-white/20">{step.n}</span>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 relative">
+          {steps.map((step) => (
+            <div key={step.n} className="relative group">
+              <div className="h-[2px] w-full bg-background/10 absolute top-8 left-0 hidden lg:block" />
+              <div className="w-16 h-16 rounded-none bg-background/5 border border-background/20 flex items-center justify-center relative z-10 mb-10 backdrop-blur-sm group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
+                <span className="font-['Orbitron'] text-lg font-medium">{step.n}</span>
               </div>
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-['Orbitron'] text-foreground text-lg">{step.title}</h4>
-                  <span className="text-muted-foreground text-xs border border-[#1A3AFF]/20 px-2 py-0.5">
-                    {step.duration}
-                  </span>
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-              </div>
-            </motion.div>
-          );
-        })}
+              <h4 className="text-2xl font-medium mb-4">{step.title}</h4>
+              <p className="text-background/50 text-base leading-relaxed pr-6">{step.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -540,114 +379,28 @@ function ProcessSection() {
 /* ─── Why Us Section ─── */
 function WhyUsSection() {
   return (
-    <section className="py-24 border-b border-[#1A3AFF]/15 bg-muted">
-      <div className="px-8 md:px-16 mb-16">
-        <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-          Pourquoi nous
-        </span>
-        <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground">
-          Ce qui nous différencie
-        </h2>
-      </div>
+    <section className="py-20 md:py-24 border-b border-border/40">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
+            L'avantage Zephyr
+          </span>
+          <h2 className="text-4xl md:text-5xl font-['Orbitron'] tracking-tight text-foreground">
+            Pourquoi nous ?
+          </h2>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-[#1A3AFF]/15">
-        {WHY_US.map((item, i) => {
-          const Icon = item.icon;
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: true });
-          return (
-            <motion.div
-              key={item.title}
-              ref={ref}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="p-10 border-r border-[#1A3AFF]/15 last:border-r-0"
-            >
-              <div className="w-12 h-12 border border-[#1A3AFF]/30 flex items-center justify-center mb-6">
-                <Icon className="w-5 h-5 text-[#1A3AFF]" />
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
+          {WHY_US.map((item) => (
+            <div key={item.title} className="p-10 md:p-14 bg-muted/30 border border-border/50 rounded-none hover:bg-muted/50 transition-colors">
+              <div className="w-16 h-16 bg-background border border-border rounded-none flex items-center justify-center mb-8 shadow-sm">
+                <item.icon className="w-7 h-7 text-[#1A3AFF]" />
               </div>
-              <h4 className="font-['Orbitron'] text-foreground text-base mb-3">{item.title}</h4>
-              <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-            </motion.div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-/* ─── All Services Cards ─── */
-function AllServicesSection({ onSelect }: { onSelect: (id: string) => void }) {
-  return (
-    <section className="py-24 border-b border-[#1A3AFF]/15">
-      <div className="px-8 md:px-16 mb-16">
-        <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-          Vue d'ensemble
-        </span>
-        <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground">
-          Tous nos services
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-[#1A3AFF]/15">
-        {SERVICES.map((service, i) => {
-          const Icon = service.icon;
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: true });
-          return (
-            <motion.div
-              key={service.id}
-              ref={ref}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: (i % 2) * 0.1 }}
-              className={`border-b border-r border-[#1A3AFF]/15 ${i % 2 === 1 ? "border-r-0" : ""} group`}
-            >
-              <button
-                onClick={() => {
-                  onSelect(service.id);
-                  window.scrollTo({ top: 400, behavior: "smooth" });
-                }}
-                className="w-full text-left"
-              >
-                {/* Image band */}
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-background/50 group-hover:bg-background/30 transition-colors" />
-                  <div className="absolute top-6 left-8">
-                    <span className="font-['Orbitron'] text-5xl text-white/10">{service.number}</span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 border border-[#1A3AFF]/30 flex items-center justify-center group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                        <Icon className="w-5 h-5 text-[#1A3AFF] group-hover:text-white transition-colors" />
-                      </div>
-                      <div>
-                        <h3 className="font-['Orbitron'] text-foreground text-xl">{service.title}</h3>
-                        <p className="text-muted-foreground text-sm">{service.shortDesc}</p>
-                      </div>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-[#1A3AFF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm border-t border-[#1A3AFF]/10 pt-5 mt-5">
-                    <span className="text-muted-foreground">Dès <strong className="text-foreground">{service.startingPrice}</strong></span>
-                    <span className="text-muted-foreground">{service.timeline}</span>
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-          );
-        })}
+              <h4 className="text-2xl font-semibold mb-4 text-foreground">{item.title}</h4>
+              <p className="text-lg text-muted-foreground leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -656,54 +409,19 @@ function AllServicesSection({ onSelect }: { onSelect: (id: string) => void }) {
 /* ─── CTA Section ─── */
 function CtaSection() {
   return (
-    <section className="grid lg:grid-cols-2 min-h-[400px]">
-      <div className="flex flex-col justify-center px-8 md:px-16 py-24 border-r border-[#1A3AFF]/15">
-        <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-6">
-          Passons à l'action
-        </span>
-        <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-          Prêt à lancer<br />votre projet ?
+    <section className="py-20 md:py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[#0A1628] z-0" />
+      
+      <div className="container relative z-10 px-6 md:px-12 mx-auto text-center">
+        <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-white mb-6">
+          Prêt à commencer ?
         </h2>
-        <p className="text-muted-foreground mb-10 max-w-md leading-relaxed">
-          Dites-nous ce que vous voulez construire. Devis gratuit sous 24h. Pas d'engagement, juste une conversation.
-        </p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
           <Link to="/contact">
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className="px-8 py-4 bg-[#1A3AFF] text-white font-['Orbitron'] text-sm tracking-wider hover:bg-[#0D2FE0] transition-colors inline-flex items-center gap-3"
-            >
-              Demander un devis gratuit
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            <button className="w-full sm:w-auto px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#1A3AFF] transition-colors flex items-center justify-center gap-2">
+              Démarrer le projet <ArrowRight className="w-4 h-4" />
+            </button>
           </Link>
-          <Link to="/portfolio">
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className="px-8 py-4 border border-foreground/20 text-foreground font-['Orbitron'] text-sm tracking-wider hover:bg-muted transition-colors inline-flex items-center gap-3"
-            >
-              Voir nos réalisations
-              <ArrowUpRight className="w-4 h-4" />
-            </motion.button>
-          </Link>
-        </div>
-      </div>
-
-      {/* Visual */}
-      <div className="relative min-h-[300px] overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&h=600&fit=crop"
-          alt="Zephyr team"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-background/40" />
-        <div className="absolute bottom-8 left-8 right-8 bg-background/90 backdrop-blur-sm border border-[#1A3AFF]/20 p-6">
-          <p className="text-foreground/60 text-sm italic mb-2">
-            "Zephyr a livré notre plateforme en 5 semaines. Le résultat a dépassé toutes nos attentes."
-          </p>
-          <p className="text-foreground text-sm font-medium">— CEO, TechStart Inc.</p>
         </div>
       </div>
     </section>
