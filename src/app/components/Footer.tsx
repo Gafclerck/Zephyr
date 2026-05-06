@@ -26,19 +26,20 @@ export function Footer() {
         {/* Brand */}
         <div className="p-10 lg:border-r border-[#1A3AFF]/15">
           <Link to="/" className="flex items-center mb-6 group">
-            <img 
-              src={LogoBlanc} 
-              alt="Zephyr Logo" 
-              className="h-8 hidden dark:block" 
+            <img
+              src={LogoBlanc}
+              alt="Zephyr Logo"
+              className="h-8 hidden dark:block"
             />
-            <img 
-              src={LogoNoir} 
-              alt="Zephyr Logo" 
-              className="h-8 block dark:hidden" 
+            <img
+              src={LogoNoir}
+              alt="Zephyr Logo"
+              className="h-8 block dark:hidden"
             />
           </Link>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-[220px]">
-            Agence digitale premium. Nous construisons des expériences web et mobile qui génèrent des résultats mesurables.
+            Agence digitale premium. Nous construisons des expériences web et
+            mobile qui génèrent des résultats mesurables.
           </p>
         </div>
 
@@ -98,7 +99,9 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <Phone className="w-4 h-4 text-[#1A3AFF] mt-0.5 shrink-0" />
-              <span className="text-sm text-foreground/70">+221 XX XXX XX XX</span>
+              <span className="text-sm text-foreground/70">
+                +221 XX XXX XX XX
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-[#1A3AFF] mt-0.5 shrink-0" />
@@ -109,7 +112,7 @@ export function Footer() {
           <div className="mt-8">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-['Orbitron'] tracking-wider hover:bg-[#1A3AFF] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-['Orbitron'] tracking-wider hover:bg-[#0D2FE0] transition-colors"
             >
               Start a Project
               <ArrowUpRight className="w-4 h-4" />
@@ -124,7 +127,10 @@ export function Footer() {
           © 2025 Zephyr — Agence Digitale. Tous droits réservés.
         </p>
         <div className="flex items-center gap-6">
-          <Link to="/admin" className="text-muted-foreground/50 text-xs hover:text-muted-foreground transition-colors">
+          <Link
+            to="/admin"
+            className="text-muted-foreground/50 text-xs hover:text-muted-foreground transition-colors"
+          >
             Admin
           </Link>
           <span className="text-muted-foreground/30 text-xs">v1.0.0</span>

@@ -167,7 +167,7 @@ function HeroSection() {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40">
       <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10" />
+        <div className="absolute inset-0 bg-background/50 z-10" />
         <img
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
           alt="Abstract architecture"
@@ -175,7 +175,7 @@ function HeroSection() {
         />
       </motion.div>
 
-      <div className="container relative z-20 px-6 md:px-12 mx-auto mt-20">
+      <div className="container relative z-20 px-6 md:px-12 mx-auto py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -288,7 +288,7 @@ function ServiceSection({ service, index }: { service: Service; index: number })
                 <p className="text-xl font-['Orbitron'] font-semibold text-foreground">{service.startingPrice}</p>
               </div>
               <Link to="/contact">
-                <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white rounded-none hover:bg-[#1A3AFF] transition-colors font-medium">
+                <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white rounded-none hover:bg-[#0D2FE0] transition-colors font-medium">
                   Nous consulter <ArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
@@ -308,7 +308,7 @@ function ServiceSection({ service, index }: { service: Service; index: number })
                 alt={service.title} 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+              <div className="absolute inset-0 bg-background/50" />
               
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
                 {service.highlight.map(h => (
@@ -348,26 +348,26 @@ function ProcessSection() {
   ];
 
   return (
-    <section className="py-20 md:py-24 bg-foreground text-background">
+    <section className="py-20 md:py-24 bg-muted border-y border-border/40">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
             <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
               Méthodologie
             </span>
-            <h2 className="text-4xl md:text-5xl font-['Orbitron'] tracking-tight">Le processus</h2>
+            <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground tracking-tight">Le processus</h2>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 relative">
           {steps.map((step) => (
             <div key={step.n} className="relative group">
-              <div className="h-[2px] w-full bg-background/10 absolute top-8 left-0 hidden lg:block" />
-              <div className="w-16 h-16 rounded-none bg-background/5 border border-background/20 flex items-center justify-center relative z-10 mb-10 backdrop-blur-sm group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                <span className="font-['Orbitron'] text-lg font-medium">{step.n}</span>
+              <div className="h-[1px] w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
+              <div className="w-16 h-16 rounded-none bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
+                <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.n}</span>
               </div>
-              <h4 className="text-2xl font-medium mb-4">{step.title}</h4>
-              <p className="text-background/50 text-base leading-relaxed pr-6">{step.desc}</p>
+              <h4 className="text-2xl font-medium mb-4 text-foreground">{step.title}</h4>
+              <p className="text-muted-foreground text-base leading-relaxed pr-6">{step.desc}</p>
             </div>
           ))}
         </div>
@@ -418,7 +418,7 @@ function CtaSection() {
         </h2>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
           <Link to="/contact">
-            <button className="w-full sm:w-auto px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#1A3AFF] transition-colors flex items-center justify-center gap-2">
+            <button className="w-full sm:w-auto px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-2">
               Démarrer le projet <ArrowRight className="w-4 h-4" />
             </button>
           </Link>

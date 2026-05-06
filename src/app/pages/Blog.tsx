@@ -73,7 +73,7 @@ export function Blog() {
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       {/* Hero */}
-      <section className="pt-40 pb-20 border-b border-border/40 relative">
+      <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative">
         {/* Subtle grid background for technical feel */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
@@ -155,7 +155,7 @@ function FeaturedPostCard({ post }: FeaturedPostCardProps) {
           <div className="relative h-72 lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-border/40">
             <div className="absolute inset-0 bg-[#1A3AFF]/10 group-hover:bg-transparent transition-colors z-10 mix-blend-overlay" />
             <div
-              className="absolute inset-0 bg-cover bg-center grayscale-[0.8] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-out"
               style={{ backgroundImage: `url(${post.image})` }}
             />
           </div>
@@ -222,7 +222,7 @@ function BlogPostCard({ post, index }: BlogPostCardProps) {
         <div className="relative h-60 overflow-hidden border-b border-border/40">
           <div className="absolute inset-0 bg-[#1A3AFF]/10 group-hover:bg-transparent transition-colors z-10 mix-blend-overlay" />
           <div
-            className="absolute inset-0 bg-cover bg-center grayscale-[0.8] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-out"
             style={{ backgroundImage: `url(${post.image})` }}
           />
         </div>

@@ -78,9 +78,9 @@ export function Portfolio() {
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       
       {/* Hero */}
-      <section className="pt-40 pb-20 border-b border-border/40 relative overflow-hidden">
-        {/* Abstract Background Element */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#1A3AFF]/10 blur-[150px] rounded-none pointer-events-none -translate-y-1/2 translate-x-1/3" />
+      <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative overflow-hidden">
+        {/* Geometric accent */}
+        <div className="absolute top-0 right-0 w-px h-full bg-border/40 hidden lg:block" />
         
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div
@@ -147,8 +147,8 @@ export function Portfolio() {
       {/* CTA */}
       <section className="py-32 relative overflow-hidden bg-foreground mx-6 md:mx-12 rounded-none">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A3AFF] to-[#00E5FF] mix-blend-overlay" />
-          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop" alt="texture" className="w-full h-full object-cover grayscale" />
+          <div className="absolute inset-0 bg-[#0A1628]/80" />
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop" alt="texture" className="w-full h-full object-cover opacity-20" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
@@ -159,7 +159,7 @@ export function Portfolio() {
             Rencontrons-nous pour analyser votre besoin et définir la meilleure stratégie technologique et créative.
           </p>
           <Link to="/contact">
-            <button className="px-10 py-5 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#1A3AFF] transition-colors inline-flex items-center gap-3 shadow-xl shadow-[#1A3AFF]/20">
+            <button className="px-10 py-5 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors inline-flex items-center gap-3">
               Démarrer votre projet
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -207,12 +207,12 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           <img 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
         </div>
 
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10 opacity-90 group-hover:opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-background/50 group-hover:bg-background/20 transition-colors duration-300" />
 
         {/* Content */}
         <div className="relative h-full p-8 md:p-12 flex flex-col justify-between z-10">
