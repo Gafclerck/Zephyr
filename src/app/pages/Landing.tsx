@@ -201,7 +201,10 @@ function Hero() {
           >
             {t("landing.hero_title_1")}
             <br />
-            <span dangerouslySetInnerHTML={{ __html: t("landing.hero_title_line2") }} />
+            <span>
+              {t("landing.hero_title_2a")}
+              <span style={{ color: "#1A3AFF" }}>{t("landing.hero_title_2b")}</span>
+            </span>
             <br />
             {t("landing.hero_title_3")}
           </motion.h1>

@@ -2,7 +2,8 @@
   "landing": {
     "hero_eyebrow": "Dakar, Senegal — 2026",
     "hero_title_1": "Forge",
-    "hero_title_line2": "the <span style=\"color:#1A3AFF\">Digital</span>",
+    "hero_title_2a": "the ",
+    "hero_title_2b": "Digital",
     "hero_title_3": "Future.",
     "hero_desc": "Software engineering, interactive design, and acquisition strategies for companies that refuse mediocrity.",
     "cta_start": "Start a Project",

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { PageTransition } from "../components/PageTransition";
 import { motion, AnimatePresence } from "motion/react";
@@ -14,11 +15,16 @@ interface FormData {
 
 export function Contact() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [step, setStep] = useState<FormStep>(1);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>(() => {
     const saved = localStorage.getItem("zephyr_contact_form");
-    return saved ? JSON.parse(saved) : { projectType:"", businessGoal:"", budget:"", timeline:"", description:"", name:"", email:"", phone:"", company:"" };
+    try {
+      return saved ? JSON.parse(saved) : { projectType:"", businessGoal:"", budget:"", timeline:"", description:"", name:"", email:"", phone:"", company:"" };
+    } catch {
+      return { projectType:"", businessGoal:"", budget:"", timeline:"", description:"", name:"", email:"", phone:"", company:"" };
+    }
   });
 
   useEffect(() => { localStorage.setItem("zephyr_contact_form", JSON.stringify(formData)); }, [formData]);
@@ -55,7 +61,7 @@ export function Contact() {
               </div>
               <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground mb-6 tracking-tight">{t("contact.success_title")}</h2>
               <p className="text-muted-foreground text-lg mb-12 max-w-md mx-auto leading-relaxed">{t("contact.success_desc")}</p>
-              <button onClick={() => window.location.href = "/"} className="group flex items-center gap-4 mx-auto px-10 py-5 bg-[#1A3AFF] text-white font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-[#0D2FE0] transition-all">
+              <button onClick={() => navigate("/")} className="group flex items-center gap-4 mx-auto px-10 py-5 bg-[#1A3AFF] text-white font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-[#0D2FE0] transition-all">
                 {t("contact.success_btn")} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
               </button>
             </motion.div>

@@ -37,14 +37,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     let result = translations[language];
 
     for (const key of keys) {
-      if (result && result[key]) {
+      if (result !== null && result !== undefined && result[key] !== undefined) {
         result = result[key];
       } else {
         // Fallback to French if current language is not French and key missing
         if (language !== "fr") {
           let fallback = translations["fr"];
           for (const k of keys) {
-            if (fallback && fallback[k]) {
+            if (fallback !== null && fallback !== undefined && fallback[k] !== undefined) {
               fallback = fallback[k];
             } else {
               return path;

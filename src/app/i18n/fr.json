@@ -2,7 +2,8 @@
   "landing": {
     "hero_eyebrow": "Dakar, Sénégal — 2026",
     "hero_title_1": "Forgez",
-    "hero_title_line2": "l'<span style=\"color:#1A3AFF\">Avenir</span>",
+    "hero_title_2a": "l'",
+    "hero_title_2b": "Avenir",
     "hero_title_3": "Digital.",
     "hero_desc": "Ingénierie logicielle, design interactif et stratégies d'acquisition pour les entreprises qui refusent la médiocrité.",
     "cta_start": "Démarrer un projet",
