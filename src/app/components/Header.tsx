@@ -1,3 +1,4 @@
+//pour garder la version
 import { Link, useLocation } from "react-router";
 import {
   motion,
@@ -63,10 +64,11 @@ export function Header() {
         variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300  ${atTop
-          ? "bg-background/80 backdrop-blur-sm border-b border-border/20"
-          : "bg-background/95 backdrop-blur-lg border-b border-border/40"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300  ${
+          atTop
+            ? "bg-background/80 backdrop-blur-sm border-b border-border/20"
+            : "bg-background/95 backdrop-blur-lg border-b border-border/40"
+        }`}
       >
         {/* ── Desktop ── */}
         <div className="hidden lg:flex items-stretch h-[72px] w-full  border-b">
@@ -224,8 +226,9 @@ export function Header() {
                   >
                     <Link
                       to={item.path}
-                      className={`flex items-center justify-between py-5 border-b border-border/30 ${isActive ? "text-[#1A3AFF]" : "text-foreground"
-                        }`}
+                      className={`flex items-center justify-between py-5 border-b border-border/30 ${
+                        isActive ? "text-[#1A3AFF]" : "text-foreground"
+                      }`}
                     >
                       <span className="font-['Orbitron'] text-2xl font-medium tracking-wide">
                         {item.label}
@@ -286,4 +289,3 @@ function NavCell({ path, label, currentPath, borderSide }: NavCellProps) {
     </Link>
   );
 }
-
