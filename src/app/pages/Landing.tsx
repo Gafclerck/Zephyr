@@ -1,104 +1,52 @@
+import React from "react";
 import { Link } from "react-router";
 import {
-  ArrowRight, Code, Smartphone, Palette, TrendingUp,
-  ArrowUpRight, ArrowDown,
+  ArrowRight,
+  Code,
+  Smartphone,
+  Palette,
+  TrendingUp,
+  ArrowUpRight,
+  ArrowDown,
 } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────
    DATA
 ───────────────────────────────────────────── */
-const SERVICES = [
-  {
-    icon: Code,
-    label: "01",
-    title: "Ingénierie Web",
-    desc: "Des plateformes robustes, optimisées pour la conversion et la performance absolue.",
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
-    slug: "developpement-web",
-  },
-  {
-    icon: Smartphone,
-    label: "02",
-    title: "Expériences Mobiles",
-    desc: "Applications natives et cross-platform pensées pour l'engagement utilisateur.",
-    img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
-    slug: "applications-mobiles",
-  },
-  {
-    icon: Palette,
-    label: "03",
-    title: "Direction Artistique",
-    desc: "Identités visuelles mémorables et interfaces (UI/UX) qui subliment la marque.",
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
-    slug: "branding-design",
-  },
-  {
-    icon: TrendingUp,
-    label: "04",
-    title: "Marketing Growth",
-    desc: "Stratégies d'acquisition data-driven pour démultiplier votre croissance.",
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-    slug: "marketing-digital",
-  },
+const SERVICES_BASE = [
+  { icon: Code,       label: "01", tKey: "s1", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop", slug: "developpement-web" },
+  { icon: Smartphone, label: "02", tKey: "s2", img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop", slug: "applications-mobiles" },
+  { icon: Palette,    label: "03", tKey: "s3", img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop", slug: "branding-design" },
+  { icon: TrendingUp, label: "04", tKey: "s4", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", slug: "marketing-digital" },
 ];
 
-const FEATURED_PROJECTS = [
-  {
-    title: "Aura Fintech",
-    category: "SaaS · Ingénierie",
-    result: "+300% de volume transactionnel",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    slug: "aura-fintech",
-    span: true,
-  },
-  {
-    title: "Lumina Health",
-    category: "App Mobile · Santé",
-    result: "50K+ utilisateurs actifs",
-    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop",
-    slug: "lumina-health",
-    span: false,
-  },
-  {
-    title: "Nova Retail",
-    category: "E-commerce · Design",
-    result: "Conversion doublée",
-    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop",
-    slug: "nova-retail",
-    span: false,
-  },
+const FEATURED_PROJECTS_BASE = [
+  { title: "Aura Fintech",    tKey: "fp1", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", slug: "aura-fintech",  span: true  },
+  { title: "Lumina Health",   tKey: "fp2", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop", slug: "lumina-health", span: false },
+  { title: "Nova Retail",     tKey: "fp3", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop", slug: "nova-retail",  span: false },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote: "L'expertise technique et la vision design de Zephyr ont propulsé notre produit à un niveau inespéré. Un partenariat stratégique indispensable.",
-    name: "Sarah Johnson",
-    role: "CEO, TechStart Inc.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&fit=crop",
-  },
-  {
-    quote: "Une exécution irréprochable et un niveau de finition rare sur le marché. Notre application mobile a conquis nos utilisateurs dès le lancement.",
-    name: "Michael Chen",
-    role: "VP Product, GrowthCo",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&fit=crop",
-  },
-  {
-    quote: "Ils ont su capter l'essence de notre marque et la traduire dans une identité digitale puissante. Une équipe brillante et réactive.",
-    name: "Emma Williams",
-    role: "CMO, BrandFlow",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&fit=crop",
-  },
+const TESTIMONIALS_BASE = [
+  { tKey: "t1", name: "Sarah Johnson", role: "CEO, TechStart Inc.",    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&fit=crop" },
+  { tKey: "t2", name: "Michael Chen",  role: "VP Product, GrowthCo",  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&fit=crop" },
+  { tKey: "t3", name: "Emma Williams", role: "CMO, BrandFlow",         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&fit=crop" },
 ];
 
 /* ─────────────────────────────────────────────
    PAGE
 ───────────────────────────────────────────── */
 export function Landing() {
+  const { t } = useLanguage();
+
+  const SERVICES = SERVICES_BASE.map(s => ({ ...s, title: t(`landing.${s.tKey}_title`), desc: t(`landing.${s.tKey}_desc`) }));
+  const FEATURED_PROJECTS = FEATURED_PROJECTS_BASE.map(p => ({ ...p, category: t(`landing.${p.tKey}_category`), result: t(`landing.${p.tKey}_result`) }));
+  const TESTIMONIALS = TESTIMONIALS_BASE.map(t_item => ({ ...t_item, quote: t(`landing.${t_item.tKey}_quote`) }));
+
   return (
     <div className="bg-background selection:bg-[#1A3AFF] selection:text-white">
-
       {/* ── HERO ── */}
       <Hero />
 
@@ -107,16 +55,16 @@ export function Landing() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="eyebrow">Nos expertises</span>
+              <span className="eyebrow">{t("landing.services_eyebrow")}</span>
               <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
-                Domaines d'excellence
+                {t("landing.services_title")}
               </h2>
             </div>
             <Link
               to="/services"
               className="flex items-center gap-2 text-foreground/60 text-sm hover:text-[#1A3AFF] transition-colors group shrink-0"
             >
-              Tous les services
+              {t("landing.services_link")}
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
@@ -134,16 +82,16 @@ export function Landing() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="eyebrow">Portfolio</span>
+              <span className="eyebrow">{t("landing.portfolio_eyebrow")}</span>
               <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
-                Réalisations phares
+                {t("landing.portfolio_title")}
               </h2>
             </div>
             <Link
               to="/portfolio"
               className="flex items-center gap-2 text-foreground/60 text-sm hover:text-[#1A3AFF] transition-colors group shrink-0"
             >
-              Explorer le portfolio
+              {t("landing.portfolio_link")}
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
@@ -160,18 +108,18 @@ export function Landing() {
       <section className="py-24 md:py-32 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center max-w-2xl mx-auto mb-20">
-            <span className="eyebrow">Méthodologie</span>
+            <span className="eyebrow">{t("landing.process_eyebrow")}</span>
             <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground tracking-tight">
-              De l'idée à l'impact
+              {t("landing.process_title")}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
             {[
-              { n: "01", title: "Cadrage Stratégique", desc: "Analyse approfondie des besoins, du marché et définition de la roadmap technologique." },
-              { n: "02", title: "Design & UX",         desc: "Création d'interfaces intuitives et prototypage complet avant toute ligne de code." },
-              { n: "03", title: "Ingénierie Agile",    desc: "Développement robuste en itérations courtes pour garantir flexibilité et qualité." },
-              { n: "04", title: "Go-to-Market",        desc: "Déploiement sécurisé, suivi des performances et itérations post-lancement." },
+              { n: "01", title: t("landing.p1_title"), desc: t("landing.p1_desc") },
+              { n: "02", title: t("landing.p2_title"), desc: t("landing.p2_desc") },
+              { n: "03", title: t("landing.p3_title"), desc: t("landing.p3_desc") },
+              { n: "04", title: t("landing.p4_title"), desc: t("landing.p4_desc") },
             ].map((step, i) => (
               <ProcessStep key={i} {...step} index={i} />
             ))}
@@ -183,9 +131,9 @@ export function Landing() {
       <section className="py-24 md:py-32 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
-            <span className="eyebrow">Témoignages</span>
+            <span className="eyebrow">{t("landing.testimonials_eyebrow")}</span>
             <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
-              Partenariats réussis
+              {t("landing.testimonials_title")}
             </h2>
           </div>
 
@@ -200,14 +148,14 @@ export function Landing() {
       {/* ── CTA ── */}
       <section className="py-20 md:py-32 bg-[#0A1628]">
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-          <span className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>Votre prochain projet</span>
+          <span className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>
+            {t("landing.cta_eyebrow")}
+          </span>
           <h2 className="font-['Orbitron'] text-4xl md:text-5xl lg:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
-            L'excellence digitale,{" "}
-            <br className="hidden md:block" />
-            à votre portée.
+            {t("landing.cta_title")}
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-xl mb-10 leading-relaxed">
-            Unissons nos forces pour concevoir le produit qui transformera votre activité. Proposition détaillée sous 48h.
+            {t("landing.cta_desc")}
           </p>
           <Link to="/contact">
             <motion.button
@@ -215,7 +163,7 @@ export function Landing() {
               whileTap={{ scale: 0.98 }}
               className="px-10 py-5 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-3"
             >
-              Initier la collaboration
+              {t("landing.cta_btn")}
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
@@ -226,12 +174,11 @@ export function Landing() {
 }
 
 function Hero() {
+  const { t } = useLanguage(); // i18n hook — required here since Hero is its own component
   return (
     <section className="relative flex min-h-screen border-b border-border/40 overflow-hidden">
-
       {/* ── Colonne texte ── */}
       <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-6 md:pt-10 pb-6 md:pb-10 border-r border-border/40">
-
         {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
@@ -241,7 +188,7 @@ function Hero() {
         >
           <span className="w-8 h-px bg-[#1A3AFF]" />
           <span className="text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">
-            Dakar, Sénégal — 2026
+            {t("landing.hero_eyebrow")}
           </span>
         </motion.div>
 
@@ -253,9 +200,11 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-['Orbitron'] text-[clamp(2.8rem,6vw,5.5rem)] font-medium text-foreground leading-[1.0] tracking-tight mb-8"
           >
-            Forgez<br />
-            l'<span className="text-[#1A3AFF]">Avenir</span><br />
-            Digital.
+            {t("landing.hero_title_1")}
+            <br />
+            <span dangerouslySetInnerHTML={{ __html: t("landing.hero_title_line2") }} />
+            <br />
+            {t("landing.hero_title_3")}
           </motion.h1>
 
           <motion.p
@@ -264,8 +213,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="text-muted-foreground text-base md:text-lg max-w-md mb-10 leading-relaxed"
           >
-            Ingénierie logicielle, design interactif et stratégies d'acquisition
-            pour les entreprises qui refusent la médiocrité.
+            {t("landing.hero_desc")}
           </motion.p>
 
           <motion.div
@@ -276,13 +224,13 @@ function Hero() {
           >
             <Link to="/contact">
               <button className="px-7 py-3.5 bg-[#1A3AFF] text-white text-sm rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-2 group">
-                Démarrer un projet
+                {t("landing.cta_start")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link to="/portfolio">
               <button className="px-7 py-3.5 border border-border text-foreground text-sm rounded-none font-medium tracking-wide hover:bg-muted hover:border-foreground/30 transition-colors flex items-center gap-2">
-                Voir nos réalisations
+                {t("landing.cta_portfolio")}
                 <ArrowUpRight className="w-4 h-4" />
               </button>
             </Link>
@@ -298,13 +246,17 @@ function Hero() {
         >
           <div className="grid grid-cols-3 gap-0 divide-x divide-border/40">
             {[
-              { value: "150+", label: "Projets" },
-              { value: "98%",  label: "Satisfaction" },
-              { value: "12+",  label: "Pays" },
+              { value: "150+", label: t("landing.stats_projects") },
+              { value: "98%",  label: t("landing.stats_satisfaction") },
+              { value: "12+",  label: t("landing.stats_countries") },
             ].map((s) => (
               <div key={s.label} className="px-3 sm:px-5 first:pl-0">
-                <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">{s.value}</p>
-                <p className="text-muted-foreground text-xs uppercase tracking-widest">{s.label}</p>
+                <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">
+                  {s.value}
+                </p>
+                <p className="text-muted-foreground text-xs uppercase tracking-widest">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
@@ -335,7 +287,7 @@ function Hero() {
           className="absolute bottom-10 left-8 right-8 bg-background/90 backdrop-blur-md border border-border/60 p-5"
         >
           <p className="text-muted-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-3">
-            Projet récent
+            {t("landing.recent_project")}
           </p>
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 shrink-0 overflow-hidden bg-muted">
@@ -346,8 +298,12 @@ function Hero() {
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="font-['Orbitron'] text-foreground text-sm mb-0.5 truncate">Aura Fintech</p>
-              <p className="text-muted-foreground text-xs truncate">SaaS · +300% volume transactionnel</p>
+              <p className="font-['Orbitron'] text-foreground text-sm mb-0.5 truncate">
+                Aura Fintech
+              </p>
+              <p className="text-muted-foreground text-xs truncate">
+                SaaS · +300% volume transactionnel
+              </p>
             </div>
             <Link to="/portfolio/aura-fintech" className="shrink-0">
               <div className="w-8 h-8 border border-border flex items-center justify-center hover:bg-[#1A3AFF] hover:border-[#1A3AFF] hover:text-white transition-colors text-muted-foreground">
@@ -368,7 +324,7 @@ function Hero() {
             className="text-muted-foreground/40 text-[10px] font-['Orbitron'] tracking-[0.3em] uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Scroll
+            {t("landing.scroll")}
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
@@ -385,8 +341,15 @@ function Hero() {
 /* ─────────────────────────────────────────────
    SUB-COMPONENTS
 ───────────────────────────────────────────── */
-function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index: number }) {
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: { icon: React.ElementType; label: string; tKey: string; img: string; slug: string; title: string; desc: string };
+  index: number;
+}) {
   const Icon = service.icon;
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -395,7 +358,11 @@ function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index:
       ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       {/* Link to individual service detail page */}
       <Link to={`/services/${service.slug}`} className="group block h-full">
@@ -421,7 +388,7 @@ function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index:
               {service.desc}
             </p>
             <div className="flex items-center gap-1.5 text-xs text-foreground/50 group-hover:text-[#1A3AFF] transition-colors">
-              En savoir plus
+              {t("landing.learn_more")}
               <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
@@ -431,7 +398,13 @@ function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index:
   );
 }
 
-function PortfolioCard({ project, index }: { project: (typeof FEATURED_PROJECTS)[0]; index: number }) {
+function PortfolioCard({
+  project,
+  index,
+}: {
+  project: { title: string; category: string; result: string; img: string; slug: string; span: boolean };
+  index: number;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -440,7 +413,11 @@ function PortfolioCard({ project, index }: { project: (typeof FEATURED_PROJECTS)
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.12,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className={`group relative overflow-hidden ${project.span ? "md:col-span-2" : ""}`}
       style={{ height: project.span ? "460px" : "360px" }}
     >
@@ -476,7 +453,17 @@ function PortfolioCard({ project, index }: { project: (typeof FEATURED_PROJECTS)
   );
 }
 
-function ProcessStep({ n, title, desc, index }: { n: string; title: string; desc: string; index: number }) {
+function ProcessStep({
+  n,
+  title,
+  desc,
+  index,
+}: {
+  n: string;
+  title: string;
+  desc: string;
+  index: number;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -485,19 +472,33 @@ function ProcessStep({ n, title, desc, index }: { n: string; title: string; desc
       ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="p-7 bg-muted/40 border border-border/40 hover:border-[#1A3AFF]/30 hover:bg-muted/60 transition-colors group"
     >
       <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-6 group-hover:border-[#1A3AFF]/40 transition-colors">
-        <span className="font-['Orbitron'] text-lg font-medium text-foreground">{n}</span>
+        <span className="font-['Orbitron'] text-lg font-medium text-foreground">
+          {n}
+        </span>
       </div>
-      <h4 className="font-['Orbitron'] text-base font-semibold text-foreground mb-3">{title}</h4>
+      <h4 className="font-['Orbitron'] text-base font-semibold text-foreground mb-3">
+        {title}
+      </h4>
       <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
     </motion.div>
   );
 }
 
-function TestimonialCard({ testimonial, index }: { testimonial: (typeof TESTIMONIALS)[0]; index: number }) {
+function TestimonialCard({
+  testimonial,
+  index,
+}: {
+  testimonial: { quote: string; name: string; role: string; avatar: string };
+  index: number;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -506,12 +507,21 @@ function TestimonialCard({ testimonial, index }: { testimonial: (typeof TESTIMON
       ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="p-8 bg-background border border-border/40 flex flex-col h-full"
     >
       <div className="flex gap-0.5 mb-6">
         {[...Array(5)].map((_, i) => (
-          <svg key={i} className="w-4 h-4 text-[#1A3AFF]" fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            key={i}
+            className="w-4 h-4 text-[#1A3AFF]"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
@@ -526,7 +536,9 @@ function TestimonialCard({ testimonial, index }: { testimonial: (typeof TESTIMON
           className="w-10 h-10 object-cover"
         />
         <div>
-          <p className="text-foreground font-semibold text-sm">{testimonial.name}</p>
+          <p className="text-foreground font-semibold text-sm">
+            {testimonial.name}
+          </p>
           <p className="text-muted-foreground text-xs">{testimonial.role}</p>
         </div>
       </div>

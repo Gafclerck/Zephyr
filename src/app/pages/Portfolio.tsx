@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { ArrowRight, Filter } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { Link } from "react-router";
+import { useLanguage } from "../contexts/LanguageContext";
 
-/* ─── Slug map ─── */
 const SLUG_MAP: Record<string, string> = {
   "Aura Fintech":    "aura-fintech",
   "Lumina Health":   "lumina-health",
@@ -13,102 +13,50 @@ const SLUG_MAP: Record<string, string> = {
   "Onyx Coffee":     "onyx-coffee",
 };
 
+const PROJECTS_BASE = [
+  { title:"Aura Fintech",    category:"web",      tKey:"p1", tags:["React","Node.js","PostgreSQL"], large:true,  img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" },
+  { title:"Lumina Health",   category:"mobile",   tKey:"p2", tags:["React Native","AI","Santé"],   large:false, img:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop" },
+  { title:"Nova Retail",     category:"branding", tKey:"p3", tags:["Brand Identity","Packaging"],  large:false, img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop" },
+  { title:"MarketPlace Pro", category:"web",      tKey:"p4", tags:["Next.js","Stripe","E-Commerce"],large:true, img:"https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2070&auto=format&fit=crop" },
+  { title:"TeleCare",        category:"mobile",   tKey:"p5", tags:["Healthcare","WebRTC","HIPAA"], large:false, img:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" },
+  { title:"Onyx Coffee",     category:"branding", tKey:"p6", tags:["Rebranding","Print"],          large:false, img:"https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2070&auto=format&fit=crop" },
+];
+
 export function Portfolio() {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("all");
 
   const filters = [
-    { id: "all", label: "Tous les projets" },
-    { id: "web", label: "Plateformes Web" },
-    { id: "mobile", label: "Applications Mobiles" },
-    { id: "branding", label: "Identité de Marque" },
+    { id:"all",      label: t("portfolio.filter_all") },
+    { id:"web",      label: t("portfolio.filter_web") },
+    { id:"mobile",   label: t("portfolio.filter_mobile") },
+    { id:"branding", label: t("portfolio.filter_branding") },
   ];
 
-  const projects = [
-    {
-      title: "Aura Fintech",
-      category: "web",
-      description: "Plateforme SaaS B2B pour la gestion de trésorerie avec intégrations bancaires en temps réel.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-      results: "+300% de volume transactionnel",
-      tags: ["React", "Node.js", "PostgreSQL"],
-      large: true,
-    },
-    {
-      title: "Lumina Health",
-      category: "mobile",
-      description: "Application de suivi santé personnalisée utilisant l'intelligence artificielle pour des recommandations sur mesure.",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop",
-      results: "50K+ téléchargements en 3 mois",
-      tags: ["React Native", "AI", "Santé"],
-      large: false,
-    },
-    {
-      title: "Nova Retail",
-      category: "branding",
-      description: "Direction artistique et rebranding complet pour une marque de prêt-à-porter éco-responsable.",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop",
-      results: "3 prix de design remportés",
-      tags: ["Brand Identity", "Packaging"],
-      large: false,
-    },
-    {
-      title: "MarketPlace Pro",
-      category: "web",
-      description: "Marketplace multi-vendeurs hautement scalable connectant des fournisseurs industriels et des acheteurs.",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2070&auto=format&fit=crop",
-      results: "5M€ de CA la première année",
-      tags: ["Next.js", "Stripe Connect", "E-Commerce"],
-      large: true,
-    },
-    {
-      title: "TeleCare",
-      category: "mobile",
-      description: "Plateforme de télémédecine sécurisée avec gestion de planning et consultations vidéo HD.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop",
-      results: "10K+ consultations/mois",
-      tags: ["Healthcare", "WebRTC", "HIPAA"],
-      large: false,
-    },
-    {
-      title: "Onyx Coffee",
-      category: "branding",
-      description: "Refonte de l'identité visuelle d'une chaîne de cafés premiums et déclinaison sur tous les supports physiques.",
-      image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2070&auto=format&fit=crop",
-      results: "+85% de reconnaissance de marque",
-      tags: ["Rebranding", "Print"],
-      large: false,
-    },
-  ];
+  const projects = PROJECTS_BASE.map(p => ({
+    ...p,
+    description: t(`portfolio.${p.tKey}_desc`),
+    results:     t(`portfolio.${p.tKey}_results`),
+  }));
 
-  const filteredProjects = activeFilter === "all"
-    ? projects
-    : projects.filter((p) => p.category === activeFilter);
+  const filteredProjects = activeFilter === "all" ? projects : projects.filter(p => p.category === activeFilter);
 
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
-      
+
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative overflow-hidden">
-        {/* Geometric accent */}
         <div className="absolute top-0 right-0 w-px h-full bg-border/40 hidden lg:block" />
-        
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl"
-          >
+          <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
-              <span className="eyebrow" style={{marginBottom:0}}>Études de cas</span>
+              <span className="eyebrow" style={{ marginBottom:0 }}>{t("portfolio.eyebrow")}</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
-              Nos Réalisations
+              {t("portfolio.title")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              Des projets ambitieux, des résultats concrets. Explorez les plateformes et les marques que nous avons propulsées vers le succès.
-            </p>
+            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">{t("portfolio.subtitle")}</p>
           </motion.div>
         </div>
       </section>
@@ -118,15 +66,14 @@ export function Portfolio() {
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
           <div className="hidden md:flex items-center gap-3">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">Filtrer par :</span>
+            <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">{t("portfolio.filter_by")}</span>
           </div>
-          
           <div className="flex overflow-x-auto no-scrollbar gap-2 md:gap-4 pb-2 md:pb-0 w-full md:w-auto">
-            {filters.map((filter) => (
+            {filters.map(filter => (
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`whitespace-nowrap px-6 py-2.5 rounded-none text-sm font-medium tracking-wide transition-all duration-300 ${
+                className={`whitespace-nowrap px-6 py-2.5 text-sm font-medium tracking-wide transition-all duration-300 ${
                   activeFilter === filter.id
                     ? "bg-foreground text-background shadow-md"
                     : "bg-muted/30 text-foreground/70 hover:bg-muted hover:text-foreground border border-border/50"
@@ -153,23 +100,17 @@ export function Portfolio() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 relative overflow-hidden bg-foreground mx-6 md:mx-12 rounded-none">
+      <section className="py-32 relative overflow-hidden bg-foreground mx-6 md:mx-12">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-[#0A1628]/80" />
           <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop" alt="texture" className="w-full h-full object-cover opacity-20" />
         </div>
-        
         <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
-          <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-background mb-8 tracking-tight max-w-2xl">
-            Prêt à figurer parmi <br /> nos prochains succès ?
-          </h2>
-          <p className="text-background/80 text-lg mb-12 max-w-xl">
-            Rencontrons-nous pour analyser votre besoin et définir la meilleure stratégie technologique et créative.
-          </p>
+          <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-background mb-8 tracking-tight max-w-2xl">{t("portfolio.cta_title")}</h2>
+          <p className="text-background/80 text-lg mb-12 max-w-xl">{t("portfolio.cta_desc")}</p>
           <Link to="/contact">
-            <button className="px-10 py-5 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors inline-flex items-center gap-3">
-              Démarrer votre projet
-              <ArrowRight className="w-5 h-5" />
+            <button className="px-10 py-5 bg-[#1A3AFF] text-white font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors inline-flex items-center gap-3">
+              {t("portfolio.cta_btn")} <ArrowRight className="w-5 h-5" />
             </button>
           </Link>
         </div>
@@ -178,86 +119,52 @@ export function Portfolio() {
   );
 }
 
-// Project Card Component
 interface ProjectCardProps {
-  project: {
-    title: string;
-    category: string;
-    description: string;
-    image: string;
-    results: string;
-    tags: string[];
-    large: boolean;
-  };
+  project: { title:string; category:string; description:string; image?:string; img?:string; results:string; tags:string[]; large:boolean };
   index: number;
 }
 
 function ProjectCard({ project, index }: ProjectCardProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once:true, margin:"-10%" });
   const slug = SLUG_MAP[project.title] ?? "";
+  const imgSrc = project.image ?? project.img ?? "";
   const Wrapper = slug ? Link : "div";
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`group ${project.large ? "md:col-span-2" : ""}`}
+      initial={{ opacity:0, scale:0.95 }}
+      animate={{ opacity:1, scale:1 }}
+      exit={{ opacity:0, scale:0.95 }}
+      transition={{ duration:0.5, ease:[0.16,1,0.3,1] }}
+      className={`group ${project.large?"md:col-span-2":""}`}
     >
       {/* @ts-ignore */}
       <Wrapper
         ref={ref}
-        {...(slug ? { to: `/portfolio/${slug}` } : {})}
-        className={`relative overflow-hidden rounded-none bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full cursor-pointer ${
-          project.large ? "min-h-[360px] md:min-h-[500px] lg:min-h-[600px]" : "min-h-[320px] md:min-h-[450px] lg:min-h-[500px]"
-        }`}
+        {...(slug ? { to:`/portfolio/${slug}` } : {})}
+        className={`relative overflow-hidden bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full cursor-pointer ${project.large?"min-h-[360px] md:min-h-[500px] lg:min-h-[600px]":"min-h-[320px] md:min-h-[450px] lg:min-h-[500px]"}`}
       >
-        {/* Background Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
+          <img src={imgSrc} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
         </div>
-
-        {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-background/50 group-hover:bg-background/20 transition-colors duration-300" />
-
-        {/* Content */}
         <div className="relative h-full p-8 md:p-12 flex flex-col justify-between z-10">
-          
-          {/* Top - Tags */}
           <div className="flex flex-wrap gap-2 transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
             {project.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="px-4 py-1.5 rounded-none bg-background/50 backdrop-blur-md border border-white/10 text-foreground text-xs font-medium tracking-wide"
-              >
-                {tag}
-              </span>
+              <span key={i} className="px-4 py-1.5 bg-background/50 backdrop-blur-md border border-white/10 text-foreground text-xs font-medium tracking-wide">{tag}</span>
             ))}
           </div>
-
-          {/* Bottom - Info */}
           <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-            <h3 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground mb-4 font-medium tracking-tight">
-              {project.title}
-            </h3>
-
-            <p className="text-muted-foreground text-lg mb-8 max-w-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-              {project.description}
-            </p>
-
+            <h3 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground mb-4 font-medium tracking-tight">{project.title}</h3>
+            <p className="text-muted-foreground text-lg mb-8 max-w-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{project.description}</p>
             <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-border/50">
               <div className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-none bg-[#00E5FF]" />
+                <span className="w-2 h-2 bg-[#00E5FF]" />
                 <span className="text-foreground text-base font-medium">{project.results}</span>
               </div>
-              <div className="w-12 h-12 rounded-none bg-background border border-border flex items-center justify-center group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
+              <div className="w-12 h-12 bg-background border border-border flex items-center justify-center group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
                 <ArrowRight className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
               </div>
             </div>

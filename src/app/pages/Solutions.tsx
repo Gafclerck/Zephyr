@@ -1,113 +1,34 @@
+import React, { useRef } from "react";
 import { Link } from "react-router";
 import { Check, ArrowRight, Zap, Target, Box } from "lucide-react";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+
+const SOLUTIONS_BASE = [
+  { slug:"landing-page-pro",        tKey:"s1", popular:true,  pricing:"À partir de 500k FCFA", timeline:"1-2 semaines", featureCount:6 },
+  { slug:"brand-identity-system",   tKey:"s2", popular:false, pricing:"À partir de 300k FCFA", timeline:"2-3 semaines", featureCount:6 },
+  { slug:"digital-marketing-engine",tKey:"s3", popular:true,  pricing:"150k FCFA / mois",      timeline:"3 mois minimum",featureCount:6 },
+  { slug:"corporate-platform",      tKey:"s4", popular:false, pricing:"À partir de 1.5M FCFA", timeline:"3-4 semaines", featureCount:6 },
+  { slug:"ecommerce-architecture",  tKey:"s5", popular:false, pricing:"À partir de 2.5M FCFA", timeline:"4-6 semaines", featureCount:6 },
+  { slug:"mobile-mvp-framework",    tKey:"s6", popular:false, pricing:"À partir de 3M FCFA",   timeline:"6-8 semaines", featureCount:6 },
+];
+
+const BENEFITS = [
+  { icon: Zap,    tKey:"b1" },
+  { icon: Target, tKey:"b2" },
+  { icon: Box,    tKey:"b3" },
+];
 
 export function Solutions() {
-  const solutions = [
-    {
-      slug: "landing-page-pro",
-      name: "Landing Page Pro",
-      tagline: "Conversion Haute Performance",
-      description: "Une page d'atterrissage optimisée au pixel près pour maximiser les conversions de vos campagnes d'acquisition.",
-      features: [
-        "Architecture Single Page",
-        "A/B testing intégré",
-        "Formulaires de capture avancés",
-        "Performances Core Web Vitals (< 2s)",
-        "Responsive design absolu",
-        "1 mois de support technique",
-      ],
-      pricing: "À partir de 500k FCFA",
-      timeline: "1-2 semaines",
-      popular: true,
-    },
-    {
-      slug: "brand-identity-system",
-      name: "Brand Identity System",
-      tagline: "Système de marque complet",
-      description: "Identité visuelle exhaustive incluant logotype, typographie, palette, et un brand book rigoureux.",
-      features: [
-        "Création de Logotype (3 concepts)",
-        "Système chromatique et typographique",
-        "Brand Guidelines (Livre de marque)",
-        "Cartes de visite / Papeterie",
-        "Kit Réseaux Sociaux",
-        "Cession complète des droits",
-      ],
-      pricing: "À partir de 300k FCFA",
-      timeline: "2-3 semaines",
-      popular: false,
-    },
-    {
-      slug: "digital-marketing-engine",
-      name: "Digital Marketing Engine",
-      tagline: "Trafic & Acquisition B2B/B2C",
-      description: "Campagne de marketing digital trimestrielle incluant SEO, médias sociaux et publicité algorithmique.",
-      features: [
-        "Audit et optimisation SEO",
-        "Gestion des réseaux sociaux",
-        "Campagnes Ads (Google/Meta)",
-        "Création de contenu premium",
-        "Rapports de performance mensuels",
-        "Consulting stratégique",
-      ],
-      pricing: "150k FCFA / mois",
-      timeline: "3 mois minimum",
-      popular: true,
-    },
-    {
-      slug: "corporate-platform",
-      name: "Corporate Platform",
-      tagline: "Site vitrine institutionnel",
-      description: "Plateforme web professionnelle complète pour asseoir l'autorité de votre entreprise sur son marché.",
-      features: [
-        "Jusqu'à 10 pages structurées",
-        "Design responsive et interactif",
-        "Formulaires de contact complexes",
-        "Optimisation SEO de base",
-        "Intégration Analytics/Tag Manager",
-        "3 mois de support évolutif",
-      ],
-      pricing: "À partir de 1.5M FCFA",
-      timeline: "3-4 semaines",
-      popular: false,
-    },
-    {
-      slug: "ecommerce-architecture",
-      name: "E-Commerce Architecture",
-      tagline: "Vente en ligne performante",
-      description: "Boutique en ligne robuste avec traitement des paiements sécurisés et gestion de stocks avancée.",
-      features: [
-        "Jusqu'à 100 produits intégrés",
-        "Passerelles de paiement locales/int.",
-        "Panier et tunnel de conversion optimisés",
-        "Interface de gestion des commandes",
-        "Espace client complet",
-        "6 mois de support technique",
-      ],
-      pricing: "À partir de 2.5M FCFA",
-      timeline: "4-6 semaines",
-      popular: false,
-    },
-    {
-      slug: "mobile-mvp-framework",
-      name: "Mobile MVP Framework",
-      tagline: "Lancement d'application",
-      description: "Produit Minimum Viable (MVP) pour iOS et Android afin de valider rapidement votre concept sur le marché.",
-      features: [
-        "Codebase cross-platform (React Native)",
-        "5 à 7 fonctionnalités clés",
-        "Authentification sécurisée (OAuth)",
-        "Backend / Base de données Cloud",
-        "Système de notifications Push",
-        "3 mois d'accompagnement post-lancement",
-      ],
-      pricing: "À partir de 3M FCFA",
-      timeline: "6-8 semaines",
-      popular: false,
-    },
-  ];
+  const { t } = useLanguage();
+
+  const solutions = SOLUTIONS_BASE.map(s => ({
+    ...s,
+    name:     t(`solutions.${s.tKey}_name`),
+    tagline:  t(`solutions.${s.tKey}_tagline`),
+    description: t(`solutions.${s.tKey}_desc`),
+    features: Array.from({ length: s.featureCount }, (_, i) => t(`solutions.${s.tKey}_f${i+1}`)),
+  }));
 
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white">
@@ -116,22 +37,15 @@ export function Solutions() {
       <section className="pt-40 pb-20 border-b border-border/40 relative">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[32px_32px] pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl"
-          >
+          <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-px bg-[#1A3AFF]" />
-              <span className="eyebrow" style={{marginBottom:0}}>Offres standardisées</span>
+              <span className="eyebrow" style={{ marginBottom:0 }}>{t("solutions.eyebrow")}</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
-              Solutions Prêtes <br /> à Déployer
+              {t("solutions.title_1")} <br />{t("solutions.title_2")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              Des packages technologiques pré-architecturés pour une livraison accélérée et des résultats prouvés.
-            </p>
+            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">{t("solutions.subtitle")}</p>
           </motion.div>
         </div>
       </section>
@@ -140,9 +54,7 @@ export function Solutions() {
       <section className="py-24 bg-muted/10">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.map((solution, index) => (
-              <SolutionCard key={index} solution={solution} index={index} />
-            ))}
+            {solutions.map((solution, index) => <SolutionCard key={index} solution={solution} index={index} />)}
           </div>
         </div>
       </section>
@@ -150,62 +62,34 @@ export function Solutions() {
       {/* Custom Solutions */}
       <section className="py-32 border-y border-border/40 relative overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-[#1A3AFF]/5 -skew-x-12 translate-x-20 pointer-events-none" />
-
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-px bg-foreground/40" />
-              <span className="eyebrow" style={{marginBottom:0, color:'var(--foreground)', opacity:0.6}}>Ingénierie sur mesure</span>
+              <span className="eyebrow" style={{ marginBottom:0, color:"var(--foreground)", opacity:0.6 }}>{t("solutions.custom_eyebrow")}</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-foreground mb-8">
-              Besoins Complexes ?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              Ces solutions ne sont que des points de départ. Nous concevons et développons des infrastructures digitales entièrement sur mesure pour répondre aux défis techniques les plus exigeants.
-            </p>
+            <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-foreground mb-8">{t("solutions.custom_title")}</h2>
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">{t("solutions.custom_desc")}</p>
             <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-foreground text-background font-['Orbitron'] text-sm tracking-wider hover:bg-muted-foreground transition-colors inline-flex items-center gap-3"
-              >
-                Planifier une consultation technique
-                <ArrowRight className="w-5 h-5" />
+              <motion.button whileHover={{ scale:1.02 }} whileTap={{ scale:0.98 }} className="px-8 py-4 bg-foreground text-background font-['Orbitron'] text-sm tracking-wider hover:bg-muted-foreground transition-colors inline-flex items-center gap-3">
+                {t("solutions.custom_btn")} <ArrowRight className="w-5 h-5" />
               </motion.button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Our Solutions */}
+      {/* Value */}
       <section className="py-32">
         <div className="container mx-auto px-6 md:px-12">
-            <div className="flex items-center gap-4 mb-16">
-              <span className="w-12 h-px bg-[#1A3AFF]" />
-              <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">
-                La Valeur Zephyr
-              </h2>
-            </div>
-
+          <div className="flex items-center gap-4 mb-16">
+            <span className="w-12 h-px bg-[#1A3AFF]" />
+            <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">{t("solutions.value_eyebrow")}</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <BenefitBlock
-              icon={Zap}
-              title="Déploiement Rapide"
-              description="Des architectures pré-configurées qui permettent de diviser par deux les délais de mise sur le marché (Time-to-Market)."
-              index={0}
-            />
-            <BenefitBlock
-              icon={Target}
-              title="Résultats Prouvés"
-              description="Chaque solution est basée sur des design patterns et des technologies qui ont déjà fait leurs preuves sur des dizaines de projets."
-              index={1}
-            />
-            <BenefitBlock
-              icon={Box}
-              title="Transparence Totale"
-              description="Une tarification claire, des livrables définis à l'avance et un cahier des charges strict. Aucun coût caché."
-              index={2}
-            />
+            {BENEFITS.map((b, i) => (
+              <BenefitBlock key={i} icon={b.icon} titleKey={`solutions.${b.tKey}_title`} descKey={`solutions.${b.tKey}_desc`} index={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -213,54 +97,35 @@ export function Solutions() {
   );
 }
 
-// Solution Card Component
 interface SolutionCardProps {
-  solution: {
-    slug: string;
-    name: string;
-    tagline: string;
-    description: string;
-    features: string[];
-    pricing: string;
-    timeline: string;
-    popular: boolean;
-  };
+  solution: { slug:string; name:string; tagline:string; description:string; features:string[]; pricing:string; timeline:string; popular:boolean };
   index: number;
 }
 
 function SolutionCard({ solution, index }: SolutionCardProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once:true, margin:"-10%" });
+  const { t } = useLanguage();
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative p-8 md:p-10 flex flex-col border transition-all duration-300 group ${solution.popular
-        ? "bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]"
-        : "bg-background border-border/40 hover:border-border"
-        }`}
+      initial={{ opacity:0, y:20 }}
+      animate={isInView?{opacity:1,y:0}:{}}
+      transition={{ duration:0.5, delay:index*0.1, ease:[0.16,1,0.3,1] }}
+      className={`relative p-8 md:p-10 flex flex-col border transition-all duration-300 group ${solution.popular?"bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]":"bg-background border-border/40 hover:border-border"}`}
     >
-      {/* Decorative corner accent */}
-      <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular ? "border-[#1A3AFF]" : "border-transparent group-hover:border-foreground/20"}`} />
-
-      {/* Popular Badge */}
+      <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular?"border-[#1A3AFF]":"border-transparent group-hover:border-foreground/20"}`} />
       <div className="h-8 mb-6">
         {solution.popular && (
           <div className="inline-flex items-center px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-['Orbitron'] tracking-widest uppercase">
-            Plus Demandé
+            {t("solutions.popular")}
           </div>
         )}
       </div>
-
-      {/* Title */}
       <h3 className="text-2xl font-['Orbitron'] text-foreground mb-2">{solution.name}</h3>
       <p className="text-[#1A3AFF] text-sm font-medium mb-6 uppercase tracking-wider">{solution.tagline}</p>
       <p className="text-muted-foreground text-sm leading-relaxed mb-8 grow">{solution.description}</p>
-
-      {/* Features */}
       <div className="space-y-4 mb-10 border-t border-border/40 pt-8">
         {solution.features.map((feature, i) => (
           <div key={i} className="flex items-start gap-3">
@@ -269,29 +134,20 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
           </div>
         ))}
       </div>
-
-      {/* Pricing & Timeline */}
       <div className="border-t border-border/40 pt-8 mt-auto">
         <div className="flex flex-col gap-4 mb-8">
           <div>
-            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">Budget Initial</p>
+            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.budget")}</p>
             <p className="text-foreground text-xl font-['Orbitron'] font-semibold">{solution.pricing}</p>
           </div>
           <div>
-            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">Délai Estimé</p>
+            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.timeline")}</p>
             <p className="text-foreground text-sm font-medium">{solution.timeline}</p>
           </div>
         </div>
-
         <Link to={`/solutions/${solution.slug}`}>
-          <button
-            className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular
-              ? "bg-[#1A3AFF] text-white hover:bg-[#1A3AFF]"
-              : "bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"
-              }`}
-          >
-            Voir le détail
-            <ArrowRight className="w-4 h-4" />
+          <button className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular?"bg-[#1A3AFF] text-white hover:bg-[#0D2FE0]":"bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"}`}>
+            {t("solutions.view_detail")} <ArrowRight className="w-4 h-4" />
           </button>
         </Link>
       </div>
@@ -299,31 +155,18 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
   );
 }
 
-// Benefit Block Component
-interface BenefitBlockProps {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  index: number;
-}
-
-function BenefitBlock({ icon: Icon, title, description, index }: BenefitBlockProps) {
+function BenefitBlock({ icon: Icon, titleKey, descKey, index }: { icon: React.ElementType; titleKey: string; descKey: string; index: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once:true, margin:"-10%" });
+  const { t } = useLanguage();
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-muted/30 p-10 border border-border/40 hover:border-border transition-colors group"
-    >
+    <motion.div ref={ref} initial={{ opacity:0, y:20 }} animate={isInView?{opacity:1,y:0}:{}} transition={{ duration:0.5, delay:index*0.1 }} className="bg-muted/30 p-10 border border-border/40 hover:border-border transition-colors group">
       <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-8 group-hover:border-[#1A3AFF]/50 transition-colors">
         <Icon className="w-5 h-5 text-[#1A3AFF]" />
       </div>
-      <h4 className="text-xl font-['Orbitron'] text-foreground mb-4">{title}</h4>
-      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+      <h4 className="text-xl font-['Orbitron'] text-foreground mb-4">{t(titleKey)}</h4>
+      <p className="text-muted-foreground text-sm leading-relaxed">{t(descKey)}</p>
     </motion.div>
   );
 }
