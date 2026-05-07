@@ -5,16 +5,16 @@ import LogoNoir from "../../assets/logos/Logo-Zephyr-Noir.png";
 
 const FOOTER_LINKS = {
   company: [
-    { label: "Services", to: "/services" },
-    { label: "Portfolio", to: "/portfolio" },
-    { label: "Solutions", to: "/solutions" },
-    { label: "Blog", to: "/blog" },
+    { label: "Services",   to: "/services" },
+    { label: "Portfolio",  to: "/portfolio" },
+    { label: "Solutions",  to: "/solutions" },
+    { label: "Blog",       to: "/blog" },
   ],
   services: [
-    { label: "Développement Web",    to: "/services" },
-    { label: "Applications Mobiles", to: "/services" },
-    { label: "Branding & Design",    to: "/services" },
-    { label: "Marketing Digital",   to: "/services" },
+    { label: "Développement Web",    to: "/services/developpement-web" },
+    { label: "Applications Mobiles", to: "/services/applications-mobiles" },
+    { label: "Branding & Design",    to: "/services/branding-design" },
+    { label: "Marketing Digital",    to: "/services/marketing-digital" },
   ],
 };
 
@@ -26,16 +26,8 @@ export function Footer() {
         {/* Brand */}
         <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15">
           <Link to="/" className="flex items-center mb-6 group">
-            <img
-              src={LogoBlanc}
-              alt="Zephyr Logo"
-              className="h-8 hidden dark:block"
-            />
-            <img
-              src={LogoNoir}
-              alt="Zephyr Logo"
-              className="h-8 block dark:hidden"
-            />
+            <img src={LogoBlanc} alt="Zephyr Logo" className="h-8 hidden dark:block" />
+            <img src={LogoNoir}  alt="Zephyr Logo" className="h-8 block dark:hidden" />
           </Link>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-[220px]">
             Agence digitale premium. Nous construisons des expériences web et
@@ -63,7 +55,7 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Services */}
+        {/* Services — now links to individual service pages */}
         <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15 border-t lg:border-t-0">
           <h4 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-6">
             Services
@@ -73,9 +65,10 @@ export function Footer() {
               <li key={link.label}>
                 <Link
                   to={link.to}
-                  className="text-sm text-foreground/70 hover:text-foreground transition-colors"
+                  className="text-sm text-foreground/70 hover:text-foreground transition-colors inline-flex items-center gap-1.5 group"
                 >
                   {link.label}
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
             ))}
@@ -99,9 +92,7 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <Phone className="w-4 h-4 text-[#1A3AFF] mt-0.5 shrink-0" />
-              <span className="text-sm text-foreground/70">
-                +221 XX XXX XX XX
-              </span>
+              <span className="text-sm text-foreground/70">+221 XX XXX XX XX</span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-[#1A3AFF] mt-0.5 shrink-0" />

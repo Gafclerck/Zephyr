@@ -1,7 +1,17 @@
 import { useState, useRef } from "react";
-import { ArrowRight, ExternalLink, Filter } from "lucide-react";
+import { ArrowRight, Filter } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { Link } from "react-router";
+
+/* ─── Slug map ─── */
+const SLUG_MAP: Record<string, string> = {
+  "Aura Fintech":    "aura-fintech",
+  "Lumina Health":   "lumina-health",
+  "Nova Retail":     "nova-retail",
+  "MarketPlace Pro": "marketplace-pro",
+  "TeleCare":        "telecare",
+  "Onyx Coffee":     "onyx-coffee",
+};
 
 export function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -91,9 +101,7 @@ export function Portfolio() {
           >
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
-                Études de cas
-              </span>
+              <span className="eyebrow" style={{marginBottom:0}}>Études de cas</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
               Nos Réalisations
@@ -187,6 +195,8 @@ interface ProjectCardProps {
 function ProjectCard({ project, index }: ProjectCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const slug = SLUG_MAP[project.title] ?? "";
+  const Wrapper = slug ? Link : "div";
 
   return (
     <motion.div
@@ -195,14 +205,15 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      style={{ minHeight: project.large ? undefined : undefined }}
-        className={`group ${project.large ? "md:col-span-2" : ""}`}
-      >
-      <div 
-      ref={ref}
-      className={`relative overflow-hidden rounded-none bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full ${
-            project.large ? "min-h-[360px] md:min-h-[500px] lg:min-h-[600px]" : "min-h-[320px] md:min-h-[450px] lg:min-h-[500px]"
-          }`}
+      className={`group ${project.large ? "md:col-span-2" : ""}`}
+    >
+      {/* @ts-ignore */}
+      <Wrapper
+        ref={ref}
+        {...(slug ? { to: `/portfolio/${slug}` } : {})}
+        className={`relative overflow-hidden rounded-none bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full cursor-pointer ${
+          project.large ? "min-h-[360px] md:min-h-[500px] lg:min-h-[600px]" : "min-h-[320px] md:min-h-[450px] lg:min-h-[500px]"
+        }`}
       >
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -247,12 +258,12 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                 <span className="text-foreground text-base font-medium">{project.results}</span>
               </div>
               <div className="w-12 h-12 rounded-none bg-background border border-border flex items-center justify-center group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                <ExternalLink className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+                <ArrowRight className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Wrapper>
     </motion.div>
   );
 }

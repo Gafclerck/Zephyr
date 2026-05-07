@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import {
   Code, Smartphone, Palette, TrendingUp,
   ArrowRight, CheckCircle, ArrowUpRight,
@@ -10,6 +10,7 @@ import { motion, useScroll, useTransform, useInView } from "motion/react";
 /* ─── Types ─── */
 interface Service {
   id: string;
+  slug: string;
   number: string;
   icon: React.ElementType;
   title: string;
@@ -27,6 +28,7 @@ interface Service {
 const SERVICES: Service[] = [
   {
     id: "web",
+    slug: "developpement-web",
     number: "01",
     icon: Code,
     title: "Développement Web",
@@ -53,6 +55,7 @@ const SERVICES: Service[] = [
   },
   {
     id: "mobile",
+    slug: "applications-mobiles",
     number: "02",
     icon: Smartphone,
     title: "Applications Mobiles",
@@ -74,11 +77,12 @@ const SERVICES: Service[] = [
     highlight: [
       { label: "Apps", value: "35+" },
       { label: "DL", value: "200K+" },
-      { label: "OS", value: "iOS/Android" },
+      { label: "OS", value: "iOS/And." },
     ],
   },
   {
     id: "branding",
+    slug: "branding-design",
     number: "03",
     icon: Palette,
     title: "Branding & Design",
@@ -100,11 +104,12 @@ const SERVICES: Service[] = [
     highlight: [
       { label: "Marques", value: "60+" },
       { label: "Awards", value: "8" },
-      { label: "Concepts", value: "3/projet" },
+      { label: "Concepts", value: "3/proj." },
     ],
   },
   {
     id: "marketing",
+    slug: "marketing-digital",
     number: "04",
     icon: TrendingUp,
     title: "Marketing Digital",
@@ -132,10 +137,10 @@ const SERVICES: Service[] = [
 ];
 
 const WHY_US = [
-  { icon: Zap, title: "Exécution Rapide", desc: "Sprints agiles et itérations hebdomadaires." },
+  { icon: Zap,    title: "Exécution Rapide",   desc: "Sprints agiles et itérations hebdomadaires." },
   { icon: Shield, title: "Qualité Supérieure", desc: "Code propre, tests et design premium." },
-  { icon: Globe, title: "Vision 360°", desc: "Architecture, UI et marketing unifiés." },
-  { icon: Users, title: "Équipe Experte", desc: "Un interlocuteur unique et dédié." },
+  { icon: Globe,  title: "Vision 360°",        desc: "Architecture, UI et marketing unifiés." },
+  { icon: Users,  title: "Équipe Experte",      desc: "Un interlocuteur unique et dédié." },
 ];
 
 /* ─── Page Component ─── */
@@ -144,7 +149,6 @@ export function Services() {
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       <HeroSection />
 
-      {/* Individual Service Sections */}
       <div id="services-list" className="flex flex-col">
         {SERVICES.map((service, index) => (
           <ServiceSection key={service.id} service={service} index={index} />
@@ -166,31 +170,18 @@ function HeroSection() {
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40 bg-background">
-
-      {/* ── Blueprint Grid Background — 100% vectoriel, theme-aware ── */}
       <div className="absolute inset-0 pointer-events-none">
-
-        {/* Niveau 1 : grille fine 20×20 */}
         <div className="absolute inset-0 bg-grid-blueprint-fine" />
-
-        {/* Niveau 2 : grille majeure 100×100 */}
         <div className="absolute inset-0 bg-grid-blueprint-major" />
 
-        {/* Niveau 3 : SVG — points + croix de cible + diagonales */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            {/* Point bleu à chaque intersection 100px */}
             <pattern id="svc-dot" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
               <circle cx="0"   cy="0"   r="1.5" fill="var(--grid-dot)" />
               <circle cx="100" cy="0"   r="1.5" fill="var(--grid-dot)" />
               <circle cx="0"   cy="100" r="1.5" fill="var(--grid-dot)" />
               <circle cx="100" cy="100" r="1.5" fill="var(--grid-dot)" />
             </pattern>
-            {/* Croix de visée tous les 500px */}
             <pattern id="svc-cross" x="0" y="0" width="500" height="500" patternUnits="userSpaceOnUse">
               <line x1="490" y1="500" x2="510" y2="500" stroke="var(--grid-line-major)" strokeWidth="1" />
               <line x1="500" y1="490" x2="500" y2="510" stroke="var(--grid-line-major)" strokeWidth="1" />
@@ -199,25 +190,13 @@ function HeroSection() {
           </defs>
           <rect width="100%" height="100%" fill="url(#svc-dot)" />
           <rect width="100%" height="100%" fill="url(#svc-cross)" />
-          {/* Diagonale principale */}
           <line x1="0" y1="0" x2="100%" y2="100%" stroke="var(--grid-line-major)" strokeWidth="0.6" />
-          {/* Diagonale secondaire */}
           <line x1="100%" y1="0" x2="0" y2="100%" stroke="var(--grid-line-major)" strokeWidth="0.3" />
-          {/* Ligne horizontale centrale en pointillés */}
           <line x1="0" y1="50%" x2="100%" y2="50%" stroke="var(--grid-line-major)" strokeWidth="0.5" strokeDasharray="4 8" />
         </svg>
 
-        {/* Orbe bleu — halo dynamique (suit le scroll) */}
-        <motion.div
-          style={{ y: y, opacity: op }}
-          className="absolute top-[-15%] right-[-5%] w-[55vw] h-[55vw] bg-[#1A3AFF]/10 rounded-full blur-[140px]"
-        />
-        <motion.div
-          style={{ y: y, opacity: op }}
-          className="absolute bottom-[-10%] left-[-5%] w-[35vw] h-[35vw] bg-[#00B4FF]/5 rounded-full blur-[100px]"
-        />
-
-        {/* Fondu bas vers le contenu */}
+        <motion.div style={{ y, opacity: op }} className="absolute top-[-15%] right-[-5%] w-[55vw] h-[55vw] bg-[#1A3AFF]/10 rounded-full blur-[140px]" />
+        <motion.div style={{ y, opacity: op }} className="absolute bottom-[-10%] left-[-5%] w-[35vw] h-[35vw] bg-[#00B4FF]/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
 
@@ -230,16 +209,16 @@ function HeroSection() {
         >
           <div className="flex items-center gap-4 mb-8">
             <span className="w-12 h-px bg-[#1A3AFF]" />
-            <span className="eyebrow" style={{marginBottom:0}}>Nos Services</span>
+            <span className="eyebrow" style={{ marginBottom: 0 }}>Nos Services</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
+          <h1 className="font-['Orbitron'] text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
             Expertise <br className="hidden md:block" />
-            <span className="text-foreground">Digitale Complète.</span>
+            Digitale Complète.
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
-            Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l’ensemble de votre stratégie technologique et créative.
+            Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l'ensemble de votre stratégie technologique et créative.
           </p>
 
           <div className="flex items-center gap-6">
@@ -269,13 +248,9 @@ function ServiceSection({ service, index }: { service: Service; index: number })
   const isInView = useInView(ref, { once: true, margin: "-20%" });
 
   return (
-    <section
-      ref={ref}
-      id={service.id}
-      className="py-20 md:py-24 border-b border-border/40 relative"
-    >
+    <section ref={ref} id={service.id} className="py-20 md:py-24 border-b border-border/40 relative">
       <div className="container mx-auto px-6 md:px-12">
-        <div className={`flex flex-col gap-16 lg:gap-20 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+        <div className={`flex flex-col gap-16 lg:gap-20 items-center ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
 
           {/* Content */}
           <motion.div
@@ -293,17 +268,17 @@ function ServiceSection({ service, index }: { service: Service; index: number })
                   {service.number}
                 </span>
               </div>
-              <h3 className="text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-foreground">{service.title}</h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {service.longDesc}
-              </p>
+              <h3 className="font-['Orbitron'] text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-foreground">
+                {service.title}
+              </h3>
+              <p className="text-lg text-muted-foreground leading-relaxed">{service.longDesc}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border/50">
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">Points clés</p>
                 <ul className="space-y-3">
-                  {service.features.map(f => (
+                  {service.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
                       <CheckCircle className="w-4 h-4 text-[#1A3AFF] shrink-0 mt-0.5" />
                       <span>{f}</span>
@@ -314,7 +289,7 @@ function ServiceSection({ service, index }: { service: Service; index: number })
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">Livrables</p>
                 <ul className="space-y-3">
-                  {service.deliverables.map(d => (
+                  {service.deliverables.map((d) => (
                     <li key={d} className="flex items-start gap-2 text-sm text-foreground/80">
                       <span className="w-1.5 h-1.5 rounded-none bg-foreground/30 mt-1.5 shrink-0" />
                       <span>{d}</span>
@@ -329,11 +304,18 @@ function ServiceSection({ service, index }: { service: Service; index: number })
                 <p className="text-sm text-muted-foreground mb-1">Budget moyen</p>
                 <p className="text-xl font-['Orbitron'] font-semibold text-foreground">{service.startingPrice}</p>
               </div>
-              <Link to="/contact">
-                <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white rounded-none hover:bg-[#0D2FE0] transition-colors font-medium">
-                  Nous consulter <ArrowUpRight className="w-4 h-4" />
-                </button>
-              </Link>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link to={`/services/${service.slug}`}>
+                  <button className="flex items-center gap-2 px-6 py-3 border border-border text-foreground rounded-none hover:bg-muted/30 transition-colors font-medium">
+                    Voir le détail <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
+                <Link to="/contact">
+                  <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white rounded-none hover:bg-[#0D2FE0] transition-colors font-medium">
+                    Nous consulter <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </div>
             </div>
           </motion.div>
 
@@ -351,9 +333,8 @@ function ServiceSection({ service, index }: { service: Service; index: number })
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-background/50" />
-
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
-                {service.highlight.map(h => (
+                {service.highlight.map((h) => (
                   <div key={h.label} className="bg-background/80 backdrop-blur-md p-4 rounded-none border border-white/10">
                     <p className="font-['Orbitron'] text-xl md:text-2xl text-foreground mb-1">{h.value}</p>
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{h.label}</p>
@@ -365,7 +346,7 @@ function ServiceSection({ service, index }: { service: Service; index: number })
             <div className="mt-6 p-6 bg-muted/30 border border-border/50 rounded-none flex items-center justify-between">
               <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">Tech Stack</span>
               <div className="flex items-center gap-2 flex-wrap justify-end">
-                {service.technologies.map(t => (
+                {service.technologies.map((t) => (
                   <span key={t} className="px-3 py-1 bg-background border border-border rounded-none text-xs font-medium text-foreground/80">
                     {t}
                   </span>
@@ -373,7 +354,6 @@ function ServiceSection({ service, index }: { service: Service; index: number })
               </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
@@ -383,10 +363,10 @@ function ServiceSection({ service, index }: { service: Service; index: number })
 /* ─── Process Section ─── */
 function ProcessSection() {
   const steps = [
-    { n: "01", title: "Cadrage", desc: "Analyse des objectifs et specs techniques." },
-    { n: "02", title: "Design", desc: "Création des interfaces UI/UX." },
-    { n: "03", title: "Ingénierie", desc: "Développement agile en sprints." },
-    { n: "04", title: "Lancement", desc: "Mise en production et tests QA." },
+    { n: "01", title: "Cadrage",     desc: "Analyse des objectifs et specs techniques." },
+    { n: "02", title: "Design",      desc: "Création des interfaces UI/UX." },
+    { n: "03", title: "Ingénierie",  desc: "Développement agile en sprints." },
+    { n: "04", title: "Lancement",   desc: "Mise en production et tests QA." },
   ];
 
   return (
@@ -395,10 +375,9 @@ function ProcessSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
             <span className="eyebrow">Méthodologie</span>
-            <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground tracking-tight">Le processus</h2>
+            <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground tracking-tight">Le processus</h2>
           </div>
         </div>
-
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 relative">
           {steps.map((step) => (
             <div key={step.n} className="relative group">
@@ -406,7 +385,7 @@ function ProcessSection() {
               <div className="w-16 h-16 rounded-none bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
                 <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.n}</span>
               </div>
-              <h4 className="text-2xl font-medium mb-4 text-foreground">{step.title}</h4>
+              <h4 className="font-['Orbitron'] text-xl font-medium mb-4 text-foreground">{step.title}</h4>
               <p className="text-muted-foreground text-base leading-relaxed pr-6">{step.desc}</p>
             </div>
           ))}
@@ -422,19 +401,16 @@ function WhyUsSection() {
     <section className="py-20 md:py-24 border-b border-border/40">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <span className="eyebrow">L’avantage Zephyr</span>
-          <h2 className="text-4xl md:text-5xl font-['Orbitron'] tracking-tight text-foreground">
-            Pourquoi nous ?
-          </h2>
+          <span className="eyebrow">L'avantage Zephyr</span>
+          <h2 className="font-['Orbitron'] text-4xl md:text-5xl tracking-tight text-foreground">Pourquoi nous ?</h2>
         </div>
-
         <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
           {WHY_US.map((item) => (
             <div key={item.title} className="p-6 md:p-10 lg:p-14 bg-muted/30 border border-border/50 rounded-none hover:bg-muted/50 transition-colors">
               <div className="w-16 h-16 bg-background border border-border rounded-none flex items-center justify-center mb-8 shadow-sm">
                 <item.icon className="w-7 h-7 text-[#1A3AFF]" />
               </div>
-              <h4 className="text-2xl font-semibold mb-4 text-foreground">{item.title}</h4>
+              <h4 className="font-['Orbitron'] text-2xl font-semibold mb-4 text-foreground">{item.title}</h4>
               <p className="text-lg text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
           ))}
@@ -449,11 +425,8 @@ function CtaSection() {
   return (
     <section className="py-20 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-[#0A1628] z-0" />
-
       <div className="container relative z-10 px-6 md:px-12 mx-auto text-center">
-        <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-white mb-6">
-          Prêt à commencer ?
-        </h2>
+        <h2 className="font-['Orbitron'] text-4xl md:text-6xl text-white mb-6">Prêt à commencer ?</h2>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
           <Link to="/contact">
             <button className="w-full sm:w-auto px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-2">

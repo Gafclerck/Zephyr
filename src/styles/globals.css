@@ -1,6 +1,4 @@
 /* ─── Admin layout : headings reviennent en Inter (pas Orbitron) ─────────── */
-/* Le theme.css applique Orbitron sur h1-h6 globalement.
-   L'admin panel est un outil métier — Inter est plus lisible et professionnel. */
 .admin-layout h1,
 .admin-layout h2,
 .admin-layout h3,
@@ -55,9 +53,7 @@ img {
   -webkit-user-drag: none;
 }
 
-/* ─── Eyebrow labels (section tags above titles) ──────────────────── */
-/* Orbitron à text-xs (11–12px) est trop chargé et peu lisible.
-   On passe ces micro-labels en Inter, gras, espacement contrôlé. */
+/* ─── Eyebrow labels ──────────────────────────────────────────── */
 .eyebrow {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 11px;
@@ -68,6 +64,20 @@ img {
   display: block;
   margin-bottom: 1rem;
 }
+
+/* ─── Scrollbar utilities ─────────────────────────────────────── */
+
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;   /* IE & Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;              /* Chrome, Safari, Opera */
+}
+
+/* ─── Grid background utilities ───────────────────────────────── */
+
 /* Fine 24px grid — used on Blog hero */
 .bg-grid-subtle {
   background-image:

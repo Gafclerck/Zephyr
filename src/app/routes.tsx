@@ -3,8 +3,11 @@ import { RootLayout } from "./components/layouts/RootLayout";
 import { AdminLayout } from "./components/layouts/AdminLayout";
 import { Landing } from "./pages/Landing";
 import { Services } from "./pages/Services";
+import { ServiceDetail } from "./pages/ServiceDetail";
 import { Solutions } from "./pages/Solutions";
+import { SolutionDetail } from "./pages/SolutionDetail";
 import { Portfolio } from "./pages/Portfolio";
+import { PortfolioDetail } from "./pages/PortfolioDetail";
 import { Blog } from "./pages/Blog";
 import { BlogPost } from "./pages/BlogPost";
 import { Contact } from "./pages/Contact";
@@ -25,8 +28,11 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Landing },
       { path: "services", Component: Services },
+      { path: "services/:slug", Component: ServiceDetail },
       { path: "solutions", Component: Solutions },
+      { path: "solutions/:slug", Component: SolutionDetail },
       { path: "portfolio", Component: Portfolio },
+      { path: "portfolio/:slug", Component: PortfolioDetail },
       { path: "blog", Component: Blog },
       { path: "blog/:slug", Component: BlogPost },
       { path: "contact", Component: Contact },

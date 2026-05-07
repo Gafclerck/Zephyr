@@ -16,6 +16,7 @@ const SERVICES = [
     title: "Ingénierie Web",
     desc: "Des plateformes robustes, optimisées pour la conversion et la performance absolue.",
     img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+    slug: "developpement-web",
   },
   {
     icon: Smartphone,
@@ -23,6 +24,7 @@ const SERVICES = [
     title: "Expériences Mobiles",
     desc: "Applications natives et cross-platform pensées pour l'engagement utilisateur.",
     img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+    slug: "applications-mobiles",
   },
   {
     icon: Palette,
@@ -30,6 +32,7 @@ const SERVICES = [
     title: "Direction Artistique",
     desc: "Identités visuelles mémorables et interfaces (UI/UX) qui subliment la marque.",
     img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
+    slug: "branding-design",
   },
   {
     icon: TrendingUp,
@@ -37,6 +40,7 @@ const SERVICES = [
     title: "Marketing Growth",
     desc: "Stratégies d'acquisition data-driven pour démultiplier votre croissance.",
     img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+    slug: "marketing-digital",
   },
 ];
 
@@ -54,7 +58,7 @@ const FEATURED_PROJECTS = [
     category: "App Mobile · Santé",
     result: "50K+ utilisateurs actifs",
     img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop",
-    slug: "lumina",
+    slug: "lumina-health",
     span: false,
   },
   {
@@ -165,9 +169,9 @@ export function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
             {[
               { n: "01", title: "Cadrage Stratégique", desc: "Analyse approfondie des besoins, du marché et définition de la roadmap technologique." },
-              { n: "02", title: "Design & UX", desc: "Création d'interfaces intuitives et prototypage complet avant toute ligne de code." },
-              { n: "03", title: "Ingénierie Agile", desc: "Développement robuste en itérations courtes pour garantir flexibilité et qualité." },
-              { n: "04", title: "Go-to-Market", desc: "Déploiement sécurisé, suivi des performances et itérations post-lancement." },
+              { n: "02", title: "Design & UX",         desc: "Création d'interfaces intuitives et prototypage complet avant toute ligne de code." },
+              { n: "03", title: "Ingénierie Agile",    desc: "Développement robuste en itérations courtes pour garantir flexibilité et qualité." },
+              { n: "04", title: "Go-to-Market",        desc: "Déploiement sécurisé, suivi des performances et itérations post-lancement." },
             ].map((step, i) => (
               <ProcessStep key={i} {...step} index={i} />
             ))}
@@ -196,7 +200,7 @@ export function Landing() {
       {/* ── CTA ── */}
       <section className="py-20 md:py-32 bg-[#0A1628]">
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-          <span className="eyebrow">Votre prochain projet</span>
+          <span className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>Votre prochain projet</span>
           <h2 className="font-['Orbitron'] text-4xl md:text-5xl lg:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
             L'excellence digitale,{" "}
             <br className="hidden md:block" />
@@ -237,12 +241,12 @@ function Hero() {
         >
           <span className="w-8 h-px bg-[#1A3AFF]" />
           <span className="text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">
-            Dakar, Sénégal — 2025
+            Dakar, Sénégal — 2026
           </span>
         </motion.div>
 
-        {/* Main content — centré verticalement */}
-        <div className="flex flex-col justify-center flex-1 py-5 md:py-12 ">
+        {/* Main content */}
+        <div className="flex flex-col justify-center flex-1 py-5 md:py-12">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -285,7 +289,7 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* Bottom — stats horizontales */}
+        {/* Bottom — stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -295,16 +299,12 @@ function Hero() {
           <div className="grid grid-cols-3 gap-0 divide-x divide-border/40">
             {[
               { value: "150+", label: "Projets" },
-              { value: "98%", label: "Satisfaction" },
-              { value: "12+", label: "Pays" },
+              { value: "98%",  label: "Satisfaction" },
+              { value: "12+",  label: "Pays" },
             ].map((s) => (
               <div key={s.label} className="px-3 sm:px-5 first:pl-0">
-                <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">
-                  {s.value}
-                </p>
-                <p className="text-muted-foreground text-xs uppercase tracking-widest">
-                  {s.label}
-                </p>
+                <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">{s.value}</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-widest">{s.label}</p>
               </div>
             ))}
           </div>
@@ -324,11 +324,10 @@ function Hero() {
             alt="Espace de travail créatif"
             className="w-full h-full object-cover"
           />
-          {/* Overlay léger pour lisibilité */}
           <div className="absolute inset-0 bg-background/20" />
         </motion.div>
 
-        {/* Carte flottante — projet en cours */}
+        {/* Carte flottante */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -350,7 +349,7 @@ function Hero() {
               <p className="font-['Orbitron'] text-foreground text-sm mb-0.5 truncate">Aura Fintech</p>
               <p className="text-muted-foreground text-xs truncate">SaaS · +300% volume transactionnel</p>
             </div>
-            <Link to="/portfolio" className="shrink-0">
+            <Link to="/portfolio/aura-fintech" className="shrink-0">
               <div className="w-8 h-8 border border-border flex items-center justify-center hover:bg-[#1A3AFF] hover:border-[#1A3AFF] hover:text-white transition-colors text-muted-foreground">
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </div>
@@ -358,7 +357,7 @@ function Hero() {
           </div>
         </motion.div>
 
-        {/* Scroll hint vertical — côté droit */}
+        {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -379,7 +378,6 @@ function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
     </section>
   );
 }
@@ -399,7 +397,8 @@ function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index:
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
     >
-      <Link to="/services" className="group block h-full">
+      {/* Link to individual service detail page */}
+      <Link to={`/services/${service.slug}`} className="group block h-full">
         <div className="h-full bg-background border border-border/50 hover:border-[#1A3AFF]/40 transition-colors flex flex-col overflow-hidden">
           <div className="relative h-44 overflow-hidden">
             <img
@@ -445,7 +444,8 @@ function PortfolioCard({ project, index }: { project: (typeof FEATURED_PROJECTS)
       className={`group relative overflow-hidden ${project.span ? "md:col-span-2" : ""}`}
       style={{ height: project.span ? "460px" : "360px" }}
     >
-      <Link to="/portfolio" className="block w-full h-full">
+      {/* Link to individual case study */}
+      <Link to={`/portfolio/${project.slug}`} className="block w-full h-full">
         <img
           src={project.img}
           alt={project.title}

@@ -6,6 +6,7 @@ import { useRef } from "react";
 export function Solutions() {
   const solutions = [
     {
+      slug: "landing-page-pro",
       name: "Landing Page Pro",
       tagline: "Conversion Haute Performance",
       description: "Une page d'atterrissage optimisée au pixel près pour maximiser les conversions de vos campagnes d'acquisition.",
@@ -22,6 +23,7 @@ export function Solutions() {
       popular: true,
     },
     {
+      slug: "brand-identity-system",
       name: "Brand Identity System",
       tagline: "Système de marque complet",
       description: "Identité visuelle exhaustive incluant logotype, typographie, palette, et un brand book rigoureux.",
@@ -38,6 +40,7 @@ export function Solutions() {
       popular: false,
     },
     {
+      slug: "digital-marketing-engine",
       name: "Digital Marketing Engine",
       tagline: "Trafic & Acquisition B2B/B2C",
       description: "Campagne de marketing digital trimestrielle incluant SEO, médias sociaux et publicité algorithmique.",
@@ -54,6 +57,7 @@ export function Solutions() {
       popular: true,
     },
     {
+      slug: "corporate-platform",
       name: "Corporate Platform",
       tagline: "Site vitrine institutionnel",
       description: "Plateforme web professionnelle complète pour asseoir l'autorité de votre entreprise sur son marché.",
@@ -70,6 +74,7 @@ export function Solutions() {
       popular: false,
     },
     {
+      slug: "ecommerce-architecture",
       name: "E-Commerce Architecture",
       tagline: "Vente en ligne performante",
       description: "Boutique en ligne robuste avec traitement des paiements sécurisés et gestion de stocks avancée.",
@@ -86,6 +91,7 @@ export function Solutions() {
       popular: false,
     },
     {
+      slug: "mobile-mvp-framework",
       name: "Mobile MVP Framework",
       tagline: "Lancement d'application",
       description: "Produit Minimum Viable (MVP) pour iOS et Android afin de valider rapidement votre concept sur le marché.",
@@ -118,9 +124,7 @@ export function Solutions() {
           >
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-px bg-[#1A3AFF]" />
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
-                Offres standardisées
-              </span>
+              <span className="eyebrow" style={{marginBottom:0}}>Offres standardisées</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
               Solutions Prêtes <br /> à Déployer
@@ -151,9 +155,7 @@ export function Solutions() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-px bg-foreground/40" />
-              <span className="text-foreground/60 font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
-                Ingénierie sur mesure
-              </span>
+              <span className="eyebrow" style={{marginBottom:0, color:'var(--foreground)', opacity:0.6}}>Ingénierie sur mesure</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-foreground mb-8">
               Besoins Complexes ?
@@ -178,12 +180,12 @@ export function Solutions() {
       {/* Why Choose Our Solutions */}
       <section className="py-32">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex items-center gap-4 mb-16">
-            <span className="w-12 h-px bg-[#1A3AFF]" />
-            <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">
-              La Valeur Zephyr
-            </h2>
-          </div>
+            <div className="flex items-center gap-4 mb-16">
+              <span className="w-12 h-px bg-[#1A3AFF]" />
+              <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">
+                La Valeur Zephyr
+              </h2>
+            </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <BenefitBlock
@@ -214,6 +216,7 @@ export function Solutions() {
 // Solution Card Component
 interface SolutionCardProps {
   solution: {
+    slug: string;
     name: string;
     tagline: string;
     description: string;
@@ -280,14 +283,14 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
           </div>
         </div>
 
-        <Link to="/contact">
+        <Link to={`/solutions/${solution.slug}`}>
           <button
             className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular
               ? "bg-[#1A3AFF] text-white hover:bg-[#1A3AFF]"
               : "bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"
               }`}
           >
-            Sélectionner
+            Voir le détail
             <ArrowRight className="w-4 h-4" />
           </button>
         </Link>
