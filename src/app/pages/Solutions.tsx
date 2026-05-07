@@ -105,10 +105,10 @@ export function Solutions() {
 
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white">
-      
+
       {/* Hero */}
       <section className="pt-40 pb-20 border-b border-border/40 relative">
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px] pointer-events-none" />
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[32px_32px] pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -117,7 +117,7 @@ export function Solutions() {
             className="max-w-4xl"
           >
             <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-[#1A3AFF]" />
+              <span className="w-12 h-px bg-[#1A3AFF]" />
               <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
                 Offres standardisées
               </span>
@@ -146,11 +146,11 @@ export function Solutions() {
       {/* Custom Solutions */}
       <section className="py-32 border-y border-border/40 relative overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-[#1A3AFF]/5 -skew-x-12 translate-x-20 pointer-events-none" />
-        
+
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-foreground/40" />
+              <span className="w-12 h-px bg-foreground/40" />
               <span className="text-foreground/60 font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
                 Ingénierie sur mesure
               </span>
@@ -179,7 +179,7 @@ export function Solutions() {
       <section className="py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex items-center gap-4 mb-16">
-            <span className="w-12 h-[1px] bg-[#1A3AFF]" />
+            <span className="w-12 h-px bg-[#1A3AFF]" />
             <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">
               La Valeur Zephyr
             </h2>
@@ -235,11 +235,10 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative p-8 md:p-10 flex flex-col border transition-all duration-300 group ${
-        solution.popular 
-          ? "bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]" 
-          : "bg-background border-border/40 hover:border-border"
-      }`}
+      className={`relative p-8 md:p-10 flex flex-col border transition-all duration-300 group ${solution.popular
+        ? "bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]"
+        : "bg-background border-border/40 hover:border-border"
+        }`}
     >
       {/* Decorative corner accent */}
       <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular ? "border-[#1A3AFF]" : "border-transparent group-hover:border-foreground/20"}`} />
@@ -256,7 +255,7 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
       {/* Title */}
       <h3 className="text-2xl font-['Orbitron'] text-foreground mb-2">{solution.name}</h3>
       <p className="text-[#1A3AFF] text-sm font-medium mb-6 uppercase tracking-wider">{solution.tagline}</p>
-      <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">{solution.description}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed mb-8 grow">{solution.description}</p>
 
       {/* Features */}
       <div className="space-y-4 mb-10 border-t border-border/40 pt-8">
@@ -283,11 +282,10 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
 
         <Link to="/contact">
           <button
-            className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${
-              solution.popular
-                ? "bg-[#1A3AFF] text-white hover:bg-[#1A3AFF]"
-                : "bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"
-            }`}
+            className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular
+              ? "bg-[#1A3AFF] text-white hover:bg-[#1A3AFF]"
+              : "bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"
+              }`}
           >
             Sélectionner
             <ArrowRight className="w-4 h-4" />
@@ -311,7 +309,7 @@ function BenefitBlock({ icon: Icon, title, description, index }: BenefitBlockPro
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}

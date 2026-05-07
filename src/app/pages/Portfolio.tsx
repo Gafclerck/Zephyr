@@ -195,12 +195,14 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`group ${project.large ? "md:col-span-2" : ""}`}
-    >
+      style={{ minHeight: project.large ? undefined : undefined }}
+        className={`group ${project.large ? "md:col-span-2" : ""}`}
+      >
       <div 
-        ref={ref}
-        className="relative overflow-hidden rounded-none bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full"
-        style={{ minHeight: project.large ? "600px" : "500px" }}
+      ref={ref}
+      className={`relative overflow-hidden rounded-none bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full ${
+            project.large ? "min-h-[360px] md:min-h-[500px] lg:min-h-[600px]" : "min-h-[320px] md:min-h-[450px] lg:min-h-[500px]"
+          }`}
       >
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">

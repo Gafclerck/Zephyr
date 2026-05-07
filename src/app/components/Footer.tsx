@@ -24,7 +24,7 @@ export function Footer() {
       {/* Main grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-[#1A3AFF]/15">
         {/* Brand */}
-        <div className="p-10 lg:border-r border-[#1A3AFF]/15">
+        <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15">
           <Link to="/" className="flex items-center mb-6 group">
             <img
               src={LogoBlanc}
@@ -44,7 +44,7 @@ export function Footer() {
         </div>
 
         {/* Company */}
-        <div className="p-10 lg:border-r border-[#1A3AFF]/15 border-t md:border-t-0">
+        <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15 border-t md:border-t-0">
           <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
             Company
           </h4>
@@ -64,7 +64,7 @@ export function Footer() {
         </div>
 
         {/* Services */}
-        <div className="p-10 lg:border-r border-[#1A3AFF]/15 border-t lg:border-t-0">
+        <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15 border-t lg:border-t-0">
           <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
             Services
           </h4>
@@ -83,7 +83,7 @@ export function Footer() {
         </div>
 
         {/* Contact */}
-        <div className="p-10 border-t lg:border-t-0">
+        <div className="p-6 md:p-8 lg:p-10 border-t lg:border-t-0">
           <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
             Contact
           </h4>
@@ -122,7 +122,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-10 py-5 gap-4">
+      <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 py-5 gap-4">
         <p className="text-muted-foreground text-xs">
           © 2025 Zephyr — Agence Digitale. Tous droits réservés.
         </p>

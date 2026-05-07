@@ -202,17 +202,17 @@ export function Landing() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-32 bg-[#0A1628]">
+      <section className="py-20 md:py-32 bg-[#0A1628]">
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
           <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-6">
             Votre prochain projet
           </span>
-          <h2 className="font-['Orbitron'] text-5xl md:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
+          <h2 className="font-['Orbitron'] text-4xl md:text-5xl lg:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
             L'excellence digitale,{" "}
             <br className="hidden md:block" />
             à votre portée.
           </h2>
-          <p className="text-white/60 text-lg max-w-xl mb-12 leading-relaxed">
+          <p className="text-white/60 text-base md:text-lg max-w-xl mb-10 leading-relaxed">
             Unissons nos forces pour concevoir le produit qui transformera votre activité. Proposition détaillée sous 48h.
           </p>
           <Link to="/contact">
@@ -231,11 +231,6 @@ export function Landing() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   HERO — architecture repensée
-   Layout : colonne texte (55%) | image (45%)
-   Pleine hauteur écran, stats intégrées en bas
-───────────────────────────────────────────── */
 function Hero() {
   return (
     <section className="relative flex min-h-screen border-b border-border/40 overflow-hidden">
@@ -313,7 +308,7 @@ function Hero() {
               { value: "98%", label: "Satisfaction" },
               { value: "12+", label: "Pays" },
             ].map((s) => (
-              <div key={s.label} className="px-5 first:pl-0">
+              <div key={s.label} className="px-3 sm:px-5 first:pl-0">
                 <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">
                   {s.value}
                 </p>

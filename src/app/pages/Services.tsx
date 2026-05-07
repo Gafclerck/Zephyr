@@ -143,7 +143,7 @@ export function Services() {
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       <HeroSection />
-      
+
       {/* Individual Service Sections */}
       <div id="services-list" className="flex flex-col">
         {SERVICES.map((service, index) => (
@@ -183,25 +183,25 @@ function HeroSection() {
           className="max-w-4xl"
         >
           <div className="flex items-center gap-4 mb-8">
-            <span className="w-12 h-[1px] bg-[#1A3AFF]" />
+            <span className="w-12 h-px bg-[#1A3AFF]" />
             <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
               Nos Services
             </span>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
             Expertise <br className="hidden md:block" />
             <span className="text-foreground">
               Digitale Complète.
             </span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
             Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l'ensemble de votre stratégie technologique et créative.
           </p>
 
           <div className="flex items-center gap-6">
-            <button 
+            <button
               onClick={() => {
                 const el = document.getElementById("services-list");
                 el?.scrollIntoView({ behavior: "smooth" });
@@ -227,16 +227,16 @@ function ServiceSection({ service, index }: { service: Service; index: number })
   const isInView = useInView(ref, { once: true, margin: "-20%" });
 
   return (
-    <section 
+    <section
       ref={ref}
-      id={service.id} 
+      id={service.id}
       className="py-20 md:py-24 border-b border-border/40 relative"
     >
       <div className="container mx-auto px-6 md:px-12">
         <div className={`flex flex-col gap-16 lg:gap-20 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
-          
+
           {/* Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: isEven ? -50 : 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -296,20 +296,20 @@ function ServiceSection({ service, index }: { service: Service; index: number })
           </motion.div>
 
           {/* Visual */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="w-full lg:w-7/12"
           >
-            <div className="relative w-full h-[500px] lg:h-[650px] rounded-none overflow-hidden group border border-border/40">
-              <img 
-                src={service.img} 
-                alt={service.title} 
+            <div className="relative w-full h-[320px] md:h-[500px] lg:h-[650px] rounded-none overflow-hidden group border border-border/40">
+              <img
+                src={service.img}
+                alt={service.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-background/50" />
-              
+
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
                 {service.highlight.map(h => (
                   <div key={h.label} className="bg-background/80 backdrop-blur-md p-4 rounded-none border border-white/10">
@@ -359,10 +359,10 @@ function ProcessSection() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 relative">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 relative">
           {steps.map((step) => (
             <div key={step.n} className="relative group">
-              <div className="h-[1px] w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
+              <div className="h-px w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
               <div className="w-16 h-16 rounded-none bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
                 <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.n}</span>
               </div>
@@ -392,7 +392,7 @@ function WhyUsSection() {
 
         <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
           {WHY_US.map((item) => (
-            <div key={item.title} className="p-10 md:p-14 bg-muted/30 border border-border/50 rounded-none hover:bg-muted/50 transition-colors">
+            <div key={item.title} className="p-6 md:p-10 lg:p-14 bg-muted/30 border border-border/50 rounded-none hover:bg-muted/50 transition-colors">
               <div className="w-16 h-16 bg-background border border-border rounded-none flex items-center justify-center mb-8 shadow-sm">
                 <item.icon className="w-7 h-7 text-[#1A3AFF]" />
               </div>
@@ -411,7 +411,7 @@ function CtaSection() {
   return (
     <section className="py-20 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-[#0A1628] z-0" />
-      
+
       <div className="container relative z-10 px-6 md:px-12 mx-auto text-center">
         <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-white mb-6">
           Prêt à commencer ?

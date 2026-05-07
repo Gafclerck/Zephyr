@@ -76,12 +76,12 @@ export function Header() {
           <img
             src={LogoBlanc}
             alt="Zephyr"
-            className="h-12 hidden dark:block object-contain"
+            className="h-15 hidden dark:block object-contain"
           />
           <img
             src={LogoNoir}
             alt="Zephyr"
-            className="h-12 block dark:hidden object-contain"
+            className="h-15 block dark:hidden object-contain"
           />
         </Link>
 
