@@ -2,81 +2,98 @@ import { Link } from "react-router";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+interface PostData {
+  slug: string;
+  titleKey: string;
+  excerptKey: string;
+  categoryKey: string;
+  date: string;
+  readTimeKey: string;
+  image: string;
+  featured: boolean;
+}
+
+type TranslateFn = (key: string) => string;
+
+// ─── Post data (dates stay locale-neutral as they are already in French) ──────
+const POSTS: PostData[] = [
+  {
+    slug: "react-performance-2025",
+    titleKey: "blog.post1_title",
+    excerptKey: "blog.post1_excerpt",
+    categoryKey: "blog.cat_engineering",
+    date: "1 Mai 2026",
+    readTimeKey: "blog.post1_read",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop",
+    featured: true,
+  },
+  {
+    slug: "mobile-app-trends",
+    titleKey: "blog.post2_title",
+    excerptKey: "blog.post2_excerpt",
+    categoryKey: "blog.cat_mobile",
+    date: "28 Avril 2026",
+    readTimeKey: "blog.post2_read",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop",
+    featured: false,
+  },
+  {
+    slug: "branding-essentials",
+    titleKey: "blog.post3_title",
+    excerptKey: "blog.post3_excerpt",
+    categoryKey: "blog.cat_design",
+    date: "25 Avril 2026",
+    readTimeKey: "blog.post3_read",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&fit=crop",
+    featured: false,
+  },
+  {
+    slug: "seo-strategies-2026",
+    titleKey: "blog.post4_title",
+    excerptKey: "blog.post4_excerpt",
+    categoryKey: "blog.cat_marketing",
+    date: "22 Avril 2026",
+    readTimeKey: "blog.post4_read",
+    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&h=500&fit=crop",
+    featured: false,
+  },
+  {
+    slug: "design-systems-guide",
+    titleKey: "blog.post5_title",
+    excerptKey: "blog.post5_excerpt",
+    categoryKey: "blog.cat_design",
+    date: "18 Avril 2026",
+    readTimeKey: "blog.post5_read",
+    image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop",
+    featured: false,
+  },
+  {
+    slug: "conversion-optimization",
+    titleKey: "blog.post6_title",
+    excerptKey: "blog.post6_excerpt",
+    categoryKey: "blog.cat_marketing",
+    date: "15 Avril 2026",
+    readTimeKey: "blog.post6_read",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+    featured: false,
+  },
+];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export function Blog() {
-  const posts = [
-    {
-      slug: "react-performance-2025",
-      title: "Optimisation de Performance React en 2026",
-      excerpt: "Découvrez les dernières techniques architecturales pour construire des applications React ultra-rapides et scalables.",
-      category: "Ingénierie",
-      date: "1 Mai 2026",
-      readTime: "8 min de lecture",
-      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop",
-      featured: true,
-    },
-    {
-      slug: "mobile-app-trends",
-      title: "Tendances du Développement Mobile Natif",
-      excerpt: "Les technologies et les design patterns qui redéfinissent l'écosystème mobile iOS et Android cette année.",
-      category: "Mobile",
-      date: "28 Avril 2026",
-      readTime: "6 min de lecture",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop",
-      featured: false,
-    },
-    {
-      slug: "branding-essentials",
-      title: "Fondations d'une Identité de Marque Puissante",
-      excerpt: "Construisez une image de marque mémorable et percutante dès le premier jour avec ces stratégies éprouvées.",
-      category: "Design",
-      date: "25 Avril 2026",
-      readTime: "5 min de lecture",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&fit=crop",
-      featured: false,
-    },
-    {
-      slug: "seo-strategies-2026",
-      title: "Stratégies SEO Data-Driven",
-      excerpt: "Des techniques de référencement algorithmique et sémantique pour générer une croissance mesurable du trafic organique.",
-      category: "Marketing",
-      date: "22 Avril 2026",
-      readTime: "7 min de lecture",
-      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&h=500&fit=crop",
-      featured: false,
-    },
-    {
-      slug: "design-systems-guide",
-      title: "Architecture de Design Systems Évolutifs",
-      excerpt: "Comment créer un système de design robuste qui accompagne la croissance de votre produit et de vos équipes.",
-      category: "Design",
-      date: "18 Avril 2026",
-      readTime: "10 min de lecture",
-      image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop",
-      featured: false,
-    },
-    {
-      slug: "conversion-optimization",
-      title: "Guide CRO : Optimisation du Taux de Conversion",
-      excerpt: "Transformez vos visiteurs en clients fidèles grâce à des protocoles d'A/B testing et d'optimisation UI/UX.",
-      category: "Marketing",
-      date: "15 Avril 2026",
-      readTime: "9 min de lecture",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
-      featured: false,
-    },
-  ];
+  const { t } = useLanguage();
 
-  const featuredPost = posts.find((p) => p.featured);
-  const regularPosts = posts.filter((p) => !p.featured);
+  const featuredPost = POSTS.find((p) => p.featured);
+  const regularPosts = POSTS.filter((p) => !p.featured);
 
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative">
-        {/* Subtle grid background for technical feel */}
         <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
-        
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -86,13 +103,13 @@ export function Blog() {
           >
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
-              <span className="eyebrow" style={{marginBottom: 0}}>Intelligence Technologique</span>
+              <span className="eyebrow" style={{ marginBottom: 0 }}>{t("blog.eyebrow")}</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
-              Insights & <br /> Prospective
+              {t("blog.title")}
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              Analyses approfondies, tutoriels techniques et décryptage des tendances par notre équipe d'experts et d'ingénieurs.
+              {t("blog.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -102,7 +119,7 @@ export function Blog() {
       {featuredPost && (
         <section className="py-24 border-b border-border/40 bg-muted/10">
           <div className="container mx-auto px-6 md:px-12">
-            <FeaturedPostCard post={featuredPost} />
+            <FeaturedPostCard post={featuredPost} t={t} />
           </div>
         </section>
       )}
@@ -112,7 +129,7 @@ export function Blog() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularPosts.map((post, index) => (
-              <BlogPostCard key={index} post={post} index={index} />
+              <BlogPostCard key={post.slug} post={post} index={index} t={t} />
             ))}
           </div>
         </div>
@@ -121,22 +138,8 @@ export function Blog() {
   );
 }
 
-// Featured Post Card Component
-interface PostData {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  image: string;
-}
-
-interface FeaturedPostCardProps {
-  post: PostData;
-}
-
-function FeaturedPostCard({ post }: FeaturedPostCardProps) {
+// ─── Featured Post Card ───────────────────────────────────────────────────────
+function FeaturedPostCard({ post, t }: { post: PostData; t: TranslateFn }) {
   return (
     <Link to={`/blog/${post.slug}`} className="block group">
       <motion.div
@@ -161,15 +164,15 @@ function FeaturedPostCard({ post }: FeaturedPostCardProps) {
           {/* Content */}
           <div className="p-10 md:p-16 flex flex-col justify-center">
             <div className="inline-flex items-center px-4 py-1.5 border border-[#1A3AFF] bg-[#1A3AFF]/5 text-[#1A3AFF] text-xs font-['Orbitron'] tracking-widest uppercase mb-8 self-start">
-              {post.category}
+              {t(post.categoryKey)}
             </div>
 
             <h2 className="text-3xl md:text-5xl font-['Orbitron'] text-foreground mb-6 leading-tight group-hover:text-[#1A3AFF] transition-colors">
-              {post.title}
+              {t(post.titleKey)}
             </h2>
 
             <p className="text-muted-foreground text-lg mb-10 leading-relaxed max-w-xl">
-              {post.excerpt}
+              {t(post.excerptKey)}
             </p>
 
             <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm uppercase tracking-wider mb-10 border-t border-border/40 pt-6">
@@ -179,12 +182,14 @@ function FeaturedPostCard({ post }: FeaturedPostCardProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#1A3AFF]" />
-                <span>{post.readTime}</span>
+                <span>{t(post.readTimeKey)}</span>
               </div>
             </div>
 
             <div className="flex items-center gap-3 text-foreground font-['Orbitron'] text-sm tracking-wider uppercase group-hover:text-[#1A3AFF] transition-colors">
-              <span className="border-b border-transparent group-hover:border-[#1A3AFF] pb-1 transition-colors">Lire l'article complet</span>
+              <span className="border-b border-transparent group-hover:border-[#1A3AFF] pb-1 transition-colors">
+                {t("blog.readFull")}
+              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </div>
           </div>
@@ -194,13 +199,8 @@ function FeaturedPostCard({ post }: FeaturedPostCardProps) {
   );
 }
 
-// Blog Post Card Component
-interface BlogPostCardProps {
-  post: PostData;
-  index: number;
-}
-
-function BlogPostCard({ post, index }: BlogPostCardProps) {
+// ─── Blog Post Card ───────────────────────────────────────────────────────────
+function BlogPostCard({ post, index, t }: { post: PostData; index: number; t: TranslateFn }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -228,15 +228,15 @@ function BlogPostCard({ post, index }: BlogPostCardProps) {
         {/* Content */}
         <div className="p-8 flex flex-col flex-grow">
           <div className="inline-flex items-center px-3 py-1 border border-foreground/20 text-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-6 self-start group-hover:border-[#1A3AFF] group-hover:text-[#1A3AFF] transition-colors">
-            {post.category}
+            {t(post.categoryKey)}
           </div>
 
           <h3 className="text-2xl font-['Orbitron'] text-foreground mb-4 group-hover:text-[#1A3AFF] transition-colors leading-tight">
-            {post.title}
+            {t(post.titleKey)}
           </h3>
 
           <p className="text-muted-foreground mb-8 flex-grow leading-relaxed text-sm">
-            {post.excerpt}
+            {t(post.excerptKey)}
           </p>
 
           <div className="flex flex-col gap-4 border-t border-border/40 pt-6">
@@ -247,12 +247,12 @@ function BlogPostCard({ post, index }: BlogPostCardProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-3 h-3 text-foreground/50 group-hover:text-[#1A3AFF] transition-colors" />
-                <span>{post.readTime}</span>
+                <span>{t(post.readTimeKey)}</span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2 text-foreground font-['Orbitron'] text-[10px] tracking-widest uppercase mt-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
-              <span className="text-[#1A3AFF]">Lire l'article</span>
+              <span className="text-[#1A3AFF]">{t("blog.readMore")}</span>
               <ArrowRight className="w-3 h-3 text-[#1A3AFF]" />
             </div>
           </div>

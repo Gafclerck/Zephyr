@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
-import { PageTransition } from "../components/PageTransition";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -47,7 +46,12 @@ export function Contact() {
 
   if (submitted) {
     return (
-      <PageTransition>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="bg-background min-h-screen flex items-center justify-center selection:bg-[#1A3AFF] selection:text-white relative overflow-hidden">
           <div className="absolute inset-0 z-0 opacity-50"><div className="absolute inset-0 bg-dots-themed" /></div>
           <div className="container mx-auto px-6 relative z-10">
@@ -67,7 +71,7 @@ export function Contact() {
             </motion.div>
           </div>
         </div>
-      </PageTransition>
+      </motion.div>
     );
   }
 
