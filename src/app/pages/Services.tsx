@@ -230,9 +230,7 @@ function HeroSection() {
         >
           <div className="flex items-center gap-4 mb-8">
             <span className="w-12 h-px bg-[#1A3AFF]" />
-            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
-              Nos Services
-            </span>
+            <span className="eyebrow" style={{marginBottom:0}}>Nos Services</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
@@ -396,9 +394,7 @@ function ProcessSection() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
-            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-              Méthodologie
-            </span>
+            <span className="eyebrow">Méthodologie</span>
             <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground tracking-tight">Le processus</h2>
           </div>
         </div>
@@ -426,9 +422,7 @@ function WhyUsSection() {
     <section className="py-20 md:py-24 border-b border-border/40">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-            L'avantage Zephyr
-          </span>
+          <span className="eyebrow">L’avantage Zephyr</span>
           <h2 className="text-4xl md:text-5xl font-['Orbitron'] tracking-tight text-foreground">
             Pourquoi nous ?
           </h2>

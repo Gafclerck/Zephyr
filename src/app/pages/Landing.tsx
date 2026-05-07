@@ -103,9 +103,7 @@ export function Landing() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-                Nos expertises
-              </span>
+              <span className="eyebrow">Nos expertises</span>
               <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
                 Domaines d'excellence
               </h2>
@@ -132,9 +130,7 @@ export function Landing() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-                Portfolio
-              </span>
+              <span className="eyebrow">Portfolio</span>
               <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
                 Réalisations phares
               </h2>
@@ -160,9 +156,7 @@ export function Landing() {
       <section className="py-24 md:py-32 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center max-w-2xl mx-auto mb-20">
-            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-              Méthodologie
-            </span>
+            <span className="eyebrow">Méthodologie</span>
             <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground tracking-tight">
               De l'idée à l'impact
             </h2>
@@ -185,9 +179,7 @@ export function Landing() {
       <section className="py-24 md:py-32 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
-            <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-4">
-              Témoignages
-            </span>
+            <span className="eyebrow">Témoignages</span>
             <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
               Partenariats réussis
             </h2>
@@ -204,9 +196,7 @@ export function Landing() {
       {/* ── CTA ── */}
       <section className="py-20 md:py-32 bg-[#0A1628]">
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-          <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-widest uppercase block mb-6">
-            Votre prochain projet
-          </span>
+          <span className="eyebrow">Votre prochain projet</span>
           <h2 className="font-['Orbitron'] text-4xl md:text-5xl lg:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
             L'excellence digitale,{" "}
             <br className="hidden md:block" />

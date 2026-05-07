@@ -11,10 +11,10 @@ const FOOTER_LINKS = {
     { label: "Blog", to: "/blog" },
   ],
   services: [
-    { label: "Website Development", to: "/services" },
-    { label: "Mobile Apps", to: "/services" },
-    { label: "Branding & Design", to: "/services" },
-    { label: "Digital Marketing", to: "/services" },
+    { label: "Développement Web",    to: "/services" },
+    { label: "Applications Mobiles", to: "/services" },
+    { label: "Branding & Design",    to: "/services" },
+    { label: "Marketing Digital",   to: "/services" },
   ],
 };
 
@@ -45,8 +45,8 @@ export function Footer() {
 
         {/* Company */}
         <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15 border-t md:border-t-0">
-          <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
-            Company
+          <h4 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-6">
+            Entreprise
           </h4>
           <ul className="space-y-3">
             {FOOTER_LINKS.company.map((link) => (
@@ -65,7 +65,7 @@ export function Footer() {
 
         {/* Services */}
         <div className="p-6 md:p-8 lg:p-10 lg:border-r border-[#1A3AFF]/15 border-t lg:border-t-0">
-          <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
+          <h4 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-6">
             Services
           </h4>
           <ul className="space-y-3">
@@ -84,7 +84,7 @@ export function Footer() {
 
         {/* Contact */}
         <div className="p-6 md:p-8 lg:p-10 border-t lg:border-t-0">
-          <h4 className="font-['Orbitron'] text-xs tracking-widest uppercase text-muted-foreground mb-6">
+          <h4 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-6">
             Contact
           </h4>
           <ul className="space-y-4">
@@ -112,9 +112,9 @@ export function Footer() {
           <div className="mt-8">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-['Orbitron'] tracking-wider hover:bg-[#0D2FE0] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A3AFF] text-white text-sm font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors"
             >
-              Start a Project
+              Démarrer un projet
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
@@ -124,7 +124,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 py-5 gap-4">
         <p className="text-muted-foreground text-xs">
-          © 2025 Zephyr — Agence Digitale. Tous droits réservés.
+          © 2026 Zephyr — Agence Digitale. Tous droits réservés.
         </p>
         <div className="flex items-center gap-6">
           <Link

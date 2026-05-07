@@ -86,9 +86,7 @@ export function Blog() {
           >
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">
-                Intelligence Technologique
-              </span>
+              <span className="eyebrow" style={{marginBottom: 0}}>Intelligence Technologique</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
               Insights & <br /> Prospective
