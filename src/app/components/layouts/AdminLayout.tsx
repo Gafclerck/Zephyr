@@ -8,6 +8,7 @@ import {
   Package,
   LogOut,
   Settings,
+  FolderKanban,
 } from "lucide-react";
 import LogoBlanc from "../../../assets/logos/Logo-Zephyr-Blanc.png";
 import LogoNoir from "../../../assets/logos/Logo-Zephyr-Noir.png";
@@ -16,16 +17,17 @@ export function AdminLayout() {
   const location = useLocation();
 
   const navItems = [
-    { path: "/admin", label: "Dashboard", icon: LayoutDashboard },
-    { path: "/admin/leads", label: "Acquisitions", icon: Users },
-    { path: "/admin/portfolio", label: "Portfolio", icon: Briefcase },
-    { path: "/admin/solutions", label: "Solutions", icon: Package },
-    { path: "/admin/blog", label: "Publications", icon: FileText },
-    { path: "/admin/testimonials", label: "Avis Clients", icon: MessageSquare },
+    { path: "/admin",             label: "Dashboard",    icon: LayoutDashboard },
+    { path: "/admin/leads",       label: "Acquisitions", icon: Users },
+    { path: "/admin/projects",    label: "Projets",      icon: FolderKanban },
+    { path: "/admin/portfolio",   label: "Portfolio",    icon: Briefcase },
+    { path: "/admin/solutions",   label: "Solutions",    icon: Package },
+    { path: "/admin/blog",        label: "Publications", icon: FileText },
+    { path: "/admin/testimonials",label: "Avis Clients", icon: MessageSquare },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] dark:bg-[#050A14] flex selection:bg-[#1A3AFF] selection:text-white font-sans text-foreground">
+    <div className="admin-layout min-h-screen bg-[#F8F9FA] dark:bg-[#050A14] flex selection:bg-[#1A3AFF] selection:text-white font-sans text-foreground">
       {/* Sidebar */}
       <aside className="w-64 bg-white dark:bg-[#0A1220] border-r border-border/40 flex flex-col z-20">
         <div className="h-20 px-6 border-b border-border/40 flex items-center">
@@ -53,7 +55,9 @@ export function AdminLayout() {
                     : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-[#1A3AFF]" : "text-muted-foreground"}`} />
+                <Icon className={`w-4 h-4 shrink-0 ${
+                  isActive ? "text-[#1A3AFF]" : "text-muted-foreground"
+                }`} />
                 {item.label}
               </Link>
             );

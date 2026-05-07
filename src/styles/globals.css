@@ -1,4 +1,16 @@
-/* ─── Theme-aware grid backgrounds ───────────────────────────────────────── */
+/* ─── Admin layout : headings reviennent en Inter (pas Orbitron) ─────────── */
+/* Le theme.css applique Orbitron sur h1-h6 globalement.
+   L'admin panel est un outil métier — Inter est plus lisible et professionnel. */
+.admin-layout h1,
+.admin-layout h2,
+.admin-layout h3,
+.admin-layout h4,
+.admin-layout h5,
+.admin-layout h6 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+}
+
 
 /* Fine 24px grid — used on Blog hero */
 .bg-grid-subtle {

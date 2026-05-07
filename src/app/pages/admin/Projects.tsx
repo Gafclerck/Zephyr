@@ -69,11 +69,11 @@ export function AdminProjects() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-semibold text-foreground mb-2">
+                    <h1 className="text-2xl font-semibold text-foreground mb-1">
                         Gestion des Projets
                     </h1>
                     <p className="text-sm text-muted-foreground">
-                        Suivi d'avancement des projets clients
+                        Suivi d’avancement des projets clients
                     </p>
                 </div>
                 <button className="px-4 py-2 bg-[#1A3AFF] text-white text-sm font-medium rounded hover:bg-[#0D2FE0] transition-colors flex items-center gap-2">
