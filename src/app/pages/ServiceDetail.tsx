@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router";
 import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
-import React from "react";
+import { type ReactNode } from "react";
 
 /* ─── Service Data ─── */
 interface ServiceDetail {
@@ -131,8 +131,8 @@ const SERVICE_LABELS: Record<string, string> = {
   "marketing-digital": "Marketing Digital",
 };
 
-/* ── Reveal animation wrapper ── */
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+
+function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}

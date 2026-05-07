@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Code, Smartphone, Palette, TrendingUp, ArrowRight, CheckCircle, ArrowUpRight, Globe, Zap, Shield, Users, ArrowDown } from "lucide-react";
 import { Link } from "react-router";
 import { motion, useScroll, useTransform, useInView } from "motion/react";

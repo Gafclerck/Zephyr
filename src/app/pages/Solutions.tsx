@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router";
 import { Check, ArrowRight, Zap, Target, Box } from "lucide-react";
 import { motion, useInView } from "motion/react";

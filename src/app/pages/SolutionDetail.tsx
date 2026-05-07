@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router";
 import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
-import React from "react";
+import { type ReactNode } from "react";
 
 interface SolutionDetail {
   name: string;
@@ -162,7 +162,7 @@ const SOLUTIONS: Record<string, SolutionDetail> = {
 
 const SLUG_ORDER = ["landing-page-pro", "brand-identity-system", "digital-marketing-engine", "corporate-platform", "ecommerce-architecture", "mobile-mvp-framework"];
 
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}

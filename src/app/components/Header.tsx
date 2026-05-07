@@ -8,7 +8,7 @@ import {
 import { Sun, Moon, Menu, X, ArrowUpRight, Globe } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLanguage } from "../contexts/LanguageContext";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import LogoBlanc from "../../assets/logos/Logo-Zephyr-Blanc.png";
 import LogoNoir from "../../assets/logos/Logo-Zephyr-Noir.png";
 
@@ -44,11 +44,11 @@ export function Header() {
     }
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
