@@ -165,14 +165,46 @@ function HeroSection() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40">
-      <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-background/50 z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-          alt="Abstract architecture"
-          className="w-full h-full object-cover opacity-60 grayscale"
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40 bg-background">
+      {/* High-Tech Dynamic Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Grid Layer 1: Subtle Small Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+        
+        {/* Grid Layer 2: Larger Primary Grid Lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808018_1px,transparent_1px),linear-gradient(to_bottom,#80808018_1px,transparent_1px)] bg-[size:200px_200px]" />
+        
+        {/* Animated Glowing Orbs for Depth */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 40, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] bg-[#1A3AFF]/15 rounded-full blur-[120px]" 
         />
+        <motion.div 
+          animate={{ 
+            scale: [1.3, 1, 1.3],
+            opacity: [0.2, 0.5, 0.2],
+            x: [0, -30, 0],
+            y: [0, 50, 0]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[5%] right-[5%] w-[40vw] h-[40vw] bg-cyan-500/10 rounded-full blur-[100px]" 
+        />
+
+        {/* Static Tech Accents: Dots at grid intersections (simulated via radial gradient) */}
+        <div className="absolute inset-0 bg-[radial-gradient(#80808020_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
+
+        {/* Gradient Fade to Content */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background" />
+      </div>
+
+      <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full pointer-events-none">
+        {/* Empty container for scroll parallax effect if needed, but background is now dynamic */}
       </motion.div>
 
       <div className="container relative z-20 px-6 md:px-12 mx-auto py-16 md:py-24">
