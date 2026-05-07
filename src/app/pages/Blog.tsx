@@ -75,7 +75,7 @@ export function Blog() {
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative">
         {/* Subtle grid background for technical feel */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+        <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
         
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div

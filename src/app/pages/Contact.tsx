@@ -99,8 +99,8 @@ export function Contact() {
       <PageTransition>
         <div className="bg-background min-h-screen flex items-center justify-center selection:bg-[#1A3AFF] selection:text-white relative overflow-hidden">
           {/* Success Background */}
-          <div className="absolute inset-0 z-0 opacity-30">
-            <div className="absolute inset-0 bg-[radial-gradient(#1A3AFF_1px,transparent_1px)] bg-[size:32px_32px]" />
+          <div className="absolute inset-0 z-0 opacity-50">
+            <div className="absolute inset-0 bg-dots-themed" />
           </div>
 
           <div className="container mx-auto px-6 relative z-10">
@@ -156,7 +156,7 @@ export function Contact() {
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24 relative overflow-hidden">
       {/* High-Tech Dynamic Background (from Services) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 bg-grid-contact" />
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 20, repeat: Infinity }}

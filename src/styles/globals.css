@@ -1,0 +1,37 @@
+/* ─── Theme-aware grid backgrounds ───────────────────────────────────────── */
+
+/* Fine 24px grid — used on Blog hero */
+.bg-grid-subtle {
+  background-image:
+    linear-gradient(to right, var(--grid-line-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-fine) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Fine 40px grid — used on Contact */
+.bg-grid-contact {
+  background-image:
+    linear-gradient(to right, var(--grid-line-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-fine) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Blueprint dual-level grid — used on Services hero */
+.bg-grid-blueprint-fine {
+  background-image:
+    linear-gradient(to right, var(--grid-line-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-fine) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.bg-grid-blueprint-major {
+  background-image:
+    linear-gradient(to right, var(--grid-line-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-major) 1px, transparent 1px);
+  background-size: 100px 100px;
+}
+
+/* Dot grid — used on Contact success */
+.bg-dots-themed {
+  background-image: radial-gradient(var(--grid-dot-subtle) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}

@@ -52,6 +52,12 @@
   --sidebar-accent-foreground: var(--zephyr-white);
   --sidebar-border: rgba(0, 180, 255, 0.2);
   --sidebar-ring: var(--zephyr-cyan);
+
+  /* Grid background tokens — dark mode (default) */
+  --grid-line-fine:  rgba(255, 255, 255, 0.045);
+  --grid-line-major: rgba(0, 180, 255, 0.09);
+  --grid-dot:        rgba(26, 58, 255, 0.55);
+  --grid-dot-subtle: rgba(0, 180, 255, 0.18);
 }
 
 /* .dark theme removed - identical to :root (dark mode forced) */
@@ -93,6 +99,12 @@
   --sidebar-accent-foreground: var(--zephyr-black);
   --sidebar-border: rgba(26, 58, 255, 0.15);
   --sidebar-ring: var(--zephyr-royal-blue);
+
+  /* Grid background tokens — light mode */
+  --grid-line-fine:  rgba(26, 58, 255, 0.055);
+  --grid-line-major: rgba(26, 58, 255, 0.13);
+  --grid-dot:        rgba(26, 58, 255, 0.45);
+  --grid-dot-subtle: rgba(26, 58, 255, 0.12);
 }
 
 @theme inline {

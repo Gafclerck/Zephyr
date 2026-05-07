@@ -161,51 +161,65 @@ export function Services() {
 /* ─── Hero Section ─── */
 function HeroSection() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const y  = useTransform(scrollY, [0, 500], [0, 80]);
+  const op = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40 bg-background">
-      {/* High-Tech Dynamic Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Grid Layer 1: Subtle Small Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-        
-        {/* Grid Layer 2: Larger Primary Grid Lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808018_1px,transparent_1px),linear-gradient(to_bottom,#80808018_1px,transparent_1px)] bg-[size:200px_200px]" />
-        
-        {/* Animated Glowing Orbs for Depth */}
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, 40, 0],
-            y: [0, -20, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] bg-[#1A3AFF]/15 rounded-full blur-[120px]" 
+
+      {/* ── Blueprint Grid Background — 100% vectoriel, theme-aware ── */}
+      <div className="absolute inset-0 pointer-events-none">
+
+        {/* Niveau 1 : grille fine 20×20 */}
+        <div className="absolute inset-0 bg-grid-blueprint-fine" />
+
+        {/* Niveau 2 : grille majeure 100×100 */}
+        <div className="absolute inset-0 bg-grid-blueprint-major" />
+
+        {/* Niveau 3 : SVG — points + croix de cible + diagonales */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            {/* Point bleu à chaque intersection 100px */}
+            <pattern id="svc-dot" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="0"   cy="0"   r="1.5" fill="var(--grid-dot)" />
+              <circle cx="100" cy="0"   r="1.5" fill="var(--grid-dot)" />
+              <circle cx="0"   cy="100" r="1.5" fill="var(--grid-dot)" />
+              <circle cx="100" cy="100" r="1.5" fill="var(--grid-dot)" />
+            </pattern>
+            {/* Croix de visée tous les 500px */}
+            <pattern id="svc-cross" x="0" y="0" width="500" height="500" patternUnits="userSpaceOnUse">
+              <line x1="490" y1="500" x2="510" y2="500" stroke="var(--grid-line-major)" strokeWidth="1" />
+              <line x1="500" y1="490" x2="500" y2="510" stroke="var(--grid-line-major)" strokeWidth="1" />
+              <circle cx="500" cy="500" r="6" fill="none" stroke="var(--grid-line-major)" strokeWidth="0.75" strokeDasharray="2 4" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#svc-dot)" />
+          <rect width="100%" height="100%" fill="url(#svc-cross)" />
+          {/* Diagonale principale */}
+          <line x1="0" y1="0" x2="100%" y2="100%" stroke="var(--grid-line-major)" strokeWidth="0.6" />
+          {/* Diagonale secondaire */}
+          <line x1="100%" y1="0" x2="0" y2="100%" stroke="var(--grid-line-major)" strokeWidth="0.3" />
+          {/* Ligne horizontale centrale en pointillés */}
+          <line x1="0" y1="50%" x2="100%" y2="50%" stroke="var(--grid-line-major)" strokeWidth="0.5" strokeDasharray="4 8" />
+        </svg>
+
+        {/* Orbe bleu — halo dynamique (suit le scroll) */}
+        <motion.div
+          style={{ y: y, opacity: op }}
+          className="absolute top-[-15%] right-[-5%] w-[55vw] h-[55vw] bg-[#1A3AFF]/10 rounded-full blur-[140px]"
         />
-        <motion.div 
-          animate={{ 
-            scale: [1.3, 1, 1.3],
-            opacity: [0.2, 0.5, 0.2],
-            x: [0, -30, 0],
-            y: [0, 50, 0]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[5%] right-[5%] w-[40vw] h-[40vw] bg-cyan-500/10 rounded-full blur-[100px]" 
+        <motion.div
+          style={{ y: y, opacity: op }}
+          className="absolute bottom-[-10%] left-[-5%] w-[35vw] h-[35vw] bg-[#00B4FF]/5 rounded-full blur-[100px]"
         />
 
-        {/* Static Tech Accents: Dots at grid intersections (simulated via radial gradient) */}
-        <div className="absolute inset-0 bg-[radial-gradient(#80808020_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-        {/* Gradient Fade to Content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background" />
+        {/* Fondu bas vers le contenu */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
-
-      <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full pointer-events-none">
-        {/* Empty container for scroll parallax effect if needed, but background is now dynamic */}
-      </motion.div>
 
       <div className="container relative z-20 px-6 md:px-12 mx-auto py-16 md:py-24">
         <motion.div
@@ -223,13 +237,11 @@ function HeroSection() {
 
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
             Expertise <br className="hidden md:block" />
-            <span className="text-foreground">
-              Digitale Complète.
-            </span>
+            <span className="text-foreground">Digitale Complète.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
-            Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l'ensemble de votre stratégie technologique et créative.
+            Des solutions sur-mesure pour propulser votre entreprise. Nous couvrons l’ensemble de votre stratégie technologique et créative.
           </p>
 
           <div className="flex items-center gap-6">
