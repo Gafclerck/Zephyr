@@ -141,7 +141,7 @@ function Hero() {
           className="flex items-center gap-3 pt-4"
         >
           <span className="w-8 h-px bg-[#1A3AFF]" />
-          <span className="text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">
+          <span className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
             {t("landing.hero_eyebrow")}
           </span>
         </motion.div>
@@ -208,7 +208,7 @@ function Hero() {
               { value: "12+",  label: t("landing.stats_countries") },
             ].map((s) => (
               <div key={s.label} className="px-3 sm:px-5 first:pl-0">
-                <p className="font-['Orbitron'] text-2xl md:text-3xl text-foreground mb-1 tracking-tight">
+                <p className="text-2xl md:text-3xl font-semibold text-foreground mb-1 tracking-tight">
                   {s.value}
                 </p>
                 <p className="text-muted-foreground text-xs uppercase tracking-widest">
@@ -243,7 +243,7 @@ function Hero() {
           transition={{ duration: 0.55, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="absolute bottom-10 left-8 right-8 bg-background/90 backdrop-blur-md border border-border/60 p-5"
         >
-          <p className="text-muted-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-3">
+          <p className="text-muted-foreground text-[10px] font-semibold tracking-widest uppercase mb-3">
             {t("landing.recent_project")}
           </p>
           <div className="flex items-center gap-4">
@@ -255,7 +255,7 @@ function Hero() {
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="font-['Orbitron'] text-foreground text-sm mb-0.5 truncate">
+              <p className="font-semibold text-foreground text-sm mb-0.5 truncate">
                 Aura Fintech
               </p>
               <p className="text-muted-foreground text-xs truncate">
@@ -278,7 +278,7 @@ function Hero() {
           className="absolute top-1/2 right-6 -translate-y-1/2 flex flex-col items-center gap-3"
         >
           <span
-            className="text-muted-foreground/30 text-[10px] font-['Orbitron'] tracking-[0.3em] uppercase"
+            className="text-muted-foreground/30 text-[10px] font-semibold tracking-[0.3em] uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
             {t("landing.scroll")}
@@ -331,14 +331,14 @@ function ServiceCard({
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-background/40 group-hover:bg-background/10 transition-colors duration-300" />
-            <span className="absolute top-3 left-4 font-['Orbitron'] text-xs text-white/60">
+            <span className="absolute top-3 left-4 text-xs text-white/60 font-semibold uppercase tracking-widest">
               {service.label}
             </span>
           </div>
 
           <div className="p-4 flex flex-col flex-1">
             <Icon className="w-4 h-4 text-[#1A3AFF] mb-3" />
-            <h3 className="font-['Orbitron'] text-sm font-semibold text-foreground mb-1.5">
+            <h3 className="text-sm font-semibold text-foreground mb-1.5">
               {service.title}
             </h3>
             <p className="text-muted-foreground text-xs leading-relaxed flex-1 mb-3 line-clamp-3">
@@ -390,13 +390,13 @@ function PortfolioCard({
         <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
           <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
             <div className="flex flex-wrap items-center gap-3 mb-3">
-              <span className="px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white/80 text-[10px] font-['Orbitron'] tracking-wider border border-white/15">
+              <span className="px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white/80 text-[10px] tracking-wider border border-white/15">
                 {project.category}
               </span>
               <span className="text-[#00B4FF] text-sm">{project.result}</span>
             </div>
             <div className="flex items-end justify-between gap-4">
-              <h3 className="font-['Orbitron'] text-white text-xl md:text-2xl font-medium tracking-tight">
+              <h3 className="text-white text-xl md:text-2xl font-semibold tracking-tight">
                 {project.title}
               </h3>
               <div className="w-10 h-10 shrink-0 bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/15 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
@@ -437,11 +437,11 @@ function ProcessStep({
       className="p-5 bg-muted/40 border border-border/40 hover:border-[#1A3AFF]/30 hover:bg-muted/60 transition-colors group"
     >
       <div className="w-10 h-10 bg-background border border-border flex items-center justify-center mb-4 group-hover:border-[#1A3AFF]/40 transition-colors">
-        <span className="font-['Orbitron'] text-sm font-medium text-foreground">
+        <span className="text-sm font-medium text-foreground">
           {n}
         </span>
       </div>
-      <h4 className="font-['Orbitron'] text-sm font-semibold text-foreground mb-2">
+      <h4 className="text-sm font-semibold text-foreground mb-2">
         {title}
       </h4>
       <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>

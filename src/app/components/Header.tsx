@@ -202,7 +202,7 @@ export function Header() {
                         to="/services"
                         className="flex items-center justify-between text-[10px] uppercase tracking-widest text-muted-foreground hover:text-[#1A3AFF] transition-colors duration-150 group"
                       >
-                        <span className="font-['Orbitron'] font-semibold">{t("nav.all_services")}</span>
+                        <span className="font-semibold">{t("nav.all_services")}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </Link>
                     </div>
@@ -345,7 +345,7 @@ export function Header() {
                   onClick={() => setMobileSubOpen((v) => !v)}
                   className={`w-full flex items-center justify-between py-5 border-b border-border/30 ${isServicesActive ? "text-[#1A3AFF]" : "text-foreground"}`}
                 >
-                  <span className="font-['Orbitron'] text-2xl font-medium tracking-wide">
+                  <span className="text-2xl font-semibold tracking-wide">
                     {t("nav.services")}
                   </span>
                   <motion.span
@@ -388,7 +388,7 @@ export function Header() {
                         })}
                         <Link
                           to="/services"
-                          className="flex items-center gap-2 py-3 text-xs font-['Orbitron'] uppercase tracking-widest text-muted-foreground hover:text-[#1A3AFF] transition-colors"
+                          className="flex items-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground hover:text-[#1A3AFF] transition-colors"
                         >
                           {t("nav.all_services")} <ArrowUpRight className="w-3.5 h-3.5" />
                         </Link>
@@ -412,7 +412,7 @@ export function Header() {
                       to={item.path}
                       className={`flex items-center justify-between py-5 border-b border-border/30 ${isActive ? "text-[#1A3AFF]" : "text-foreground"}`}
                     >
-                      <span className="font-['Orbitron'] text-2xl font-medium tracking-wide">
+                      <span className="text-2xl font-semibold tracking-wide">
                         {t(item.labelKey)}
                       </span>
                       <ArrowUpRight className="w-5 h-5 text-muted-foreground" />

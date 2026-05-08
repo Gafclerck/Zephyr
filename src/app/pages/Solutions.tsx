@@ -74,7 +74,7 @@ export function Solutions() {
             <h2 className="text-3xl md:text-5xl font-['Orbitron'] text-foreground mb-6">{t("solutions.custom_title")}</h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">{t("solutions.custom_desc")}</p>
             <Link to="/contact">
-              <motion.button whileHover={{ scale:1.02 }} whileTap={{ scale:0.98 }} className="px-8 py-4 bg-foreground text-background font-['Orbitron'] text-sm tracking-wider hover:bg-muted-foreground transition-colors inline-flex items-center gap-3">
+              <motion.button whileHover={{ scale:1.02 }} whileTap={{ scale:0.98 }} className="px-8 py-4 bg-foreground text-background text-sm font-semibold tracking-wide hover:bg-muted-foreground transition-colors inline-flex items-center gap-3">
                 {t("solutions.custom_btn")} <ArrowRight className="w-5 h-5" />
               </motion.button>
             </Link>
@@ -121,12 +121,12 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
       <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular?"border-[#1A3AFF]":"border-transparent group-hover:border-foreground/20"}`} />
       <div className="h-8 mb-6">
         {solution.popular && (
-          <div className="inline-flex items-center px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-['Orbitron'] tracking-widest uppercase">
+          <div className="inline-flex items-center px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-semibold tracking-widest uppercase">
             {t("solutions.popular")}
           </div>
         )}
       </div>
-      <h3 className="text-xl font-['Orbitron'] text-foreground mb-2">{solution.name}</h3>
+      <h3 className="text-lg font-semibold text-foreground mb-2">{solution.name}</h3>
       <p className="text-[#1A3AFF] text-xs font-medium mb-4 uppercase tracking-wider">{solution.tagline}</p>
       <p className="text-muted-foreground text-xs leading-relaxed mb-5 grow">{solution.description}</p>
       <div className="space-y-2.5 mb-6 border-t border-border/40 pt-5">
@@ -141,7 +141,7 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
         <div className="flex flex-col gap-3 mb-5">
           <div>
             <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.budget")}</p>
-            <p className="text-foreground text-xl font-['Orbitron'] font-semibold">{solution.pricing}</p>
+            <p className="text-foreground text-xl font-semibold">{solution.pricing}</p>
           </div>
           <div>
             <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.timeline")}</p>
@@ -149,7 +149,7 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
           </div>
         </div>
         <Link to={`/solutions/${solution.slug}`}>
-          <button className={`w-full py-4 text-sm font-['Orbitron'] tracking-wider uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular?"bg-[#1A3AFF] text-white hover:bg-[#0D2FE0]":"bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"}`}>
+          <button className={`w-full py-4 text-sm font-semibold tracking-wide uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular?"bg-[#1A3AFF] text-white hover:bg-[#0D2FE0]":"bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"}`}>
             {t("solutions.view_detail")} <ArrowRight className="w-4 h-4" />
           </button>
         </Link>
@@ -168,7 +168,7 @@ function BenefitBlock({ icon: Icon, titleKey, descKey, index }: { icon: React.El
       <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-8 group-hover:border-[#1A3AFF]/50 transition-colors">
         <Icon className="w-5 h-5 text-[#1A3AFF]" />
       </div>
-      <h4 className="text-xl font-['Orbitron'] text-foreground mb-4">{t(titleKey)}</h4>
+      <h4 className="text-base font-semibold text-foreground mb-4">{t(titleKey)}</h4>
       <p className="text-muted-foreground text-sm leading-relaxed">{t(descKey)}</p>
     </motion.div>
   );

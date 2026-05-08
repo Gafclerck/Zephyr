@@ -194,13 +194,13 @@ export function SolutionDetail() {
         <div className="absolute top-0 right-0 w-px h-full bg-border/40 hidden lg:block" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-            <Link to="/solutions" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-['Orbitron'] text-xs tracking-widest uppercase transition-colors mb-12 group">
+            <Link to="/solutions" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-xs tracking-widest uppercase font-semibold transition-colors mb-12 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Nos Solutions
             </Link>
             <div className="flex items-center gap-4 mb-8">
-              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-['Orbitron'] tracking-widest uppercase">{solution.category}</span>
-              {solution.popular && <span className="px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-['Orbitron'] tracking-widest uppercase">Plus Demandé</span>}
+              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-semibold tracking-widest uppercase">{solution.category}</span>
+              {solution.popular && <span className="px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-semibold tracking-widest uppercase">Plus Demandé</span>}
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-['Orbitron'] text-foreground mb-6 leading-[1.05] tracking-tight font-medium">{solution.name}</h1>
             <p className="text-[#1A3AFF] text-lg font-medium tracking-wide mb-6">{solution.tagline}</p>
@@ -217,11 +217,11 @@ export function SolutionDetail() {
           <img src={solution.hero} alt={solution.name} className="w-full h-full object-cover" />
           <div className="absolute bottom-8 right-8 z-20 bg-background/90 backdrop-blur border border-border px-6 py-4 flex items-center gap-3">
             <span className="w-2 h-2 bg-[#1A3AFF]" />
-            <span className="font-['Orbitron'] text-sm text-foreground font-medium">{solution.pricing}</span>
+            <span className="text-sm text-foreground font-semibold">{solution.pricing}</span>
           </div>
           <div className="absolute bottom-8 left-8 z-20 bg-background/90 backdrop-blur border border-border px-6 py-4 flex items-center gap-3">
             <span className="w-2 h-2 bg-[#00E5FF]" />
-            <span className="font-['Orbitron'] text-sm text-foreground font-medium">{solution.timeline}</span>
+            <span className="text-sm text-foreground font-semibold">{solution.timeline}</span>
           </div>
         </motion.div>
       </section>
@@ -237,7 +237,7 @@ export function SolutionDetail() {
                 <div className="relative group">
                   <div className="h-px w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
                   <div className="w-16 h-16 bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                    <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.step}</span>
+                    <span className="text-sm font-semibold text-foreground group-hover:text-white transition-colors">{step.step}</span>
                   </div>
                   <h4 className="text-lg font-semibold mb-3 text-foreground">{step.title}</h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
@@ -264,7 +264,7 @@ export function SolutionDetail() {
                 ))}
               </ul>
               <div className="mt-10 pt-8 border-t border-border/40">
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">Stack Technique</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Stack Technique</p>
                 <div className="flex flex-wrap gap-2">
                   {solution.technologies.map((t) => (
                     <span key={t} className="px-3 py-1.5 border border-border/60 text-xs text-foreground/70 font-medium">{t}</span>
@@ -275,9 +275,9 @@ export function SolutionDetail() {
 
             <Reveal delay={0.15}>
               <div className="p-8 md:p-12 bg-muted/20 border border-border/40 sticky top-24">
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">Budget Initial</p>
-                <p className="text-4xl font-['Orbitron'] font-semibold text-foreground mb-6">{solution.pricing}</p>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">Délai Estimé</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Budget Initial</p>
+                <p className="text-4xl font-bold text-foreground mb-6">{solution.pricing}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Délai Estimé</p>
                 <p className="text-xl font-medium text-foreground mb-4">{solution.timeline}</p>
                 {solution.benefits.map((b) => (
                   <div key={b.title} className="py-4 border-t border-border/30">
@@ -286,7 +286,7 @@ export function SolutionDetail() {
                   </div>
                 ))}
                 <Link to="/contact">
-                  <button className="w-full mt-6 py-4 bg-[#1A3AFF] text-white font-['Orbitron'] text-sm tracking-wider uppercase hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-3">
+                  <button className="w-full mt-6 py-4 bg-[#1A3AFF] text-white text-sm font-semibold tracking-widest uppercase hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-3">
                     Sélectionner cette offre
                     <ArrowRight className="w-4 h-4" />
                   </button>
@@ -306,16 +306,16 @@ export function SolutionDetail() {
                 <ArrowLeft className="w-4 h-4 group-hover:text-white transition-colors" />
               </div>
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Précédent</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Précédent</p>
                 <p className="text-sm text-foreground font-medium">{SOLUTIONS[prevSlug]?.name}</p>
               </div>
             </Link>
           ) : <div />}
-          <Link to="/solutions" className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Toutes les solutions</Link>
+          <Link to="/solutions" className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Toutes les solutions</Link>
           {nextSlug ? (
             <Link to={`/solutions/${nextSlug}`} className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors text-right">
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Suivant</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Suivant</p>
                 <p className="text-sm text-foreground font-medium">{SOLUTIONS[nextSlug]?.name}</p>
               </div>
               <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-[#1A3AFF] group-hover:bg-[#1A3AFF] transition-colors">

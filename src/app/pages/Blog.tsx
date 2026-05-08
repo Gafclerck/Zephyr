@@ -163,11 +163,11 @@ function FeaturedPostCard({ post, t }: { post: PostData; t: TranslateFn }) {
 
           {/* Content */}
           <div className="p-7 md:p-10 flex flex-col justify-center">
-            <div className="inline-flex items-center px-3 py-1.5 border border-[#1A3AFF] bg-[#1A3AFF]/5 text-[#1A3AFF] text-xs font-['Orbitron'] tracking-widest uppercase mb-5 self-start">
+            <div className="inline-flex items-center px-3 py-1.5 border border-[#1A3AFF] bg-[#1A3AFF]/5 text-[#1A3AFF] text-xs font-semibold tracking-widest uppercase mb-5 self-start">
               {t(post.categoryKey)}
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-['Orbitron'] text-foreground mb-4 leading-tight group-hover:text-[#1A3AFF] transition-colors">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4 leading-tight group-hover:text-[#1A3AFF] transition-colors">
               {t(post.titleKey)}
             </h2>
 
@@ -186,7 +186,7 @@ function FeaturedPostCard({ post, t }: { post: PostData; t: TranslateFn }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 text-foreground font-['Orbitron'] text-sm tracking-wider uppercase group-hover:text-[#1A3AFF] transition-colors">
+            <div className="flex items-center gap-3 text-foreground font-semibold text-sm tracking-wider uppercase group-hover:text-[#1A3AFF] transition-colors">
               <span className="border-b border-transparent group-hover:border-[#1A3AFF] pb-1 transition-colors">
                 {t("blog.readFull")}
               </span>
@@ -227,11 +227,11 @@ function BlogPostCard({ post, index, t }: { post: PostData; index: number; t: Tr
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow">
-          <div className="inline-flex items-center px-3 py-1 border border-foreground/20 text-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-6 self-start group-hover:border-[#1A3AFF] group-hover:text-[#1A3AFF] transition-colors">
+          <div className="inline-flex items-center px-3 py-1 border border-foreground/20 text-foreground text-[10px] font-semibold tracking-widest uppercase mb-6 self-start group-hover:border-[#1A3AFF] group-hover:text-[#1A3AFF] transition-colors">
             {t(post.categoryKey)}
           </div>
 
-          <h3 className="text-2xl font-['Orbitron'] text-foreground mb-4 group-hover:text-[#1A3AFF] transition-colors leading-tight">
+          <h3 className="text-2xl font-semibold text-foreground mb-4 group-hover:text-[#1A3AFF] transition-colors leading-tight">
             {t(post.titleKey)}
           </h3>
 
@@ -251,7 +251,7 @@ function BlogPostCard({ post, index, t }: { post: PostData; index: number; t: Tr
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-foreground font-['Orbitron'] text-[10px] tracking-widest uppercase mt-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+            <div className="flex items-center gap-2 text-foreground font-semibold text-[10px] tracking-widest uppercase mt-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
               <span className="text-[#1A3AFF]">{t("blog.readMore")}</span>
               <ArrowRight className="w-3 h-3 text-[#1A3AFF]" />
             </div>

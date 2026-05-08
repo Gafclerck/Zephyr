@@ -66,7 +66,7 @@ export function Portfolio() {
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
           <div className="hidden md:flex items-center gap-3">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">{t("portfolio.filter_by")}</span>
+            <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{t("portfolio.filter_by")}</span>
           </div>
           <div className="flex overflow-x-auto no-scrollbar gap-2 md:gap-4 pb-2 md:pb-0 w-full md:w-auto">
             {filters.map(filter => (
@@ -157,7 +157,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             ))}
           </div>
           <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-            <h3 className="text-2xl md:text-3xl font-['Orbitron'] text-foreground mb-3 font-medium tracking-tight">{project.title}</h3>
+            <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3 tracking-tight">{project.title}</h3>
             <p className="text-muted-foreground text-base mb-5 max-w-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-2">{project.description}</p>
             <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-border/50">
               <div className="flex items-center gap-2">

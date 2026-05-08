@@ -213,7 +213,7 @@ export function ChatBot() {
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background rounded-none translate-x-1/4 translate-y-1/4" />
                 </div>
                 <div>
-                  <h3 className="font-['Orbitron'] font-medium text-foreground tracking-wide">Zephyr AI</h3>
+                  <h3 className="font-semibold text-foreground tracking-wide">Zephyr AI</h3>
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
                     <Sparkles className="w-3 h-3 text-[#1A3AFF]" /> Assistant Premium
                   </p>
@@ -316,7 +316,7 @@ export function ChatBot() {
                 </button>
               </div>
               <div className="flex justify-center mt-3">
-                <span className="text-[10px] font-['Orbitron'] tracking-wider text-muted-foreground/60 uppercase">
+                <span className="text-[10px] tracking-wider text-muted-foreground/60 uppercase">
                   {useAI ? "Propulsé par IA Claude" : "Assistant Automatique"}
                 </span>
               </div>

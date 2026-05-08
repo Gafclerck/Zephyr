@@ -173,12 +173,15 @@
   }
 
   h1,
-  h2,
+  h2 {
+    font-family: "Orbitron", "Rajdhana", sans-serif;
+  }
+
   h3,
   h4,
   h5,
   h6 {
-    font-family: "Orbitron", "Rajdhana", sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
   }
 
   h1 {

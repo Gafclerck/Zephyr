@@ -18,17 +18,17 @@ export function BlogPost() {
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <Link to="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-['Orbitron'] text-xs tracking-widest uppercase transition-colors mb-12 group">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-xs tracking-widest uppercase font-semibold transition-colors mb-12 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Retour aux articles
             </Link>
 
             <div className="flex items-center gap-4 mb-8">
-              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-['Orbitron'] tracking-widest uppercase">
+              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-semibold tracking-widest uppercase">
                 Ingénierie
               </span>
               <span className="w-8 h-[1px] bg-border" />
-              <div className="flex items-center gap-4 text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">
+              <div className="flex items-center gap-4 text-muted-foreground text-xs font-medium tracking-widest uppercase">
                 <span className="flex items-center gap-2"><Calendar className="w-3 h-3 text-[#1A3AFF]" /> 1 Mai 2026</span>
                 <span className="flex items-center gap-2"><Clock className="w-3 h-3 text-[#1A3AFF]" /> 8 min de lecture</span>
               </div>

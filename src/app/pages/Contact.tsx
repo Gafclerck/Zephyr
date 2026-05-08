@@ -65,7 +65,7 @@ export function Contact() {
               </div>
               <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground mb-6 tracking-tight">{t("contact.success_title")}</h2>
               <p className="text-muted-foreground text-lg mb-12 max-w-md mx-auto leading-relaxed">{t("contact.success_desc")}</p>
-              <button onClick={() => navigate("/")} className="group flex items-center gap-4 mx-auto px-10 py-5 bg-[#1A3AFF] text-white font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-[#0D2FE0] transition-all">
+              <button onClick={() => navigate("/")} className="group flex items-center gap-4 mx-auto px-10 py-5 bg-[#1A3AFF] text-white text-xs tracking-widest uppercase font-semibold hover:bg-[#0D2FE0] transition-all">
                 {t("contact.success_btn")} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
               </button>
             </motion.div>
@@ -95,7 +95,7 @@ export function Contact() {
               className="flex items-center gap-4 mb-6"
             >
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
-              <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">{t("contact.eyebrow")}</span>
+              <span className="text-[#1A3AFF] text-xs tracking-[0.3em] uppercase font-semibold">{t("contact.eyebrow")}</span>
             </motion.div>
             <motion.h1
               initial={{ opacity:0, y:16 }}
@@ -131,10 +131,10 @@ export function Contact() {
                 <button key={s.num} disabled={s.num > 1 && !isStepValid(s.num - 1) && s.num > step} onClick={() => setStep(s.num as FormStep)}
                   className={`flex-1 p-6 md:p-8 text-left transition-all relative group ${step === s.num?"bg-[#1A3AFF]/10":s.num < step?"bg-muted/20":"bg-background"}`}>
                   <div className={`absolute bottom-0 left-0 h-1 transition-all duration-500 ${step === s.num?"w-full bg-[#1A3AFF]":s.num < step?"w-full bg-[#1A3AFF]/40":"w-0 bg-border"}`} />
-                  <div className={`text-xl font-['Orbitron'] mb-2 flex items-center gap-3 ${step === s.num?"text-[#1A3AFF]":s.num < step?"text-[#1A3AFF]/60":"text-muted-foreground"}`}>
+                  <div className={`text-xl font-semibold mb-2 flex items-center gap-3 ${step === s.num?"text-[#1A3AFF]":s.num < step?"text-[#1A3AFF]/60":"text-muted-foreground"}`}>
                     0{s.num} {s.num < step && <CheckCircle2 className="w-4 h-4" />}
                   </div>
-                  <div className={`text-[10px] font-['Orbitron'] uppercase tracking-[0.2em] font-semibold ${step === s.num?"text-foreground":"text-muted-foreground"}`}>{t(s.labelKey)}</div>
+                  <div className={`text-[10px] uppercase tracking-widest font-semibold ${step === s.num?"text-foreground":"text-muted-foreground"}`}>{t(s.labelKey)}</div>
                 </button>
               ))}
             </div>
@@ -149,19 +149,19 @@ export function Contact() {
               {/* Step 1 */}
               {step === 1 && (
                 <motion.div key="step1" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
-                  <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step1_title")}</h3>
+                  <h3 className="text-2xl font-semibold text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step1_title")}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                     {projectTypes.map(type => (
                       <button key={type} onClick={() => updateFormData("projectType", type)} className={`p-6 border transition-all text-left group flex items-center justify-between relative overflow-hidden ${formData.projectType===type?"border-[#1A3AFF] bg-[#1A3AFF]/5 text-foreground":"border-border/40 text-muted-foreground hover:border-[#1A3AFF]/30 hover:bg-[#1A3AFF]/2"}`}>
                         {formData.projectType===type && <motion.div layoutId="active-bg" className="absolute inset-0 bg-[#1A3AFF]/5" />}
-                        <span className="font-['Orbitron'] text-sm tracking-wider uppercase relative z-10">{type}</span>
+                        <span className="text-sm font-medium tracking-wide relative z-10">{type}</span>
                         <div className={`w-5 h-5 border transition-all ${formData.projectType===type?"border-[#1A3AFF] bg-[#1A3AFF] scale-110":"border-border group-hover:border-[#1A3AFF]/50"}`}>
                           {formData.projectType===type && <CheckCircle2 className="w-full h-full text-white p-0.5" />}
                         </div>
                       </button>
                     ))}
                   </div>
-                  <button onClick={() => setStep(2)} disabled={!formData.projectType} className="w-full py-6 bg-foreground text-background font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-muted-foreground transition-all disabled:opacity-30 disabled:grayscale flex items-center justify-center gap-4 group">
+                  <button onClick={() => setStep(2)} disabled={!formData.projectType} className="w-full py-6 bg-foreground text-background text-xs tracking-widest uppercase font-semibold hover:bg-muted-foreground transition-all disabled:opacity-30 disabled:grayscale flex items-center justify-center gap-4 group">
                     {t("contact.next_phase")} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                   </button>
                 </motion.div>
@@ -170,12 +170,12 @@ export function Contact() {
               {/* Step 2 */}
               {step === 2 && (
                 <motion.div key="step2" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
-                  <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step2_title")}</h3>
+                  <h3 className="text-2xl font-semibold text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step2_title")}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                     {businessGoals.map(goal => (
                       <button key={goal} onClick={() => updateFormData("businessGoal", goal)} className={`p-6 border transition-all text-left group flex items-center justify-between relative overflow-hidden ${formData.businessGoal===goal?"border-[#1A3AFF] bg-[#1A3AFF]/5 text-foreground":"border-border/40 text-muted-foreground hover:border-[#1A3AFF]/30"}`}>
                         {formData.businessGoal===goal && <motion.div layoutId="active-bg2" className="absolute inset-0 bg-[#1A3AFF]/5" />}
-                        <span className="font-['Orbitron'] text-sm tracking-wider uppercase relative z-10">{goal}</span>
+                        <span className="text-sm font-medium tracking-wide relative z-10">{goal}</span>
                         <div className={`w-5 h-5 border transition-all ${formData.businessGoal===goal?"border-[#1A3AFF] bg-[#1A3AFF] scale-110":"border-border"}`}>
                           {formData.businessGoal===goal && <CheckCircle2 className="w-full h-full text-white p-0.5" />}
                         </div>
@@ -183,10 +183,10 @@ export function Contact() {
                     ))}
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <button onClick={() => setStep(1)} className="flex-1 py-5 border border-border/60 text-foreground font-['Orbitron'] text-xs tracking-[0.2em] uppercase hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
+                    <button onClick={() => setStep(1)} className="flex-1 py-5 border border-border/60 text-foreground text-xs tracking-widest uppercase font-semibold hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
                       <ArrowLeft className="w-4 h-4" />{t("contact.step1_label")}
                     </button>
-                    <button onClick={() => setStep(3)} disabled={!formData.businessGoal} className="flex-1 py-5 bg-foreground text-background font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-muted-foreground transition-all disabled:opacity-30 flex items-center justify-center gap-3 group">
+                    <button onClick={() => setStep(3)} disabled={!formData.businessGoal} className="flex-1 py-5 bg-foreground text-background text-xs tracking-widest uppercase font-semibold hover:bg-muted-foreground transition-all disabled:opacity-30 flex items-center justify-center gap-3 group">
                       {t("contact.next_phase")} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                     </button>
                   </div>
@@ -196,9 +196,9 @@ export function Contact() {
               {/* Step 3 */}
               {step === 3 && (
                 <motion.div key="step3" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
-                  <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step3_title")}</h3>
+                  <h3 className="text-2xl font-semibold text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step3_title")}</h3>
                   <div className="mb-10">
-                    <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-6 opacity-60">{t("contact.budget_label")}</label>
+                    <label className="block text-foreground text-[10px] uppercase tracking-widest mb-6 opacity-60 font-semibold">{t("contact.budget_label")}</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {budgetRanges.map(budget => (
                         <button key={budget} onClick={() => updateFormData("budget", budget)} className={`p-5 border transition-all text-center relative overflow-hidden ${formData.budget===budget?"border-[#1A3AFF] bg-[#1A3AFF]/10 text-[#1A3AFF]":"border-border/40 text-muted-foreground hover:border-[#1A3AFF]/30"}`}>
@@ -208,24 +208,24 @@ export function Contact() {
                     </div>
                   </div>
                   <div className="mb-12">
-                    <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-6 opacity-60">{t("contact.timeline_label")}</label>
+                    <label className="block text-foreground text-[10px] uppercase tracking-widest mb-6 opacity-60 font-semibold">{t("contact.timeline_label")}</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {timelines.map(tl => (
                         <button key={tl} onClick={() => updateFormData("timeline", tl)} className={`p-5 border transition-all text-center relative overflow-hidden ${formData.timeline===tl?"border-[#1A3AFF] bg-[#1A3AFF]/10 text-[#1A3AFF]":"border-border/40 text-muted-foreground hover:border-[#1A3AFF]/30"}`}>
-                          <span className="font-['Orbitron'] text-[10px] tracking-widest uppercase relative z-10">{tl}</span>
+                          <span className="text-sm font-medium relative z-10">{tl}</span>
                         </button>
                       ))}
                     </div>
                   </div>
                   <div className="mb-14">
-                    <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-6 opacity-60">{t("contact.precision_label")}</label>
+                    <label className="block text-foreground text-[10px] uppercase tracking-widest mb-6 opacity-60 font-semibold">{t("contact.precision_label")}</label>
                     <textarea value={formData.description} onChange={e => updateFormData("description", e.target.value)} className="w-full p-8 bg-background/50 border border-border/40 text-foreground focus:border-[#1A3AFF] outline-none transition-all resize-none min-h-[180px] font-sans leading-relaxed" placeholder={t("contact.precision_placeholder")} />
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <button onClick={() => setStep(2)} className="flex-1 py-5 border border-border/60 text-foreground font-['Orbitron'] text-xs tracking-[0.2em] uppercase hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
+                    <button onClick={() => setStep(2)} className="flex-1 py-5 border border-border/60 text-foreground text-xs tracking-widest uppercase font-semibold hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
                       <ArrowLeft className="w-4 h-4" />{t("contact.step2_label")}
                     </button>
-                    <button onClick={() => setStep(4)} disabled={!formData.budget || !formData.timeline} className="flex-1 py-5 bg-foreground text-background font-['Orbitron'] text-xs tracking-[0.3em] uppercase hover:bg-muted-foreground transition-all disabled:opacity-30 flex items-center justify-center gap-3 group">
+                    <button onClick={() => setStep(4)} disabled={!formData.budget || !formData.timeline} className="flex-1 py-5 bg-foreground text-background text-xs tracking-widest uppercase font-semibold hover:bg-muted-foreground transition-all disabled:opacity-30 flex items-center justify-center gap-3 group">
                       {t("contact.last_step")} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                     </button>
                   </div>
@@ -237,23 +237,23 @@ export function Contact() {
                 <motion.div key="step4" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
                   <div className="grid lg:grid-cols-5 gap-12">
                     <div className="lg:col-span-3">
-                      <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step4_title")}</h3>
+                      <h3 className="text-2xl font-semibold text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step4_title")}</h3>
                       <div className="space-y-8">
                         <div>
-                          <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-4 opacity-60">{t("contact.name_label")}</label>
+                          <label className="block text-foreground text-[10px] uppercase tracking-widest mb-4 opacity-60 font-semibold">{t("contact.name_label")}</label>
                           <input type="text" value={formData.name} onChange={e => updateFormData("name", e.target.value)} className="w-full p-5 bg-background/50 border border-border/40 text-foreground focus:border-[#1A3AFF] outline-none transition-all" placeholder={t("contact.name_placeholder")} />
                         </div>
                         <div>
-                          <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-4 opacity-60">{t("contact.email_label")}</label>
+                          <label className="block text-foreground text-[10px] uppercase tracking-widest mb-4 opacity-60 font-semibold">{t("contact.email_label")}</label>
                           <input type="email" value={formData.email} onChange={e => updateFormData("email", e.target.value)} className={`w-full p-5 bg-background/50 border outline-none transition-all ${formData.email && !formData.email.includes("@")?"border-destructive/50":"border-border/40 focus:border-[#1A3AFF]"}`} placeholder={t("contact.email_placeholder")} />
                         </div>
                         <div className="grid md:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-4 opacity-60">{t("contact.phone_label")}</label>
+                            <label className="block text-foreground text-[10px] uppercase tracking-widest mb-4 opacity-60 font-semibold">{t("contact.phone_label")}</label>
                             <input type="tel" value={formData.phone} onChange={e => updateFormData("phone", e.target.value)} className="w-full p-5 bg-background/50 border border-border/40 text-foreground focus:border-[#1A3AFF] outline-none transition-all font-mono text-sm" placeholder={t("contact.phone_placeholder")} />
                           </div>
                           <div>
-                            <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-4 opacity-60">{t("contact.company_label")}</label>
+                            <label className="block text-foreground text-[10px] uppercase tracking-widest mb-4 opacity-60 font-semibold">{t("contact.company_label")}</label>
                             <input type="text" value={formData.company} onChange={e => updateFormData("company", e.target.value)} className="w-full p-5 bg-background/50 border border-border/40 text-foreground focus:border-[#1A3AFF] outline-none transition-all" placeholder={t("contact.company_placeholder")} />
                           </div>
                         </div>
@@ -261,7 +261,7 @@ export function Contact() {
                     </div>
                     <div className="lg:col-span-2">
                       <div className="bg-muted/30 border border-border/40 p-8 h-full">
-                        <h4 className="text-xs font-['Orbitron'] uppercase tracking-[0.3em] text-[#1A3AFF] mb-8 pb-4 border-b border-border/40">{t("contact.recap_title")}</h4>
+                        <h4 className="text-xs font-semibold uppercase tracking-widest text-[#1A3AFF] mb-8 pb-4 border-b border-border/40">{t("contact.recap_title")}</h4>
                         <div className="space-y-6">
                           {[
                             { label: t("contact.recap_type"),     value: formData.projectType  },
@@ -271,7 +271,7 @@ export function Contact() {
                           ].map(item => (
                             <div key={item.label} className="space-y-1">
                               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
-                              <p className="text-sm font-['Orbitron'] text-foreground">{item.value || t("contact.recap_unspecified")}</p>
+                              <p className="text-sm font-medium text-foreground">{item.value || t("contact.recap_unspecified")}</p>
                             </div>
                           ))}
                         </div>
@@ -282,10 +282,10 @@ export function Contact() {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4 mt-12">
-                    <button onClick={() => setStep(3)} className="flex-1 py-5 border border-border/60 text-foreground font-['Orbitron'] text-xs tracking-[0.2em] uppercase hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
+                    <button onClick={() => setStep(3)} className="flex-1 py-5 border border-border/60 text-foreground text-xs tracking-widest uppercase font-semibold hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
                       <ArrowLeft className="w-4 h-4" />{t("contact.step3_label")}
                     </button>
-                    <button onClick={handleSubmit} disabled={!formData.name || !formData.email || !formData.email.includes("@")} className="flex-[2] py-5 bg-[#1A3AFF] text-white font-['Orbitron'] text-xs tracking-[0.4em] uppercase hover:bg-[#0D2FE0] shadow-xl shadow-[#1A3AFF]/10 transition-all disabled:opacity-30 flex items-center justify-center gap-4 group">
+                    <button onClick={handleSubmit} disabled={!formData.name || !formData.email || !formData.email.includes("@")} className="flex-[2] py-5 bg-[#1A3AFF] text-white text-xs tracking-widest uppercase font-semibold hover:bg-[#0D2FE0] shadow-xl shadow-[#1A3AFF]/10 transition-all disabled:opacity-30 flex items-center justify-center gap-4 group">
                       {t("contact.submit")} <CheckCircle2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     </button>
                   </div>

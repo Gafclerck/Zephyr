@@ -172,18 +172,18 @@ export function ServiceDetail() {
           >
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-['Orbitron'] text-xs tracking-widest uppercase transition-colors mb-12 group"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-xs tracking-widest uppercase font-semibold transition-colors mb-12 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Nos Services
             </Link>
 
             <div className="flex items-center gap-4 mb-8">
-              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-['Orbitron'] tracking-widest uppercase">
+              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-semibold tracking-widest uppercase">
                 {service.category}
               </span>
               <span className="w-8 h-[1px] bg-border" />
-              <span className="text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">{service.shortDesc}</span>
+              <span className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">{service.shortDesc}</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-['Orbitron'] text-foreground mb-8 leading-[1.05] tracking-tight font-medium">
@@ -216,12 +216,12 @@ export function ServiceDetail() {
           {/* Price badge */}
           <div className="absolute bottom-8 right-8 z-20 bg-background/90 backdrop-blur border border-border px-6 py-4 flex items-center gap-3">
             <span className="w-2 h-2 bg-[#1A3AFF]" />
-            <span className="font-['Orbitron'] text-sm text-foreground font-medium">À partir de {service.startingPrice}</span>
+            <span className="text-sm text-foreground font-semibold">À partir de {service.startingPrice}</span>
           </div>
           {/* Timeline badge */}
           <div className="absolute bottom-8 left-8 z-20 bg-background/90 backdrop-blur border border-border px-6 py-4 flex items-center gap-3">
             <span className="w-2 h-2 bg-[#00E5FF]" />
-            <span className="font-['Orbitron'] text-sm text-foreground font-medium">{service.timeline}</span>
+            <span className="text-sm text-foreground font-semibold">{service.timeline}</span>
           </div>
         </motion.div>
       </section>
@@ -245,7 +245,7 @@ export function ServiceDetail() {
                 <div className="relative group">
                   <div className="h-px w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
                   <div className="w-16 h-16 rounded-none bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                    <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.step}</span>
+                    <span className="text-sm font-semibold text-foreground group-hover:text-white transition-colors">{step.step}</span>
                   </div>
                   <h4 className="text-xl font-semibold mb-4 text-foreground">{step.title}</h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
@@ -261,7 +261,7 @@ export function ServiceDetail() {
         <div className="container mx-auto px-6 md:px-12">
           <Reveal>
             <div className="flex items-center gap-6 flex-wrap">
-              <span className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground">Stack Technique :</span>
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Stack Technique :</span>
               {service.technologies.map((tech) => (
                 <span
                   key={tech}
@@ -332,18 +332,18 @@ export function ServiceDetail() {
 
             <Reveal delay={0.15}>
               <div className="p-8 md:p-12 bg-muted/20 border border-border/40">
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">Budget initial</p>
-                <p className="text-4xl font-['Orbitron'] font-semibold text-foreground mb-6">{service.startingPrice}</p>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">Délai estimé</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Budget initial</p>
+                <p className="text-4xl font-bold text-foreground mb-6">{service.startingPrice}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Délai estimé</p>
                 <p className="text-xl font-medium text-foreground mb-12">{service.timeline}</p>
                 <Link to="/contact">
-                  <button className="w-full py-4 bg-[#1A3AFF] text-white font-['Orbitron'] text-sm tracking-wider uppercase hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-3">
+                  <button className="w-full py-4 bg-[#1A3AFF] text-white text-sm font-semibold tracking-widest uppercase hover:bg-[#0D2FE0] transition-colors flex items-center justify-center gap-3">
                     Démarrer ce projet
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </Link>
                 <Link to="/solutions">
-                  <button className="w-full mt-3 py-4 border border-border text-foreground font-['Orbitron'] text-sm tracking-wider uppercase hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
+                  <button className="w-full mt-3 py-4 border border-border text-foreground text-sm font-semibold tracking-widest uppercase hover:bg-muted/30 transition-colors flex items-center justify-center gap-3">
                     Voir nos packages
                     <ExternalLink className="w-4 h-4" />
                   </button>
@@ -366,7 +366,7 @@ export function ServiceDetail() {
                 <ArrowLeft className="w-4 h-4 group-hover:text-white transition-colors" />
               </div>
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Précédent</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Précédent</p>
                 <p className="text-sm text-foreground font-medium">{SERVICE_LABELS[prevSlug]}</p>
               </div>
             </Link>
@@ -374,7 +374,7 @@ export function ServiceDetail() {
 
           <Link
             to="/services"
-            className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
             Tous les services
           </Link>
@@ -385,7 +385,7 @@ export function ServiceDetail() {
               className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors text-right"
             >
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Suivant</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Suivant</p>
                 <p className="text-sm text-foreground font-medium">{SERVICE_LABELS[nextSlug]}</p>
               </div>
               <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-[#1A3AFF] group-hover:bg-[#1A3AFF] transition-colors">

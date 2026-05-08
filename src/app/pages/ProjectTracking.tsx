@@ -57,7 +57,7 @@ export function ProjectTracking() {
                         transition={{ duration: 0.5 }}
                         className="max-w-4xl mx-auto"
                     >
-                        <div className="inline-block px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-xs font-['Orbitron'] tracking-widest uppercase rounded mb-4">
+                        <div className="inline-block px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-xs font-semibold tracking-widest uppercase rounded mb-4">
                             Suivi de Projet
                         </div>
                         <h1 className="text-4xl md:text-5xl font-medium text-foreground mb-3 tracking-tight">

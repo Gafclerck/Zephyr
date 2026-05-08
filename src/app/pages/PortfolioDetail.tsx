@@ -141,18 +141,18 @@ export function PortfolioDetail() {
           >
             <Link
               to="/portfolio"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-['Orbitron'] text-xs tracking-widest uppercase transition-colors mb-12 group"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-xs tracking-widest uppercase font-semibold transition-colors mb-12 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Retour au portfolio
             </Link>
 
             <div className="flex items-center gap-4 mb-8">
-              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-['Orbitron'] tracking-widest uppercase">
+              <span className="px-3 py-1 bg-[#1A3AFF]/10 border border-[#1A3AFF]/30 text-[#1A3AFF] text-[10px] font-semibold tracking-widest uppercase">
                 {project.category}
               </span>
               <span className="w-8 h-[1px] bg-border" />
-              <span className="text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase">{project.year}</span>
+              <span className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">{project.year}</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-['Orbitron'] text-foreground mb-8 leading-[1.05] tracking-tight font-medium">
@@ -185,7 +185,7 @@ export function PortfolioDetail() {
           {/* Result badge */}
           <div className="absolute bottom-8 right-8 z-20 bg-background/90 backdrop-blur border border-border px-6 py-4 flex items-center gap-3">
             <span className="w-2 h-2 bg-[#00E5FF]" />
-            <span className="font-['Orbitron'] text-sm text-foreground font-medium">{project.results}</span>
+            <span className="text-sm text-foreground font-semibold">{project.results}</span>
           </div>
         </motion.div>
       </section>
@@ -201,7 +201,7 @@ export function PortfolioDetail() {
               { label: "Année", value: project.year },
             ].map((item) => (
               <div key={item.label}>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground mb-2">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
                   {item.label}
                 </p>
                 <p className="text-foreground font-medium">{item.value}</p>
@@ -219,7 +219,7 @@ export function PortfolioDetail() {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 border border-border/50 text-muted-foreground text-xs font-['Orbitron'] tracking-widest uppercase hover:border-[#1A3AFF]/50 hover:text-foreground transition-colors"
+                className="px-4 py-1.5 border border-border/50 text-muted-foreground text-xs font-semibold tracking-widest uppercase hover:border-[#1A3AFF]/50 hover:text-foreground transition-colors"
               >
                 {tag}
               </span>
@@ -248,7 +248,7 @@ export function PortfolioDetail() {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <span className="w-6 h-[1px] bg-[#1A3AFF]" />
-                  <span className="font-['Orbitron'] text-[10px] tracking-widest uppercase text-[#1A3AFF]">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-[#1A3AFF]">
                     {block.label}
                   </span>
                 </div>
@@ -274,7 +274,7 @@ export function PortfolioDetail() {
                 <ArrowLeft className="w-4 h-4 group-hover:text-white transition-colors" />
               </div>
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Précédent</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Précédent</p>
                 <p className="text-sm text-foreground font-medium">{PROJECTS[prevSlug]?.title}</p>
               </div>
             </Link>
@@ -282,7 +282,7 @@ export function PortfolioDetail() {
 
           <Link
             to="/portfolio"
-            className="text-[10px] font-['Orbitron'] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
             Tous les projets
           </Link>
@@ -293,7 +293,7 @@ export function PortfolioDetail() {
               className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors text-right"
             >
               <div>
-                <p className="text-[10px] font-['Orbitron'] uppercase tracking-widest mb-1">Suivant</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest mb-1">Suivant</p>
                 <p className="text-sm text-foreground font-medium">{PROJECTS[nextSlug]?.title}</p>
               </div>
               <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-[#1A3AFF] group-hover:bg-[#1A3AFF] transition-colors">

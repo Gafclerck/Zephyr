@@ -115,7 +115,7 @@ function HeroSection() {
             <button onClick={() => document.getElementById("services-list")?.scrollIntoView({ behavior:"smooth" })} className="w-14 h-14 rounded-none border border-border/50 flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300 group">
               <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
             </button>
-            <span className="text-sm font-['Orbitron'] uppercase tracking-widest text-muted-foreground">{t("services.discover")}</span>
+            <span className="text-sm uppercase tracking-widest text-muted-foreground font-semibold">{t("services.discover")}</span>
           </div>
         </motion.div>
       </div>
@@ -140,7 +140,7 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
             </div>
             <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border/50">
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">{t("services.key_points")}</p>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-semibold">{t("services.key_points")}</p>
                 <ul className="space-y-3">
                   {service.featureKeys.map(k => (
                     <li key={k} className="flex items-start gap-2 text-sm text-foreground/80">
@@ -150,7 +150,7 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
                 </ul>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-['Orbitron']">{t("services.deliverables")}</p>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-semibold">{t("services.deliverables")}</p>
                 <ul className="space-y-3">
                   {service.deliverableKeys.map(k => (
                     <li key={k} className="flex items-start gap-2 text-sm text-foreground/80">
@@ -181,7 +181,7 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
                 {service.highlight.map(h => (
                   <div key={h.labelKey} className="bg-background/80 backdrop-blur-md p-4 border border-white/10">
-                    <p className="font-['Orbitron'] text-xl md:text-2xl text-foreground mb-1">{h.value}</p>
+                    <p className="text-xl md:text-2xl font-semibold text-foreground mb-1">{h.value}</p>
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{t(h.labelKey)}</p>
                   </div>
                 ))}
@@ -217,9 +217,9 @@ function ProcessSection() {
             <div key={step.n} className="relative group">
               <div className="h-px w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
               <div className="w-12 h-12 bg-background border border-border flex items-center justify-center relative z-10 mb-6 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
-                <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.n}</span>
+                <span className="text-sm font-semibold text-foreground group-hover:text-white transition-colors">{step.n}</span>
               </div>
-              <h4 className="font-['Orbitron'] text-xl font-medium mb-4 text-foreground">{t(step.titleKey)}</h4>
+              <h4 className="text-base font-semibold mb-4 text-foreground">{t(step.titleKey)}</h4>
               <p className="text-muted-foreground text-base leading-relaxed pr-6">{t(step.descKey)}</p>
             </div>
           ))}
@@ -244,7 +244,7 @@ function WhyUsSection() {
               <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-5 shadow-sm">
                 <item.icon className="w-5 h-5 text-[#1A3AFF]" />
               </div>
-              <h4 className="font-['Orbitron'] text-xl font-semibold mb-3 text-foreground">{t(item.titleKey)}</h4>
+              <h4 className="text-base font-semibold mb-3 text-foreground">{t(item.titleKey)}</h4>
               <p className="text-base text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
             </div>
           ))}
