@@ -31,15 +31,14 @@ export function Solutions() {
   }));
 
   return (
-    <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white relative">
-      {/* Grid background — full page, same as Services */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-grid-blueprint-fine" />
-        <div className="absolute inset-0 bg-grid-blueprint-major" />
-      </div>
+    <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white">
 
       {/* Hero */}
-      <section className="pt-24 pb-12 border-b border-border/40 relative z-10">
+      <section className="pt-24 pb-12 border-b border-border/40 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-grid-blueprint-fine" />
+          <div className="absolute inset-0 bg-grid-blueprint-major" />
+        </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
             <div className="flex items-center gap-4 mb-8">
@@ -55,7 +54,7 @@ export function Solutions() {
       </section>
 
       {/* Solutions Grid */}
-      <section className="py-12 md:py-16 bg-muted/10 relative z-10">
+      <section className="py-12 md:py-16 bg-muted/10">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map((solution, index) => <SolutionCard key={index} solution={solution} index={index} />)}
@@ -64,7 +63,7 @@ export function Solutions() {
       </section>
 
       {/* Custom Solutions */}
-      <section className="py-14 md:py-16 border-y border-border/40 relative z-10 overflow-hidden">
+      <section className="py-14 md:py-16 border-y border-border/40 relative overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-[#1A3AFF]/5 -skew-x-12 translate-x-20 pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl">
@@ -84,7 +83,7 @@ export function Solutions() {
       </section>
 
       {/* Value */}
-      <section className="py-12 md:py-14 relative z-10">
+      <section className="py-12 md:py-14">
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex items-center gap-4 mb-10">
             <span className="w-12 h-px bg-[#1A3AFF]" />
