@@ -10,14 +10,15 @@ export function RootLayout() {
   const location = useLocation();
   useLenis();
 
-  // Scroll to top on every route change — compatible with Lenis smooth scroll
+  // Scroll to top on every route change.
+  // Do NOT use lenis.scrollTo(0, { immediate: true }) — in Lenis v1.x it calls
+  // lenis.stop() internally which sets stopped=true and freezes scroll until refresh.
+  // Instead: jump the window natively, then call lenis.resize() to resync.
   useEffect(() => {
+    window.scrollTo(0, 0);
     const lenis = getLenis();
     if (lenis) {
-      // Immediate so the page isn't mid-scroll when it renders
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo({ top: 0, behavior: "instant" });
+      lenis.resize(); // resync Lenis internal state with new scroll position
     }
   }, [location.pathname]);
 
