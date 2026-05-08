@@ -60,7 +60,7 @@ export function Contact() {
               <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[#1A3AFF]" />
               <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[#1A3AFF]" />
               <div className="w-24 h-24 bg-[#1A3AFF]/10 border border-[#1A3AFF] flex items-center justify-center mx-auto mb-10 relative">
-                <motion.div animate={{ scale:[1,1.2,1] }} transition={{ duration:2, repeat:Infinity }} className="absolute inset-0 bg-[#1A3AFF]/20" />
+                <motion.div animate={{ scale:[1,1.08,1] }} transition={{ duration:3, repeat:Infinity, ease:[0.45,0,0.55,1] }} className="absolute inset-0 bg-[#1A3AFF]/20" />
                 <CheckCircle2 className="w-12 h-12 text-[#1A3AFF] relative z-10" />
               </div>
               <h2 className="text-4xl md:text-5xl font-['Orbitron'] text-foreground mb-6 tracking-tight">{t("contact.success_title")}</h2>
@@ -77,23 +77,43 @@ export function Contact() {
 
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-        <div className="absolute inset-0 bg-grid-contact" />
-        <motion.div animate={{ scale:[1,1.1,1], opacity:[0.2,0.4,0.2] }} transition={{ duration:20, repeat:Infinity }} className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-[#1A3AFF]/10 rounded-full blur-[150px]" />
-        <motion.div animate={{ scale:[1.1,1,1.1], opacity:[0.1,0.3,0.1] }} transition={{ duration:25, repeat:Infinity }} className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-500/10 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-grid-contact opacity-40" />
+        {/* CSS-only blobs — no Framer repaint loop, eliminates scroll jank */}
+        <div className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-[#1A3AFF]/10 rounded-full blur-[120px] opacity-30 animate-[pulse_20s_ease-in-out_infinite]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-500/10 rounded-full blur-[100px] opacity-20 animate-[pulse_22s_ease-in-out_infinite]" style={{ animationDelay: "8s" }} />
       </div>
 
       {/* Hero */}
-      <section className="pt-32 md:pt-44 pb-20 relative z-10">
+      <section className="pt-24 md:pt-32 pb-12 relative z-10">
         <div className="container mx-auto px-6 md:px-12">
-          <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-8">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity:0, y:10 }}
+              animate={{ opacity:1, y:0 }}
+              transition={{ duration:0.5, delay:0.05, ease:[0.16,1,0.3,1] }}
+              className="flex items-center gap-4 mb-6"
+            >
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
               <span className="text-[#1A3AFF] font-['Orbitron'] text-xs tracking-[0.3em] uppercase font-semibold">{t("contact.eyebrow")}</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">{t("contact.title")}</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">{t("contact.subtitle")}</p>
-          </motion.div>
+            </motion.div>
+            <motion.h1
+              initial={{ opacity:0, y:16 }}
+              animate={{ opacity:1, y:0 }}
+              transition={{ duration:0.6, delay:0.12, ease:[0.16,1,0.3,1] }}
+              className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground mb-6 font-['Orbitron']"
+            >
+              {t("contact.title")}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity:0, y:12 }}
+              animate={{ opacity:1, y:0 }}
+              transition={{ duration:0.5, delay:0.22, ease:[0.16,1,0.3,1] }}
+              className="text-lg text-muted-foreground max-w-2xl leading-relaxed"
+            >
+              {t("contact.subtitle")}
+            </motion.p>
+          </div>
         </div>
       </section>
 
@@ -121,14 +141,14 @@ export function Contact() {
           </div>
 
           {/* Form */}
-          <div className="max-w-5xl mx-auto border border-border/40 bg-background/40 backdrop-blur-md p-8 md:p-16 relative">
+          <div className="max-w-5xl mx-auto border border-border/40 bg-background/60 p-8 md:p-16 relative">
             <div className="absolute -top-[1px] -left-[1px] w-4 h-4 border-t border-l border-[#1A3AFF]" />
             <div className="absolute -bottom-[1px] -right-[1px] w-4 h-4 border-b border-r border-[#1A3AFF]" />
 
             <AnimatePresence mode="wait">
               {/* Step 1 */}
               {step === 1 && (
-                <motion.div key="step1" initial={{ opacity:0, x:20 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-20 }} transition={{ duration:0.4 }}>
+                <motion.div key="step1" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
                   <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step1_title")}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                     {projectTypes.map(type => (
@@ -149,7 +169,7 @@ export function Contact() {
 
               {/* Step 2 */}
               {step === 2 && (
-                <motion.div key="step2" initial={{ opacity:0, x:20 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-20 }} transition={{ duration:0.4 }}>
+                <motion.div key="step2" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
                   <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step2_title")}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                     {businessGoals.map(goal => (
@@ -175,7 +195,7 @@ export function Contact() {
 
               {/* Step 3 */}
               {step === 3 && (
-                <motion.div key="step3" initial={{ opacity:0, x:20 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-20 }} transition={{ duration:0.4 }}>
+                <motion.div key="step3" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
                   <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step3_title")}</h3>
                   <div className="mb-10">
                     <label className="block text-foreground text-[10px] font-['Orbitron'] uppercase tracking-[0.3em] mb-6 opacity-60">{t("contact.budget_label")}</label>
@@ -214,7 +234,7 @@ export function Contact() {
 
               {/* Step 4 */}
               {step === 4 && (
-                <motion.div key="step4" initial={{ opacity:0, x:20 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-20 }} transition={{ duration:0.4 }}>
+                <motion.div key="step4" initial={{ opacity:0, x:12 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:-12 }} transition={{ duration:0.3, ease:[0.16,1,0.3,1] }}>
                   <div className="grid lg:grid-cols-5 gap-12">
                     <div className="lg:col-span-3">
                       <h3 className="text-2xl font-['Orbitron'] text-foreground mb-10 flex items-center gap-4"><span className="w-8 h-px bg-border" />{t("contact.step4_title")}</h3>
