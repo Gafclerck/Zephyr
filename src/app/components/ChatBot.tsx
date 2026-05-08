@@ -101,8 +101,20 @@ function getFallbackResponse(input: string): { text: string; quickReplies?: stri
   };
 }
 
-export function ChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatBotProps {
+  /** When provided, ChatBot becomes controlled — hide its own FAB. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function ChatBot({ open: openProp, onOpenChange }: ChatBotProps = {}) {
+  const isControlled = openProp !== undefined;
+  const [isOpenInternal, setIsOpenInternal] = useState(false);
+  const isOpen = isControlled ? openProp! : isOpenInternal;
+  const setIsOpen = (v: boolean) => {
+    if (isControlled) onOpenChange?.(v);
+    else setIsOpenInternal(v);
+  };
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -172,25 +184,27 @@ export function ChatBot() {
 
   return (
     <>
-      {/* Toggle Button */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.button
-            key="chat-btn"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-16 h-16 bg-[#1A3AFF] text-white flex items-center justify-center rounded-none shadow-xl shadow-[#1A3AFF]/30 transition-shadow"
-            aria-label="Ouvrir le chat"
-          >
-            <MessageCircle className="w-7 h-7" />
-            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-none -mt-1 -mr-1" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {/* Toggle Button — only shown when NOT controlled by FloatingContactMenu */}
+      {!isControlled && (
+        <AnimatePresence>
+          {!isOpen && (
+            <motion.button
+              key="chat-btn"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsOpen(true)}
+              className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-16 h-16 bg-[#1A3AFF] text-white flex items-center justify-center rounded-none shadow-xl shadow-[#1A3AFF]/30 transition-shadow"
+              aria-label="Ouvrir le chat"
+            >
+              <MessageCircle className="w-7 h-7" />
+              <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-none -mt-1 -mr-1" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      )}
 
       {/* Chat Window */}
       <AnimatePresence>

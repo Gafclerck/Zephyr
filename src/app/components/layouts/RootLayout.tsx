@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { ChatBot } from "../ChatBot";
+import { FloatingContactMenu } from "../FloatingContactMenu";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { useLenis, getLenis } from "../../hooks/useLenis";
@@ -38,7 +38,8 @@ export function RootLayout() {
         </motion.main>
       </AnimatePresence>
       <Footer />
-      <ChatBot />
+      {/* Unified floating contact system */}
+      <FloatingContactMenu />
     </div>
   );
 }
