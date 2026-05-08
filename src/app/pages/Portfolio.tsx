@@ -138,13 +138,13 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       animate={{ opacity:1, scale:1 }}
       exit={{ opacity:0, scale:0.95 }}
       transition={{ duration:0.5, ease:[0.16,1,0.3,1] }}
-      className={`group ${project.large?"md:col-span-2":""}`}
+      className="group"
     >
       {/* @ts-ignore */}
       <Wrapper
         ref={ref}
         {...(slug ? { to:`/portfolio/${slug}` } : {})}
-        className={`relative overflow-hidden bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full cursor-pointer ${project.large?"min-h-[280px] md:min-h-[360px] lg:min-h-[420px]":"min-h-[220px] md:min-h-[280px] lg:min-h-[320px]"}`}
+        className={`relative overflow-hidden bg-muted/20 border border-border/40 shadow-sm hover:shadow-2xl hover:border-[#1A3AFF]/30 transition-all duration-500 block h-full cursor-pointer min-h-[220px] md:min-h-[280px] lg:min-h-[320px]`}
       >
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <img src={imgSrc} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
