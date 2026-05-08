@@ -52,21 +52,11 @@ export function Landing() {
       {/* ── SERVICES ── */}
       <section className="py-10 md:py-14 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <span className="eyebrow">{t("landing.services_eyebrow")}</span>
-              <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
-                {t("landing.services_title")}
-              </h2>
-            </div>
-            <Link
-              to="/services"
-              className="flex items-center gap-2 text-foreground/60 text-sm hover:text-[#1A3AFF] transition-colors group shrink-0"
-            >
-              {t("landing.services_link")}
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
-          </div>
+          <SectionHeader
+            eyebrow={t("landing.services_eyebrow")}
+            title={t("landing.services_title")}
+            link={{ label: t("landing.services_link"), to: "/services" }}
+          />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICES.map((service, i) => (
@@ -79,21 +69,11 @@ export function Landing() {
       {/* ── FEATURED WORK ── */}
       <section className="py-10 md:py-14 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <span className="eyebrow">{t("landing.portfolio_eyebrow")}</span>
-              <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
-                {t("landing.portfolio_title")}
-              </h2>
-            </div>
-            <Link
-              to="/portfolio"
-              className="flex items-center gap-2 text-foreground/60 text-sm hover:text-[#1A3AFF] transition-colors group shrink-0"
-            >
-              {t("landing.portfolio_link")}
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
-          </div>
+          <SectionHeader
+            eyebrow={t("landing.portfolio_eyebrow")}
+            title={t("landing.portfolio_title")}
+            link={{ label: t("landing.portfolio_link"), to: "/portfolio" }}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {FEATURED_PROJECTS.map((project, i) => (
@@ -106,12 +86,11 @@ export function Landing() {
       {/* ── PROCESS ── */}
       <section className="py-10 md:py-14 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="eyebrow">{t("landing.process_eyebrow")}</span>
-            <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground tracking-tight">
-              {t("landing.process_title")}
-            </h2>
-          </div>
+          <SectionHeader
+            eyebrow={t("landing.process_eyebrow")}
+            title={t("landing.process_title")}
+            center
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
             {[
@@ -129,12 +108,10 @@ export function Landing() {
       {/* ── TESTIMONIALS ── */}
       <section className="py-10 md:py-14 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="mb-8">
-            <span className="eyebrow">{t("landing.testimonials_eyebrow")}</span>
-            <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
-              {t("landing.testimonials_title")}
-            </h2>
-          </div>
+          <SectionHeader
+            eyebrow={t("landing.testimonials_eyebrow")}
+            title={t("landing.testimonials_title")}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {TESTIMONIALS.map((t, i) => (
@@ -145,29 +122,7 @@ export function Landing() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-12 md:py-16 bg-[#0A1628]">
-        <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-          <span className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>
-            {t("landing.cta_eyebrow")}
-          </span>
-          <h2 className="font-['Orbitron'] text-3xl md:text-4xl lg:text-5xl text-white font-medium mb-6 tracking-tight max-w-3xl leading-[1.05]">
-            {t("landing.cta_title")}
-          </h2>
-          <p className="text-white/60 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
-            {t("landing.cta_desc")}
-          </p>
-          <Link to="/contact">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-3"
-            >
-              {t("landing.cta_btn")}
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </Link>
-        </div>
-      </section>
+      <CtaBanner />
     </div>
   );
 }
@@ -180,9 +135,9 @@ function Hero() {
       <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-6 md:pt-8 pb-6 md:pb-8 border-r border-border/40">
         {/* Top label */}
         <motion.div
-          initial={{ opacity: 0, y: -8 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center gap-3 pt-4"
         >
           <span className="w-8 h-px bg-[#1A3AFF]" />
@@ -194,9 +149,9 @@ function Hero() {
         {/* Main content */}
         <div className="flex flex-col justify-center flex-1 py-4 md:py-8">
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="font-['Orbitron'] text-[clamp(2.4rem,5vw,4.5rem)] font-medium text-foreground leading-[1.0] tracking-tight mb-6"
           >
             {t("landing.hero_title_1")}
@@ -210,18 +165,18 @@ function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.55, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
             className="text-muted-foreground text-sm md:text-base max-w-md mb-7 leading-relaxed"
           >
             {t("landing.hero_desc")}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.46, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-wrap gap-3"
           >
             <Link to="/contact">
@@ -241,9 +196,9 @@ function Hero() {
 
         {/* Bottom — stats */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.62, ease: [0.16, 1, 0.3, 1] }}
           className="border-t border-border/40 pt-6"
         >
           <div className="grid grid-cols-3 gap-0 divide-x divide-border/40">
@@ -268,9 +223,9 @@ function Hero() {
       {/* ── Colonne image ── */}
       <div className="hidden lg:block lg:w-[45%] relative">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0"
         >
           <img
@@ -283,9 +238,9 @@ function Hero() {
 
         {/* Carte flottante */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.55, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="absolute bottom-10 left-8 right-8 bg-background/90 backdrop-blur-md border border-border/60 p-5"
         >
           <p className="text-muted-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-3">
@@ -319,20 +274,20 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
+          transition={{ delay: 1.0, duration: 0.6, ease: "easeOut" }}
           className="absolute top-1/2 right-6 -translate-y-1/2 flex flex-col items-center gap-3"
         >
           <span
-            className="text-muted-foreground/40 text-[10px] font-['Orbitron'] tracking-[0.3em] uppercase"
+            className="text-muted-foreground/30 text-[10px] font-['Orbitron'] tracking-[0.3em] uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
             {t("landing.scroll")}
           </span>
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: [0.45, 0, 0.55, 1] }}
           >
-            <ArrowDown className="w-4 h-4 text-muted-foreground/40" />
+            <ArrowDown className="w-4 h-4 text-muted-foreground/30" />
           </motion.div>
         </motion.div>
       </div>
@@ -358,11 +313,11 @@ function ServiceCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.5,
-        delay: index * 0.08,
+        delay: index * 0.07,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -413,14 +368,14 @@ function PortfolioCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.6,
-        delay: index * 0.12,
+        duration: 0.55,
+        delay: index * 0.09,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className={`group relative overflow-hidden ${project.span ? "md:col-span-2" : ""}`}
+      className={`group relative overflow-hidden cursor-pointer ${project.span ? "md:col-span-2" : ""}`}
       style={{ height: project.span ? "260px" : "200px" }}
     >
       {/* Link to individual case study */}
@@ -433,7 +388,7 @@ function PortfolioCard({
         <div className="absolute inset-0 bg-background/50 group-hover:bg-background/30 transition-colors duration-300" />
 
         <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
-          <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
+          <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <span className="px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white/80 text-[10px] font-['Orbitron'] tracking-wider border border-white/15">
                 {project.category}
@@ -472,11 +427,11 @@ function ProcessStep({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.5,
-        delay: index * 0.08,
+        delay: index * 0.07,
         ease: [0.16, 1, 0.3, 1],
       }}
       className="p-5 bg-muted/40 border border-border/40 hover:border-[#1A3AFF]/30 hover:bg-muted/60 transition-colors group"
@@ -507,11 +462,11 @@ function TestimonialCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.5,
-        delay: index * 0.08,
+        delay: index * 0.07,
         ease: [0.16, 1, 0.3, 1],
       }}
       className="p-6 bg-background border border-border/40 flex flex-col h-full"
@@ -545,5 +500,96 @@ function TestimonialCard({
         </div>
       </div>
     </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SHARED MOTION PRIMITIVES
+───────────────────────────────────────────── */
+
+/** Animated section header — replaces all bare <div className="mb-8"> headers */
+function SectionHeader({
+  eyebrow,
+  title,
+  link,
+  center,
+}: {
+  eyebrow: string;
+  title: string;
+  link?: { label: string; to: string };
+  center?: boolean;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-12%" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 12 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className={`flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 ${center ? "text-center max-w-2xl mx-auto md:flex-col md:items-center" : ""}`}
+    >
+      <div>
+        <span className="eyebrow">{eyebrow}</span>
+        <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
+          {title}
+        </h2>
+      </div>
+      {link && (
+        <Link
+          to={link.to}
+          className="flex items-center gap-2 text-foreground/60 text-sm hover:text-[#1A3AFF] transition-colors group shrink-0"
+        >
+          {link.label}
+          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
+      )}
+    </motion.div>
+  );
+}
+
+/** Animated CTA banner with staggered reveal */
+function CtaBanner() {
+  const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const item = (delay: number) => ({
+    initial: { opacity: 0, y: 12 },
+    animate: isInView ? { opacity: 1, y: 0 } : {},
+    transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  });
+
+  return (
+    <section ref={ref} className="py-12 md:py-16 bg-[#0A1628]">
+      <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
+        <motion.span {...item(0)} className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>
+          {t("landing.cta_eyebrow")}
+        </motion.span>
+        <motion.h2
+          {...item(0.08)}
+          className="font-['Orbitron'] text-3xl md:text-4xl lg:text-5xl text-white font-medium mb-6 tracking-tight max-w-3xl leading-[1.05]"
+        >
+          {t("landing.cta_title")}
+        </motion.h2>
+        <motion.p {...item(0.16)} className="text-white/60 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
+          {t("landing.cta_desc")}
+        </motion.p>
+        <motion.div {...item(0.22)}>
+          <Link to="/contact">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className="px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-3"
+            >
+              {t("landing.cta_btn")}
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
   );
 }
