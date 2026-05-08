@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { Link } from "react-router";
-import { Check, ArrowRight, Zap, Target, Box } from "lucide-react";
+import { ArrowRight, Zap, Target, Box } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const SOLUTIONS_BASE = [
-  { slug:"landing-page-pro",        tKey:"s1", popular:true,  pricing:"À partir de 500k FCFA", timeline:"1-2 semaines", featureCount:6 },
-  { slug:"brand-identity-system",   tKey:"s2", popular:false, pricing:"À partir de 300k FCFA", timeline:"2-3 semaines", featureCount:6 },
-  { slug:"digital-marketing-engine",tKey:"s3", popular:true,  pricing:"150k FCFA / mois",      timeline:"3 mois minimum",featureCount:6 },
-  { slug:"corporate-platform",      tKey:"s4", popular:false, pricing:"À partir de 1.5M FCFA", timeline:"3-4 semaines", featureCount:6 },
-  { slug:"ecommerce-architecture",  tKey:"s5", popular:false, pricing:"À partir de 2.5M FCFA", timeline:"4-6 semaines", featureCount:6 },
-  { slug:"mobile-mvp-framework",    tKey:"s6", popular:false, pricing:"À partir de 3M FCFA",   timeline:"6-8 semaines", featureCount:6 },
+  { slug:"landing-page-pro",         tKey:"s1", popular:true  },
+  { slug:"brand-identity-system",    tKey:"s2", popular:false },
+  { slug:"digital-marketing-engine", tKey:"s3", popular:true  },
+  { slug:"corporate-platform",       tKey:"s4", popular:false },
+  { slug:"ecommerce-architecture",   tKey:"s5", popular:false },
+  { slug:"mobile-mvp-framework",     tKey:"s6", popular:false },
 ];
 
 const BENEFITS = [
@@ -24,10 +24,9 @@ export function Solutions() {
 
   const solutions = SOLUTIONS_BASE.map(s => ({
     ...s,
-    name:     t(`solutions.${s.tKey}_name`),
-    tagline:  t(`solutions.${s.tKey}_tagline`),
+    name:        t(`solutions.${s.tKey}_name`),
+    tagline:     t(`solutions.${s.tKey}_tagline`),
     description: t(`solutions.${s.tKey}_desc`),
-    features: Array.from({ length: s.featureCount }, (_, i) => t(`solutions.${s.tKey}_f${i+1}`)),
   }));
 
   return (
@@ -101,7 +100,7 @@ export function Solutions() {
 }
 
 interface SolutionCardProps {
-  solution: { slug:string; name:string; tagline:string; description:string; features:string[]; pricing:string; timeline:string; popular:boolean };
+  solution: { slug:string; name:string; tagline:string; description:string; popular:boolean };
   index: number;
 }
 
@@ -115,43 +114,42 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
       ref={ref}
       initial={{ opacity:0, y:20 }}
       animate={isInView?{opacity:1,y:0}:{}}
-      transition={{ duration:0.5, delay:index*0.1, ease:[0.16,1,0.3,1] }}
-      className={`relative p-6 md:p-8 flex flex-col border transition-all duration-300 group ${solution.popular?"bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]":"bg-background border-border/40 hover:border-border"}`}
+      transition={{ duration:0.5, delay:index*0.08, ease:[0.16,1,0.3,1] }}
+      className={`relative flex flex-col p-6 md:p-8 border transition-all duration-300 group ${
+        solution.popular
+          ? "bg-[#1A3AFF]/5 border-[#1A3AFF]/50"
+          : "bg-background border-border/40 hover:border-border"
+      }`}
     >
-      <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular?"border-[#1A3AFF]":"border-transparent group-hover:border-foreground/20"}`} />
-      <div className="h-8 mb-6">
+      {/* Corner accent */}
+      <div className={`absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 transition-colors ${
+        solution.popular ? "border-[#1A3AFF]" : "border-transparent group-hover:border-foreground/20"
+      }`} />
+
+      {/* Popular badge */}
+      <div className="h-7 mb-5">
         {solution.popular && (
           <div className="inline-flex items-center px-3 py-1 bg-[#1A3AFF] text-white text-[10px] font-semibold tracking-widest uppercase">
             {t("solutions.popular")}
           </div>
         )}
       </div>
-      <h3 className="text-lg font-semibold text-foreground mb-2">{solution.name}</h3>
-      <p className="text-[#1A3AFF] text-xs font-medium mb-4 uppercase tracking-wider">{solution.tagline}</p>
-      <p className="text-muted-foreground text-xs leading-relaxed mb-5 grow">{solution.description}</p>
-      <div className="space-y-2.5 mb-6 border-t border-border/40 pt-5">
-        {solution.features.map((feature, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <Check className="w-4 h-4 text-[#1A3AFF] shrink-0 mt-0.5" />
-            <span className="text-foreground/80 text-sm">{feature}</span>
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-border/40 pt-5 mt-auto">
-        <div className="flex flex-col gap-3 mb-5">
-          <div>
-            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.budget")}</p>
-            <p className="text-foreground text-xl font-semibold">{solution.pricing}</p>
-          </div>
-          <div>
-            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.timeline")}</p>
-            <p className="text-foreground text-sm font-medium">{solution.timeline}</p>
-          </div>
-        </div>
-        <Link to={`/solutions/${solution.slug}`}>
-          <button className={`w-full py-4 text-sm font-semibold tracking-wide uppercase transition-colors flex items-center justify-center gap-3 ${solution.popular?"bg-[#1A3AFF] text-white hover:bg-[#0D2FE0]":"bg-transparent border border-border text-foreground hover:bg-foreground hover:text-background"}`}>
-            {t("solutions.view_detail")} <ArrowRight className="w-4 h-4" />
-          </button>
+
+      {/* Core info */}
+      <h3 className="text-lg font-semibold text-foreground mb-1.5">{solution.name}</h3>
+      <p className="text-[#1A3AFF] text-xs font-medium uppercase tracking-wider mb-4">{solution.tagline}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed grow">{solution.description}</p>
+
+      {/* CTA */}
+      <div className="mt-8 pt-5 border-t border-border/40">
+        <Link
+          to={`/solutions/${solution.slug}`}
+          className={`inline-flex items-center gap-2 text-sm font-semibold tracking-wide group/link ${
+            solution.popular ? "text-[#1A3AFF]" : "text-foreground"
+          }`}
+        >
+          {t("solutions.view_detail")}
+          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
         </Link>
       </div>
     </motion.div>

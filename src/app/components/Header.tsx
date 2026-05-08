@@ -5,7 +5,19 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
-import { Sun, Moon, Menu, X, ArrowUpRight, Globe, ChevronDown, Code, Smartphone, Palette, TrendingUp } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Menu,
+  X,
+  ArrowUpRight,
+  Globe,
+  ChevronDown,
+  Code,
+  Smartphone,
+  Palette,
+  TrendingUp,
+} from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useState, useEffect, useRef } from "react";
@@ -18,25 +30,25 @@ const SERVICES_ITEMS = [
     icon: Code,
     slug: "developpement-web",
     labelKey: "nav.sub_web",
-    descKey:  "nav.sub_web_desc",
+    descKey: "nav.sub_web_desc",
   },
   {
     icon: Smartphone,
     slug: "applications-mobiles",
     labelKey: "nav.sub_mobile",
-    descKey:  "nav.sub_mobile_desc",
+    descKey: "nav.sub_mobile_desc",
   },
   {
     icon: Palette,
     slug: "branding-design",
     labelKey: "nav.sub_branding",
-    descKey:  "nav.sub_branding_desc",
+    descKey: "nav.sub_branding_desc",
   },
   {
     icon: TrendingUp,
     slug: "marketing-digital",
     labelKey: "nav.sub_marketing",
-    descKey:  "nav.sub_marketing_desc",
+    descKey: "nav.sub_marketing_desc",
   },
 ];
 
@@ -46,18 +58,18 @@ const NAV_LEFT_PLAIN = [
 ];
 
 const NAV_RIGHT = [
-  { path: "/blog",    labelKey: "nav.blog"    },
+  { path: "/blog", labelKey: "nav.blog" },
   { path: "/contact", labelKey: "nav.contact" },
 ];
 
 export function Header() {
-  const location  = useLocation();
+  const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
-  const [hidden,  setHidden]  = useState(false);
-  const [atTop,   setAtTop]   = useState(true);
-  const [open,    setOpen]    = useState(false);          // mobile menu
-  const [subOpen, setSubOpen] = useState(false);          // desktop submenu
+  const [hidden, setHidden] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+  const [open, setOpen] = useState(false); // mobile menu
+  const [subOpen, setSubOpen] = useState(false); // desktop submenu
   const [mobileSubOpen, setMobileSubOpen] = useState(false); // mobile accordion
   const subRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -87,7 +99,9 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   // Close desktop submenu on outside click
@@ -103,7 +117,9 @@ export function Header() {
   }, [subOpen]);
 
   const toggleLanguage = () => setLanguage(language === "fr" ? "en" : "fr");
-  const isServicesActive = location.pathname === "/services" || location.pathname.startsWith("/services/");
+  const isServicesActive =
+    location.pathname === "/services" ||
+    location.pathname.startsWith("/services/");
 
   return (
     <>
@@ -113,16 +129,14 @@ export function Header() {
         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
           atTop
-            ? "bg-background/80 backdrop-blur-sm border-b border-border/20"
-            : "bg-background/95 backdrop-blur-lg border-b border-border/40"
+            ? "bg-background/80 backdrop-blur-sm border-b border-border/40"
+            : "bg-background/95 backdrop-blur-lg border-b border-border/90"
         }`}
       >
         {/* ── Desktop ── */}
         <div className="hidden lg:flex items-stretch h-[72px] w-full border-b">
-
           {/* Left nav: Services (with submenu) | Portfolio | Solutions */}
           <div className="flex items-stretch">
-
             {/* Services — submenu trigger */}
             <div ref={subRef} className="relative flex items-stretch">
               <button
@@ -131,8 +145,8 @@ export function Header() {
                 onClick={() => setSubOpen((v) => !v)}
                 className={`
                   relative flex items-center gap-1.5 px-6
-                  text-[11px] uppercase tracking-widest font-semibold
-                  border-r border-border/40
+                  text-[11px] uppercase tracking-widest font-bold
+                  border-r border-border/90
                   hover:bg-muted/20 transition-colors duration-200
                   ${isServicesActive ? "text-[#1A3AFF]" : "text-muted-foreground hover:text-foreground"}
                 `}
@@ -171,13 +185,18 @@ export function Header() {
                     <div className="py-2">
                       {SERVICES_ITEMS.map((item, i) => {
                         const Icon = item.icon;
-                        const isItemActive = location.pathname === `/services/${item.slug}`;
+                        const isItemActive =
+                          location.pathname === `/services/${item.slug}`;
                         return (
                           <motion.div
                             key={item.slug}
                             initial={{ opacity: 0, x: -8 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: i * 0.04, duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{
+                              delay: i * 0.04,
+                              duration: 0.2,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
                           >
                             <Link
                               to={`/services/${item.slug}`}
@@ -187,7 +206,9 @@ export function Header() {
                                 ${isItemActive ? "bg-[#1A3AFF]/5" : ""}
                               `}
                             >
-                              <p className={`text-[11px] font-semibold uppercase tracking-widest ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}>
+                              <p
+                                className={`text-[11px] font-semibold uppercase tracking-widest ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}
+                              >
                                 {t(item.labelKey)}
                               </p>
                             </Link>
@@ -202,7 +223,9 @@ export function Header() {
                         to="/services"
                         className="flex items-center justify-between text-[10px] uppercase tracking-widest text-muted-foreground hover:text-[#1A3AFF] transition-colors duration-150 group"
                       >
-                        <span className="font-semibold">{t("nav.all_services")}</span>
+                        <span className="font-semibold">
+                          {t("nav.all_services")}
+                        </span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </Link>
                     </div>
@@ -227,10 +250,18 @@ export function Header() {
           <Link
             to="/"
             aria-label="Zephyr — Accueil"
-            className="flex-1 flex items-center justify-center border-x border-border/40 hover:bg-muted/20 transition-colors duration-200"
+            className="flex-1 flex items-center justify-center border-x border-border/65 hover:bg-muted/20 transition-colors duration-200"
           >
-            <img src={LogoBlanc} alt="Zephyr" className="h-15 hidden dark:block object-contain" />
-            <img src={LogoNoir}  alt="Zephyr" className="h-15 block dark:hidden object-contain" />
+            <img
+              src={LogoBlanc}
+              alt="Zephyr"
+              className="h-15 hidden dark:block object-contain"
+            />
+            <img
+              src={LogoNoir}
+              alt="Zephyr"
+              className="h-15 block dark:hidden object-contain"
+            />
           </Link>
 
           {/* Right nav: Blog | Contact */}
@@ -250,17 +281,23 @@ export function Header() {
           <button
             onClick={toggleTheme}
             aria-label="Changer le thème"
-            className="px-4 border-l border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/20 transition-colors duration-200"
+            className="px-4 border-l border-border/65 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/20 transition-colors duration-200"
           >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {theme === "dark" ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
           </button>
 
           {/* Language toggle */}
           <button
             onClick={toggleLanguage}
             aria-label="Changer de langue"
-            title={language === "fr" ? "Switch to English" : "Passer en Français"}
-            className="px-4 border-l border-border/40 flex items-center justify-center gap-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/20 transition-colors duration-200"
+            title={
+              language === "fr" ? "Switch to English" : "Passer en Français"
+            }
+            className="px-4 border-l border-border/65 flex items-center justify-center gap-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/20 transition-colors duration-200"
           >
             <Globe className="w-3.5 h-3.5" />
             <span className="text-[10px] font-semibold tracking-wider uppercase">
@@ -275,8 +312,16 @@ export function Header() {
             to="/"
             className="flex items-center px-5 border-r border-border/40 hover:bg-muted/20 transition-colors"
           >
-            <img src={LogoBlanc} alt="Zephyr" className="h-6 hidden dark:block object-contain" />
-            <img src={LogoNoir}  alt="Zephyr" className="h-6 block dark:hidden object-contain" />
+            <img
+              src={LogoBlanc}
+              alt="Zephyr"
+              className="h-6 hidden dark:block object-contain"
+            />
+            <img
+              src={LogoNoir}
+              alt="Zephyr"
+              className="h-6 block dark:hidden object-contain"
+            />
           </Link>
 
           <div className="flex-1" />
@@ -299,7 +344,11 @@ export function Header() {
             aria-label="Changer le thème"
             className="px-4 border-r border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/20 transition-colors"
           >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {theme === "dark" ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
           </button>
 
           {/* Hamburger */}
@@ -310,11 +359,23 @@ export function Header() {
           >
             <AnimatePresence mode="wait" initial={false}>
               {open ? (
-                <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                >
                   <X className="w-5 h-5" />
                 </motion.span>
               ) : (
-                <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                >
                   <Menu className="w-5 h-5" />
                 </motion.span>
               )}
@@ -334,12 +395,15 @@ export function Header() {
             className="fixed top-[60px] left-0 right-0 h-[calc(100dvh-60px)] bg-background z-[60] flex flex-col overflow-y-auto pb-20"
           >
             <nav className="flex flex-col px-6 pt-8 pb-12 gap-0">
-
               {/* Services — accordion */}
               <motion.div
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  delay: 0,
+                  duration: 0.3,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 <button
                   onClick={() => setMobileSubOpen((v) => !v)}
@@ -390,7 +454,8 @@ export function Header() {
                           to="/services"
                           className="flex items-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground hover:text-[#1A3AFF] transition-colors"
                         >
-                          {t("nav.all_services")} <ArrowUpRight className="w-3.5 h-3.5" />
+                          {t("nav.all_services")}{" "}
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
                     </motion.div>
@@ -400,13 +465,19 @@ export function Header() {
 
               {/* Plain nav items */}
               {[...NAV_LEFT_PLAIN, ...NAV_RIGHT].map((item, i) => {
-                const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + "/");
+                const isActive =
+                  location.pathname === item.path ||
+                  location.pathname.startsWith(item.path + "/");
                 return (
                   <motion.div
                     key={item.path}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (i + 1) * 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      delay: (i + 1) * 0.06,
+                      duration: 0.3,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
                   >
                     <Link
                       to={item.path}
@@ -423,7 +494,9 @@ export function Header() {
             </nav>
 
             <div className="mt-auto px-6 pb-10 border-t border-border/30 pt-8">
-              <p className="text-muted-foreground text-sm mb-1">contact@zephyr.sn</p>
+              <p className="text-muted-foreground text-sm mb-1">
+                contact@zephyr.sn
+              </p>
               <p className="text-muted-foreground text-sm">Dakar, Sénégal</p>
             </div>
           </motion.div>
@@ -443,13 +516,16 @@ interface NavCellProps {
 
 function NavCell({ path, label, currentPath, borderSide }: NavCellProps) {
   const isActive = currentPath === path || currentPath.startsWith(path + "/");
-  const borderClass = borderSide === "right" ? "border-r border-border/40" : "border-l border-border/40";
+  const borderClass =
+    borderSide === "right"
+      ? "border-r border-border/65"
+      : "border-l border-border/65";
 
   return (
     <Link
       to={path}
       className={`
-        relative flex items-center px-6 text-[11px] uppercase tracking-widest font-semibold
+        relative flex items-center px-6 text-[11px] uppercase tracking-widest font-bold
         hover:bg-muted/20 transition-colors duration-200 ${borderClass}
         ${isActive ? "text-[#1A3AFF]" : "text-muted-foreground hover:text-foreground"}
       `}
