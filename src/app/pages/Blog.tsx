@@ -92,7 +92,7 @@ export function Blog() {
   return (
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white pb-24">
       {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-20 border-b border-border/40 relative">
+      <section className="pt-20 md:pt-28 pb-10 border-b border-border/40 relative">
         <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div
@@ -101,14 +101,14 @@ export function Blog() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-4xl"
           >
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-6">
               <span className="w-12 h-[1px] bg-[#1A3AFF]" />
               <span className="eyebrow" style={{ marginBottom: 0 }}>{t("blog.eyebrow")}</span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground mb-5 font-['Orbitron']">
               {t("blog.title")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
               {t("blog.subtitle")}
             </p>
           </motion.div>
@@ -117,7 +117,7 @@ export function Blog() {
 
       {/* Featured Post */}
       {featuredPost && (
-        <section className="py-24 border-b border-border/40 bg-muted/10">
+        <section className="py-10 md:py-14 border-b border-border/40 bg-muted/10">
           <div className="container mx-auto px-6 md:px-12">
             <FeaturedPostCard post={featuredPost} t={t} />
           </div>
@@ -125,9 +125,9 @@ export function Blog() {
       )}
 
       {/* Blog Grid */}
-      <section className="py-24">
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {regularPosts.map((post, index) => (
               <BlogPostCard key={post.slug} post={post} index={index} t={t} />
             ))}
@@ -153,7 +153,7 @@ function FeaturedPostCard({ post, t }: { post: PostData; t: TranslateFn }) {
 
         <div className="grid lg:grid-cols-2">
           {/* Image */}
-          <div className="relative h-72 lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-border/40">
+          <div className="relative h-56 lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-border/40">
             <div className="absolute inset-0 bg-[#1A3AFF]/10 group-hover:bg-transparent transition-colors z-10 mix-blend-overlay" />
             <div
               className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -162,26 +162,26 @@ function FeaturedPostCard({ post, t }: { post: PostData; t: TranslateFn }) {
           </div>
 
           {/* Content */}
-          <div className="p-10 md:p-16 flex flex-col justify-center">
-            <div className="inline-flex items-center px-4 py-1.5 border border-[#1A3AFF] bg-[#1A3AFF]/5 text-[#1A3AFF] text-xs font-['Orbitron'] tracking-widest uppercase mb-8 self-start">
+          <div className="p-7 md:p-10 flex flex-col justify-center">
+            <div className="inline-flex items-center px-3 py-1.5 border border-[#1A3AFF] bg-[#1A3AFF]/5 text-[#1A3AFF] text-xs font-['Orbitron'] tracking-widest uppercase mb-5 self-start">
               {t(post.categoryKey)}
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-['Orbitron'] text-foreground mb-6 leading-tight group-hover:text-[#1A3AFF] transition-colors">
+            <h2 className="text-2xl md:text-3xl font-['Orbitron'] text-foreground mb-4 leading-tight group-hover:text-[#1A3AFF] transition-colors">
               {t(post.titleKey)}
             </h2>
 
-            <p className="text-muted-foreground text-lg mb-10 leading-relaxed max-w-xl">
+            <p className="text-muted-foreground text-base mb-6 leading-relaxed max-w-xl line-clamp-2">
               {t(post.excerptKey)}
             </p>
 
-            <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm uppercase tracking-wider mb-10 border-t border-border/40 pt-6">
+            <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-xs uppercase tracking-wider mb-6 border-t border-border/40 pt-4">
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#1A3AFF]" />
+                <Calendar className="w-3.5 h-3.5 text-[#1A3AFF]" />
                 <span>{post.date}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#1A3AFF]" />
+                <Clock className="w-3.5 h-3.5 text-[#1A3AFF]" />
                 <span>{t(post.readTimeKey)}</span>
               </div>
             </div>
@@ -226,7 +226,7 @@ function BlogPostCard({ post, index, t }: { post: PostData; index: number; t: Tr
         </div>
 
         {/* Content */}
-        <div className="p-8 flex flex-col flex-grow">
+        <div className="p-6 flex flex-col flex-grow">
           <div className="inline-flex items-center px-3 py-1 border border-foreground/20 text-foreground text-[10px] font-['Orbitron'] tracking-widest uppercase mb-6 self-start group-hover:border-[#1A3AFF] group-hover:text-[#1A3AFF] transition-colors">
             {t(post.categoryKey)}
           </div>

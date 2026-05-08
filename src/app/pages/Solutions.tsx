@@ -34,7 +34,7 @@ export function Solutions() {
     <div className="bg-background min-h-screen selection:bg-[#1A3AFF] selection:text-white">
 
       {/* Hero */}
-      <section className="pt-40 pb-20 border-b border-border/40 relative">
+      <section className="pt-24 pb-12 border-b border-border/40 relative">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[32px_32px] pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
@@ -42,16 +42,16 @@ export function Solutions() {
               <span className="w-12 h-px bg-[#1A3AFF]" />
               <span className="eyebrow" style={{ marginBottom:0 }}>{t("solutions.eyebrow")}</span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8 font-['Orbitron']">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground mb-6 font-['Orbitron']">
               {t("solutions.title_1")} <br />{t("solutions.title_2")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">{t("solutions.subtitle")}</p>
+            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">{t("solutions.subtitle")}</p>
           </motion.div>
         </div>
       </section>
 
       {/* Solutions Grid */}
-      <section className="py-24 bg-muted/10">
+      <section className="py-12 md:py-16 bg-muted/10">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map((solution, index) => <SolutionCard key={index} solution={solution} index={index} />)}
@@ -60,7 +60,7 @@ export function Solutions() {
       </section>
 
       {/* Custom Solutions */}
-      <section className="py-32 border-y border-border/40 relative overflow-hidden">
+      <section className="py-14 md:py-16 border-y border-border/40 relative overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-[#1A3AFF]/5 -skew-x-12 translate-x-20 pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl">
@@ -68,8 +68,8 @@ export function Solutions() {
               <span className="w-12 h-px bg-foreground/40" />
               <span className="eyebrow" style={{ marginBottom:0, color:"var(--foreground)", opacity:0.6 }}>{t("solutions.custom_eyebrow")}</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-['Orbitron'] text-foreground mb-8">{t("solutions.custom_title")}</h2>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">{t("solutions.custom_desc")}</p>
+            <h2 className="text-3xl md:text-5xl font-['Orbitron'] text-foreground mb-6">{t("solutions.custom_title")}</h2>
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">{t("solutions.custom_desc")}</p>
             <Link to="/contact">
               <motion.button whileHover={{ scale:1.02 }} whileTap={{ scale:0.98 }} className="px-8 py-4 bg-foreground text-background font-['Orbitron'] text-sm tracking-wider hover:bg-muted-foreground transition-colors inline-flex items-center gap-3">
                 {t("solutions.custom_btn")} <ArrowRight className="w-5 h-5" />
@@ -80,9 +80,9 @@ export function Solutions() {
       </section>
 
       {/* Value */}
-      <section className="py-32">
+      <section className="py-12 md:py-14">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex items-center gap-4 mb-16">
+          <div className="flex items-center gap-4 mb-10">
             <span className="w-12 h-px bg-[#1A3AFF]" />
             <h2 className="text-3xl md:text-4xl font-['Orbitron'] text-foreground">{t("solutions.value_eyebrow")}</h2>
           </div>
@@ -113,7 +113,7 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
       initial={{ opacity:0, y:20 }}
       animate={isInView?{opacity:1,y:0}:{}}
       transition={{ duration:0.5, delay:index*0.1, ease:[0.16,1,0.3,1] }}
-      className={`relative p-8 md:p-10 flex flex-col border transition-all duration-300 group ${solution.popular?"bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]":"bg-background border-border/40 hover:border-border"}`}
+      className={`relative p-6 md:p-8 flex flex-col border transition-all duration-300 group ${solution.popular?"bg-[#1A3AFF]/5 border-[#1A3AFF]/50 shadow-[0_0_30px_rgba(26,58,255,0.1)]":"bg-background border-border/40 hover:border-border"}`}
     >
       <div className={`absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors ${solution.popular?"border-[#1A3AFF]":"border-transparent group-hover:border-foreground/20"}`} />
       <div className="h-8 mb-6">
@@ -123,10 +123,10 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
           </div>
         )}
       </div>
-      <h3 className="text-2xl font-['Orbitron'] text-foreground mb-2">{solution.name}</h3>
-      <p className="text-[#1A3AFF] text-sm font-medium mb-6 uppercase tracking-wider">{solution.tagline}</p>
-      <p className="text-muted-foreground text-sm leading-relaxed mb-8 grow">{solution.description}</p>
-      <div className="space-y-4 mb-10 border-t border-border/40 pt-8">
+      <h3 className="text-xl font-['Orbitron'] text-foreground mb-2">{solution.name}</h3>
+      <p className="text-[#1A3AFF] text-xs font-medium mb-4 uppercase tracking-wider">{solution.tagline}</p>
+      <p className="text-muted-foreground text-xs leading-relaxed mb-5 grow">{solution.description}</p>
+      <div className="space-y-2.5 mb-6 border-t border-border/40 pt-5">
         {solution.features.map((feature, i) => (
           <div key={i} className="flex items-start gap-3">
             <Check className="w-4 h-4 text-[#1A3AFF] shrink-0 mt-0.5" />
@@ -134,8 +134,8 @@ function SolutionCard({ solution, index }: SolutionCardProps) {
           </div>
         ))}
       </div>
-      <div className="border-t border-border/40 pt-8 mt-auto">
-        <div className="flex flex-col gap-4 mb-8">
+      <div className="border-t border-border/40 pt-5 mt-auto">
+        <div className="flex flex-col gap-3 mb-5">
           <div>
             <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">{t("solutions.budget")}</p>
             <p className="text-foreground text-xl font-['Orbitron'] font-semibold">{solution.pricing}</p>

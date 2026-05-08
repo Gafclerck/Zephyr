@@ -80,7 +80,7 @@ function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-border/40 bg-background">
+    <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden border-b border-border/40 bg-background">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-grid-blueprint-fine" />
         <div className="absolute inset-0 bg-grid-blueprint-major" />
@@ -100,13 +100,13 @@ function HeroSection() {
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <div className="container relative z-20 px-6 md:px-12 mx-auto py-16 md:py-24">
+      <div className="container relative z-20 px-6 md:px-12 mx-auto py-10 md:py-16">
         <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, ease:[0.16,1,0.3,1] }} className="max-w-4xl">
           <div className="flex items-center gap-4 mb-8">
             <span className="w-12 h-px bg-[#1A3AFF]" />
             <span className="eyebrow" style={{ marginBottom:0 }}>{t("services.eyebrow")}</span>
           </div>
-          <h1 className="font-['Orbitron'] text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
+          <h1 className="font-['Orbitron'] text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground mb-6">
             {t("services.title_1")} <br className="hidden md:block" />
             {t("services.title_2")}
           </h1>
@@ -130,9 +130,9 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} id={service.id} className="py-20 md:py-24 border-b border-border/40 relative">
+    <section ref={ref} id={service.id} className="py-12 md:py-16 border-b border-border/40 relative">
       <div className="container mx-auto px-6 md:px-12">
-        <div className={`flex flex-col gap-16 lg:gap-20 items-center ${isEven?"lg:flex-row":"lg:flex-row-reverse"}`}>
+        <div className={`flex flex-col gap-8 lg:gap-12 items-center ${isEven?"lg:flex-row":"lg:flex-row-reverse"}`}>
           <motion.div initial={{ opacity:0, x:isEven?-50:50 }} animate={isInView?{opacity:1,x:0}:{}} transition={{ duration:0.6, ease:[0.16,1,0.3,1] }} className="w-full lg:w-5/12 flex flex-col gap-8">
             <div>
               <div className="flex items-center gap-4 mb-6">
@@ -187,7 +187,7 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
           </motion.div>
 
           <motion.div initial={{ opacity:0, scale:0.95 }} animate={isInView?{opacity:1,scale:1}:{}} transition={{ duration:0.6, ease:[0.16,1,0.3,1], delay:0.2 }} className="w-full lg:w-7/12">
-            <div className="relative w-full h-[320px] md:h-[500px] lg:h-[650px] overflow-hidden group border border-border/40">
+            <div className="relative w-full h-[260px] md:h-[360px] lg:h-[440px] overflow-hidden group border border-border/40">
               <img src={service.img} alt={t(service.titleKey)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
               <div className="absolute inset-0 bg-background/50" />
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4">
@@ -223,9 +223,9 @@ function ProcessSection() {
     { n:"04", titleKey:"services.step4_title", descKey:"services.step4_desc" },
   ];
   return (
-    <section className="py-20 md:py-24 bg-muted border-y border-border/40">
+    <section className="py-12 md:py-16 bg-muted border-y border-border/40">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
             <span className="eyebrow">{t("services.process_eyebrow")}</span>
             <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground tracking-tight">{t("services.process_title")}</h2>
@@ -235,7 +235,7 @@ function ProcessSection() {
           {steps.map(step => (
             <div key={step.n} className="relative group">
               <div className="h-px w-full bg-border/60 absolute top-8 left-0 hidden lg:block" />
-              <div className="w-16 h-16 bg-background border border-border flex items-center justify-center relative z-10 mb-10 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
+              <div className="w-12 h-12 bg-background border border-border flex items-center justify-center relative z-10 mb-6 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
                 <span className="font-['Orbitron'] text-lg font-medium text-foreground group-hover:text-white transition-colors">{step.n}</span>
               </div>
               <h4 className="font-['Orbitron'] text-xl font-medium mb-4 text-foreground">{t(step.titleKey)}</h4>
@@ -251,20 +251,20 @@ function ProcessSection() {
 function WhyUsSection() {
   const { t } = useLanguage();
   return (
-    <section className="py-20 md:py-24 border-b border-border/40">
+    <section className="py-12 md:py-16 border-b border-border/40">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="text-center max-w-2xl mx-auto mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="eyebrow">{t("services.why_eyebrow")}</span>
           <h2 className="font-['Orbitron'] text-4xl md:text-5xl tracking-tight text-foreground">{t("services.why_title")}</h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
           {WHY_US_KEYS.map(item => (
-            <div key={item.titleKey} className="p-6 md:p-10 lg:p-14 bg-muted/30 border border-border/50 hover:bg-muted/50 transition-colors">
-              <div className="w-16 h-16 bg-background border border-border flex items-center justify-center mb-8 shadow-sm">
-                <item.icon className="w-7 h-7 text-[#1A3AFF]" />
+            <div key={item.titleKey} className="p-6 md:p-8 bg-muted/30 border border-border/50 hover:bg-muted/50 transition-colors">
+              <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-5 shadow-sm">
+                <item.icon className="w-5 h-5 text-[#1A3AFF]" />
               </div>
-              <h4 className="font-['Orbitron'] text-2xl font-semibold mb-4 text-foreground">{t(item.titleKey)}</h4>
-              <p className="text-lg text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
+              <h4 className="font-['Orbitron'] text-xl font-semibold mb-3 text-foreground">{t(item.titleKey)}</h4>
+              <p className="text-base text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
             </div>
           ))}
         </div>
@@ -276,7 +276,7 @@ function WhyUsSection() {
 function CtaSection() {
   const { t } = useLanguage();
   return (
-    <section className="py-20 md:py-24 relative overflow-hidden">
+    <section className="py-12 md:py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-[#0A1628] z-0" />
       <div className="container relative z-10 px-6 md:px-12 mx-auto text-center">
         <h2 className="font-['Orbitron'] text-4xl md:text-6xl text-white mb-6">{t("services.cta_title")}</h2>

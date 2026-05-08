@@ -50,12 +50,12 @@ export function Landing() {
       <Hero />
 
       {/* ── SERVICES ── */}
-      <section className="py-24 md:py-32 border-b border-border/40 bg-background">
+      <section className="py-10 md:py-14 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <span className="eyebrow">{t("landing.services_eyebrow")}</span>
-              <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
+              <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
                 {t("landing.services_title")}
               </h2>
             </div>
@@ -68,7 +68,7 @@ export function Landing() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICES.map((service, i) => (
               <ServiceCard key={i} service={service} index={i} />
             ))}
@@ -77,12 +77,12 @@ export function Landing() {
       </section>
 
       {/* ── FEATURED WORK ── */}
-      <section className="py-24 md:py-32 border-b border-border/40 bg-muted/20">
+      <section className="py-10 md:py-14 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <span className="eyebrow">{t("landing.portfolio_eyebrow")}</span>
-              <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
+              <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
                 {t("landing.portfolio_title")}
               </h2>
             </div>
@@ -95,7 +95,7 @@ export function Landing() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {FEATURED_PROJECTS.map((project, i) => (
               <PortfolioCard key={i} project={project} index={i} />
             ))}
@@ -104,11 +104,11 @@ export function Landing() {
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="py-24 md:py-32 border-b border-border/40 bg-background">
+      <section className="py-10 md:py-14 border-b border-border/40 bg-background">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="eyebrow">{t("landing.process_eyebrow")}</span>
-            <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground tracking-tight">
+            <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground tracking-tight">
               {t("landing.process_title")}
             </h2>
           </div>
@@ -127,11 +127,11 @@ export function Landing() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-24 md:py-32 border-b border-border/40 bg-muted/20">
+      <section className="py-10 md:py-14 border-b border-border/40 bg-muted/20">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="mb-16">
+          <div className="mb-8">
             <span className="eyebrow">{t("landing.testimonials_eyebrow")}</span>
-            <h2 className="font-['Orbitron'] text-4xl md:text-5xl text-foreground font-medium tracking-tight">
+            <h2 className="font-['Orbitron'] text-3xl md:text-4xl text-foreground font-medium tracking-tight">
               {t("landing.testimonials_title")}
             </h2>
           </div>
@@ -145,22 +145,22 @@ export function Landing() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 md:py-32 bg-[#0A1628]">
+      <section className="py-12 md:py-16 bg-[#0A1628]">
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
           <span className="eyebrow" style={{ color: "rgba(255,255,255,0.5)" }}>
             {t("landing.cta_eyebrow")}
           </span>
-          <h2 className="font-['Orbitron'] text-4xl md:text-5xl lg:text-7xl text-white font-medium mb-8 tracking-tight max-w-3xl leading-[1.05]">
+          <h2 className="font-['Orbitron'] text-3xl md:text-4xl lg:text-5xl text-white font-medium mb-6 tracking-tight max-w-3xl leading-[1.05]">
             {t("landing.cta_title")}
           </h2>
-          <p className="text-white/60 text-base md:text-lg max-w-xl mb-10 leading-relaxed">
+          <p className="text-white/60 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
             {t("landing.cta_desc")}
           </p>
           <Link to="/contact">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-10 py-5 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-3"
+              className="px-8 py-4 bg-[#1A3AFF] text-white rounded-none font-medium tracking-wide hover:bg-[#0D2FE0] transition-colors flex items-center gap-3"
             >
               {t("landing.cta_btn")}
               <ArrowRight className="w-5 h-5" />
@@ -175,9 +175,9 @@ export function Landing() {
 function Hero() {
   const { t } = useLanguage(); // i18n hook — required here since Hero is its own component
   return (
-    <section className="relative flex min-h-screen border-b border-border/40 overflow-hidden">
+    <section className="relative flex min-h-[90vh] border-b border-border/40 overflow-hidden">
       {/* ── Colonne texte ── */}
-      <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-6 md:pt-10 pb-6 md:pb-10 border-r border-border/40">
+      <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-between px-6 md:px-12 lg:px-16 xl:px-20 pt-6 md:pt-8 pb-6 md:pb-8 border-r border-border/40">
         {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
@@ -192,12 +192,12 @@ function Hero() {
         </motion.div>
 
         {/* Main content */}
-        <div className="flex flex-col justify-center flex-1 py-5 md:py-12">
+        <div className="flex flex-col justify-center flex-1 py-4 md:py-8">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-['Orbitron'] text-[clamp(2.8rem,6vw,5.5rem)] font-medium text-foreground leading-[1.0] tracking-tight mb-8"
+            className="font-['Orbitron'] text-[clamp(2.4rem,5vw,4.5rem)] font-medium text-foreground leading-[1.0] tracking-tight mb-6"
           >
             {t("landing.hero_title_1")}
             <br />
@@ -213,7 +213,7 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="text-muted-foreground text-base md:text-lg max-w-md mb-10 leading-relaxed"
+            className="text-muted-foreground text-sm md:text-base max-w-md mb-7 leading-relaxed"
           >
             {t("landing.hero_desc")}
           </motion.p>
@@ -369,7 +369,7 @@ function ServiceCard({
       {/* Link to individual service detail page */}
       <Link to={`/services/${service.slug}`} className="group block h-full">
         <div className="h-full bg-background border border-border/50 hover:border-[#1A3AFF]/40 transition-colors flex flex-col overflow-hidden">
-          <div className="relative h-44 overflow-hidden">
+          <div className="relative h-36 overflow-hidden">
             <img
               src={service.img}
               alt={service.title}
@@ -381,12 +381,12 @@ function ServiceCard({
             </span>
           </div>
 
-          <div className="p-5 flex flex-col flex-1">
-            <Icon className="w-5 h-5 text-[#1A3AFF] mb-4" />
-            <h3 className="font-['Orbitron'] text-base font-semibold text-foreground mb-2">
+          <div className="p-4 flex flex-col flex-1">
+            <Icon className="w-4 h-4 text-[#1A3AFF] mb-3" />
+            <h3 className="font-['Orbitron'] text-sm font-semibold text-foreground mb-1.5">
               {service.title}
             </h3>
-            <p className="text-muted-foreground text-xs leading-relaxed flex-1 mb-4">
+            <p className="text-muted-foreground text-xs leading-relaxed flex-1 mb-3 line-clamp-3">
               {service.desc}
             </p>
             <div className="flex items-center gap-1.5 text-xs text-foreground/50 group-hover:text-[#1A3AFF] transition-colors">
@@ -421,7 +421,7 @@ function PortfolioCard({
         ease: [0.16, 1, 0.3, 1],
       }}
       className={`group relative overflow-hidden ${project.span ? "md:col-span-2" : ""}`}
-      style={{ height: project.span ? "460px" : "360px" }}
+      style={{ height: project.span ? "260px" : "200px" }}
     >
       {/* Link to individual case study */}
       <Link to={`/portfolio/${project.slug}`} className="block w-full h-full">
@@ -432,7 +432,7 @@ function PortfolioCard({
         />
         <div className="absolute inset-0 bg-background/50 group-hover:bg-background/30 transition-colors duration-300" />
 
-        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
+        <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
           <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <span className="px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white/80 text-[10px] font-['Orbitron'] tracking-wider border border-white/15">
@@ -441,7 +441,7 @@ function PortfolioCard({
               <span className="text-[#00B4FF] text-sm">{project.result}</span>
             </div>
             <div className="flex items-end justify-between gap-4">
-              <h3 className="font-['Orbitron'] text-white text-2xl md:text-3xl font-medium tracking-tight">
+              <h3 className="font-['Orbitron'] text-white text-xl md:text-2xl font-medium tracking-tight">
                 {project.title}
               </h3>
               <div className="w-10 h-10 shrink-0 bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/15 group-hover:bg-[#1A3AFF] group-hover:border-[#1A3AFF] transition-colors">
@@ -479,17 +479,17 @@ function ProcessStep({
         delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="p-7 bg-muted/40 border border-border/40 hover:border-[#1A3AFF]/30 hover:bg-muted/60 transition-colors group"
+      className="p-5 bg-muted/40 border border-border/40 hover:border-[#1A3AFF]/30 hover:bg-muted/60 transition-colors group"
     >
-      <div className="w-12 h-12 bg-background border border-border flex items-center justify-center mb-6 group-hover:border-[#1A3AFF]/40 transition-colors">
-        <span className="font-['Orbitron'] text-lg font-medium text-foreground">
+      <div className="w-10 h-10 bg-background border border-border flex items-center justify-center mb-4 group-hover:border-[#1A3AFF]/40 transition-colors">
+        <span className="font-['Orbitron'] text-sm font-medium text-foreground">
           {n}
         </span>
       </div>
-      <h4 className="font-['Orbitron'] text-base font-semibold text-foreground mb-3">
+      <h4 className="font-['Orbitron'] text-sm font-semibold text-foreground mb-2">
         {title}
       </h4>
-      <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+      <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
     </motion.div>
   );
 }
@@ -514,13 +514,13 @@ function TestimonialCard({
         delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="p-8 bg-background border border-border/40 flex flex-col h-full"
+      className="p-6 bg-background border border-border/40 flex flex-col h-full"
     >
-      <div className="flex gap-0.5 mb-6">
+      <div className="flex gap-0.5 mb-4">
         {[...Array(5)].map((_, i) => (
           <svg
             key={i}
-            className="w-4 h-4 text-[#1A3AFF]"
+            className="w-3.5 h-3.5 text-[#1A3AFF]"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -528,20 +528,20 @@ function TestimonialCard({
           </svg>
         ))}
       </div>
-      <blockquote className="text-foreground leading-relaxed mb-8 flex-1 text-[0.95rem]">
+      <blockquote className="text-foreground/90 leading-relaxed mb-5 flex-1 text-sm line-clamp-4">
         "{testimonial.quote}"
       </blockquote>
-      <div className="flex items-center gap-3 border-t border-border/40 pt-5">
+      <div className="flex items-center gap-3 border-t border-border/40 pt-4">
         <img
           src={testimonial.avatar}
           alt={testimonial.name}
-          className="w-10 h-10 object-cover"
+          className="w-9 h-9 object-cover"
         />
         <div>
-          <p className="text-foreground font-semibold text-sm">
+          <p className="text-foreground font-semibold text-xs">
             {testimonial.name}
           </p>
-          <p className="text-muted-foreground text-xs">{testimonial.role}</p>
+          <p className="text-muted-foreground text-[11px]">{testimonial.role}</p>
         </div>
       </div>
     </motion.div>
