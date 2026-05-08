@@ -187,14 +187,7 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
                 ))}
               </div>
             </div>
-            <div className="mt-6 p-6 bg-muted/30 border border-border/50 flex items-center justify-between">
-              <span className="text-sm font-['Orbitron'] uppercase tracking-wider text-muted-foreground">{t("services.tech_stack")}</span>
-              <div className="flex items-center gap-2 flex-wrap justify-end">
-                {service.technologies.map(tech => (
-                  <span key={tech} className="px-3 py-1 bg-background border border-border text-xs font-medium text-foreground/80">{tech}</span>
-                ))}
-              </div>
-            </div>
+
           </motion.div>
         </div>
       </div>
