@@ -59,7 +59,16 @@
     "portfolio": "Portfolio",
     "solutions": "Solutions",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "all_services": "Tous les services",
+    "sub_web": "Développement Web",
+    "sub_web_desc": "Sites sur mesure & plateformes scalables",
+    "sub_mobile": "Applications Mobiles",
+    "sub_mobile_desc": "Expériences iOS & Android modernes",
+    "sub_branding": "Branding & Design",
+    "sub_branding_desc": "Identité visuelle & systèmes UI/UX",
+    "sub_marketing": "Marketing Digital",
+    "sub_marketing_desc": "Stratégies de croissance data-driven"
   },
   "common": {
     "startProject": "Démarrer un projet",
