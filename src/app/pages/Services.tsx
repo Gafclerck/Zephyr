@@ -135,12 +135,6 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
         <div className={`flex flex-col gap-8 lg:gap-12 items-center ${isEven?"lg:flex-row":"lg:flex-row-reverse"}`}>
           <motion.div initial={{ opacity:0, x:isEven?-50:50 }} animate={isInView?{opacity:1,x:0}:{}} transition={{ duration:0.6, ease:[0.16,1,0.3,1] }} className="w-full lg:w-5/12 flex flex-col gap-8">
             <div>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-muted rounded-none flex items-center justify-center border border-border/50">
-                  <service.icon className="w-6 h-6 text-[#1A3AFF]" />
-                </div>
-                <span className="font-['Orbitron'] text-3xl text-foreground/20 font-bold tracking-tighter">{service.number}</span>
-              </div>
               <h3 className="font-['Orbitron'] text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-foreground">{t(service.titleKey)}</h3>
               <p className="text-lg text-muted-foreground leading-relaxed">{t(service.longDescKey)}</p>
             </div>
@@ -166,23 +160,17 @@ function ServiceSection({ service, index }: { service: ServiceData; index: numbe
                 </ul>
               </div>
             </div>
-            <div className="pt-8 border-t border-border/50 flex flex-wrap items-center justify-between gap-6">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">{t("services.avg_budget")}</p>
-                <p className="text-xl font-['Orbitron'] font-semibold text-foreground">{service.startingPrice}</p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link to={`/services/${service.slug}`}>
-                  <button className="flex items-center gap-2 px-6 py-3 border border-border text-foreground hover:bg-muted/30 transition-colors font-medium">
-                    {t("services.view_detail")} <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </Link>
-                <Link to="/contact">
-                  <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white hover:bg-[#0D2FE0] transition-colors font-medium">
-                    {t("services.consult")} <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </Link>
-              </div>
+            <div className="pt-6 border-t border-border/50 flex flex-wrap items-center gap-3">
+              <Link to={`/services/${service.slug}`}>
+                <button className="flex items-center gap-2 px-6 py-3 border border-border text-foreground hover:bg-muted/30 transition-colors font-medium">
+                  {t("services.view_detail")} <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link to="/contact">
+                <button className="flex items-center gap-2 px-6 py-3 bg-[#1A3AFF] text-white hover:bg-[#0D2FE0] transition-colors font-medium">
+                  {t("services.consult")} <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </Link>
             </div>
           </motion.div>
 
