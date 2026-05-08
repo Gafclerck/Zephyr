@@ -182,28 +182,14 @@ export function Header() {
                             <Link
                               to={`/services/${item.slug}`}
                               className={`
-                                flex items-start gap-3 px-4 py-3 group
+                                flex items-center px-4 py-3 group
                                 hover:bg-muted/40 transition-colors duration-150
                                 ${isItemActive ? "bg-[#1A3AFF]/5" : ""}
                               `}
                             >
-                              <div className={`
-                                w-8 h-8 shrink-0 flex items-center justify-center mt-0.5
-                                border transition-colors duration-150
-                                ${isItemActive
-                                  ? "bg-[#1A3AFF] border-[#1A3AFF]"
-                                  : "border-border/50 group-hover:border-[#1A3AFF]/40 group-hover:bg-[#1A3AFF]/5"}
-                              `}>
-                                <Icon className={`w-3.5 h-3.5 ${isItemActive ? "text-white" : "text-[#1A3AFF]"}`} />
-                              </div>
-                              <div className="min-w-0">
-                                <p className={`text-[11px] font-semibold uppercase tracking-widest font-['Orbitron'] mb-0.5 ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}>
-                                  {t(item.labelKey)}
-                                </p>
-                                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                                  {t(item.descKey)}
-                                </p>
-                              </div>
+                              <p className={`text-[11px] font-semibold uppercase tracking-widest font-['Orbitron'] ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}>
+                                {t(item.labelKey)}
+                              </p>
                             </Link>
                           </motion.div>
                         );
@@ -391,15 +377,11 @@ export function Header() {
                             >
                               <Link
                                 to={`/services/${item.slug}`}
-                                className="flex items-center gap-3 py-3 text-muted-foreground hover:text-[#1A3AFF] transition-colors"
+                                className="flex items-center py-3 text-muted-foreground hover:text-[#1A3AFF] transition-colors"
                               >
-                                <Icon className="w-4 h-4 shrink-0 text-[#1A3AFF]" />
-                                <div>
-                                  <p className="text-sm font-['Orbitron'] font-semibold tracking-wide text-foreground">
-                                    {t(item.labelKey)}
-                                  </p>
-                                  <p className="text-xs text-muted-foreground">{t(item.descKey)}</p>
-                                </div>
+                                <span className="text-sm font-['Orbitron'] font-semibold tracking-wide text-foreground">
+                                  {t(item.labelKey)}
+                                </span>
                               </Link>
                             </motion.div>
                           );
