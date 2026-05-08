@@ -187,7 +187,7 @@ export function Header() {
                                 ${isItemActive ? "bg-[#1A3AFF]/5" : ""}
                               `}
                             >
-                              <p className={`text-[11px] font-semibold uppercase tracking-widest font-['Orbitron'] ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}>
+                              <p className={`text-[11px] font-semibold uppercase tracking-widest ${isItemActive ? "text-[#1A3AFF]" : "text-foreground group-hover:text-[#1A3AFF]"} transition-colors duration-150`}>
                                 {t(item.labelKey)}
                               </p>
                             </Link>
@@ -379,7 +379,7 @@ export function Header() {
                                 to={`/services/${item.slug}`}
                                 className="flex items-center py-3 text-muted-foreground hover:text-[#1A3AFF] transition-colors"
                               >
-                                <span className="text-sm font-['Orbitron'] font-semibold tracking-wide text-foreground">
+                                <span className="text-[11px] font-semibold uppercase tracking-widest text-foreground">
                                   {t(item.labelKey)}
                                 </span>
                               </Link>
